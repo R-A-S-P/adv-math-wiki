@@ -22,10 +22,10 @@ window.MathJax = {
   startup: {
     ready: () => {
       // 动态获取当前页面的基础路径
-      const base = window.location.pathname.split('/').slice(0, -1).join('/'); 
+      const baseUrl = window.location.pathname.split('/').slice(0, 1).join('/'); 
       // 或者更简单：如果你的 site_url 是 https://r-a-s-p.github.io/adv-math-wiki/
       // 那么基础路径就是 '/adv-math-wiki'
-      const baseUrl = '/adv-math-wiki'; 
+      //const baseUrl = '/adv-math-wiki'; 
       
       // 设置 fontURL 和 dynamicPrefix
       MathJax.config.chtml = {
