@@ -2,7 +2,7 @@
 site_name: 工科数学分析知识梳理
 site_description: 使用 MkDocs 构建的工科数学分析知识库
 site_author: 马士川
-site_url: https://r-a-s-p.github.io  # 部署后的实际地址，可先留空
+site_url: https://r-a-s-p.github.io/adv-math-wiki  # 部署后的实际地址，可先留空
 
 repo_name: 'R-A-S-P/adv-math-wiki'  # 可选，自定义显示名称，默认会自动推断
 repo_url: 'https://github.com/R-A-S-P/adv-math-wiki'  # 必填，你的仓库完整地址
@@ -43,6 +43,7 @@ theme:
 # 插件配置（按需启用）
 plugins:
   - search                     # 内置搜索，必须保留
+  #- macros                     # 支持宏定义，方便复用内容
   # Obsidian 语法支持插件（二选一方案，见下文说明）
   - obsidian-support           # 一站式处理 Callout、图片双链等
   #- autoreflinks              # 如果 obsidian-support 无法处理文本双链，可加上此插件
@@ -96,6 +97,8 @@ extra_javascript:
 extra_css:
   - _static/css/extra.css
   - https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css  # 图标库（可选）
+#extra:
+#  site_base: '{{ site_url }}/'  # 确保所有资源链接都以正确的基础 URL 开头
 
 # 导航结构（根据你的实际文件夹和文件修改）
 nav:

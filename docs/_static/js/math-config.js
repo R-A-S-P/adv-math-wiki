@@ -22,16 +22,25 @@ window.MathJax = {
   startup: {
     ready: () => {
       // 动态获取当前页面的基础路径
-      const baseUrl = window.location.pathname.split('/').slice(0, 1).join('/'); 
+      //const baseUrl = window.location.pathname.split('/').slice(0, 1).join('/'); 
       // 或者更简单：如果你的 site_url 是 https://r-a-s-p.github.io/adv-math-wiki/
       // 那么基础路径就是 '/adv-math-wiki'
-      //const baseUrl = '/adv-math-wiki'; 
+      //const baseUrl = '{{ extra.site_base }}'; 
+
+      let baseUrl = '';
+      // 方法1：通过 document.currentScript 获取当前脚本的 src（最准确）
+      const currentScript = document.currentScript;
+      if (currentScript && currentScript.src) {
+        const scriptUrl = new URL(currentScript.src);
+        // 去掉末尾的 /_static/js/math-config.js，得到基础路径（如 '' 或 '/adv-math-wiki'）
+        baseUrl = scriptUrl.pathname.replace(/\/tex-mml-chtml\.js$/, '');
+      }
       
       // 设置 fontURL 和 dynamicPrefix
       MathJax.config.chtml = {
         font: 'mathjax-newcm', // 或你的字体
-        fontURL: baseUrl + '/assets/vendor/MathJax-4.1.1/mathjax-fonts/mathjax-newcm-font/woff-v2',
-        dynamicPrefix: baseUrl + '/assets/vendor/MathJax-4.1.1/mathjax-fonts/mathjax-newcm-font/dynamic',
+        fontURL: baseUrl + '/mathjax-fonts/mathjax-newcm-font/woff-v2',
+        dynamicPrefix: baseUrl + '/mathjax-fonts/mathjax-newcm-font/dynamic',
         mtextInheritFont: true, // 设置\text命令内的字体 或使用 mtextFontInherit: true (取决于MathJax版本)
         matchFontHeight: false
       };
@@ -41,10 +50,11 @@ window.MathJax = {
     }
   },
   chtml: {
-    //font: 'mathjax-newcm',
-    //fontURL: '/mathjax-fonts/mathjax-newcm-font/woff-v2',  // 字体文件地址（可换国内源）
-    //dynamicPrefix: '{{ base_url }}/mathjax-fonts/mathjax-newcm-font/dynamic',
+  /*  font: 'mathjax-newcm',
+    fontURL: '{{ base_url }}/mathjax-fonts/mathjax-newcm-font/woff-v2',  // 字体文件地址（可换国内源）
+    dynamicPrefix: '{{ base_url }}/mathjax-fonts/mathjax-newcm-font/dynamic',
     mtextInheritFont: true, // 设置\text命令内的字体 或使用 mtextFontInherit: true (取决于MathJax版本)
     matchFontHeight: false
+    */
   }
 };
