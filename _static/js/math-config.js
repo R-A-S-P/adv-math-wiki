@@ -27,18 +27,20 @@ window.MathJax = {
       // 那么基础路径就是 '/adv-math-wiki'
       //const baseUrl = '{{ extra.site_base }}'; 
 
-      const path = window.location.pathname;
-      // 提取基础路径：匹配第一个 /xxx 段，如果没有则返回空字符串（表示根目录）
-      // 例如：/adv-math-wiki/... → '/adv-math-wiki'
-      //       / (本地预览) → ''
-      const match = path.match(/^\/[^\/]+/);
-      const baseUrl = match ? match[0] : '';
+      let baseUrl = '';
+      // 方法1：通过 document.currentScript 获取当前脚本的 src（最准确）
+      const currentScript = document.currentScript;
+      if (currentScript && currentScript.src) {
+        const scriptUrl = new URL(currentScript.src);
+        // 去掉末尾的 /_static/js/math-config.js，得到基础路径（如 '' 或 '/adv-math-wiki'）
+        baseUrl = scriptUrl.pathname.replace(/\/tex-mml-chtml\.js$/, '');
+      }
       
       // 设置 fontURL 和 dynamicPrefix
       MathJax.config.chtml = {
         font: 'mathjax-newcm', // 或你的字体
-        fontURL: baseUrl + '/assets/vendor/MathJax-4.1.1/mathjax-fonts/mathjax-newcm-font/woff-v2',
-        dynamicPrefix: baseUrl + '/assets/vendor/MathJax-4.1.1/mathjax-fonts/mathjax-newcm-font/dynamic',
+        fontURL: baseUrl + '/mathjax-fonts/mathjax-newcm-font/woff-v2',
+        dynamicPrefix: baseUrl + '/mathjax-fonts/mathjax-newcm-font/dynamic',
         mtextInheritFont: true, // 设置\text命令内的字体 或使用 mtextFontInherit: true (取决于MathJax版本)
         matchFontHeight: false
       };
