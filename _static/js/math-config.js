@@ -21,8 +21,8 @@ window.MathJax = {
   },
   chtml: {
     font: 'mathjax-newcm',
-    fontURL: '/assets/mathjax-fonts/mathjax-newcm-font/woff-v2',  // 字体文件地址（可换国内源）
-    dynamicPrefix: '/assets/mathjax-fonts/mathjax-newcm-font/dynamic',
+    fontURL: 'assets/mathjax-fonts/mathjax-newcm-font/woff-v2',  // 字体文件地址（可换国内源）
+    dynamicPrefix: 'assets/mathjax-fonts/mathjax-newcm-font/dynamic',
     mtextInheritFont: true, // 设置\text命令内的字体 或使用 mtextFontInherit: true (取决于MathJax版本)
     matchFontHeight: false
   }
