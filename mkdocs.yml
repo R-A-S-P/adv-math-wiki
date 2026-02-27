@@ -2,7 +2,7 @@
 site_name: 工科数学分析知识梳理
 site_description: 使用 MkDocs 构建的工科数学分析知识库
 site_author: 马士川
-site_url: https://r-a-s-p.github.io  # 部署后的实际地址，可先留空
+site_url: https://r-a-s-p.github.io/adv-math-wiki  # 部署后的实际地址，可先留空
 
 repo_name: 'R-A-S-P/adv-math-wiki'  # 可选，自定义显示名称，默认会自动推断
 repo_url: 'https://github.com/R-A-S-P/adv-math-wiki'  # 必填，你的仓库完整地址
@@ -89,8 +89,8 @@ markdown_extensions:
 
 # 额外的 JavaScript 和 CSS（用于公式渲染、自定义行为等）
 extra_javascript:
-  - /_static/js/math-config.js                # 1. 先加载 MathJax 配置
-  - /assets/vendor/MathJax-4.1.1/tex-mml-chtml.js  # 2. 再加载 MathJax 核心
+  - _static/js/math-config.js                # 1. 先加载 MathJax 配置
+  - assets/vendor/MathJax-4.1.1/tex-mml-chtml.js  # 2. 再加载 MathJax 核心
   # 如果你需要使用 GeoGebra 经典版本，可以加载其 API（可选）
   # - https://www.geogebra.org/apps/deployggb.js
 extra_css:
