@@ -2,7 +2,7 @@
 site_name: 工科数学分析知识梳理
 site_description: 使用 MkDocs 构建的工科数学分析知识库
 site_author: 马士川
-site_url: https://r-a-s-p.github.io/adv-math-wiki  # 部署后的实际地址，可先留空
+site_url: https://r-a-s-p.github.io  # 部署后的实际地址，可先留空
 
 repo_name: 'R-A-S-P/adv-math-wiki'  # 可选，自定义显示名称，默认会自动推断
 repo_url: 'https://github.com/R-A-S-P/adv-math-wiki'  # 必填，你的仓库完整地址
