@@ -32,6 +32,8 @@ window.MathJax = {
         font: 'mathjax-newcm', // 或你的字体
         fontURL: baseUrl + '/assets/vendor/MathJax-4.1.1/mathjax-fonts/mathjax-newcm-font/woff-v2',
         dynamicPrefix: baseUrl + '/assets/vendor/MathJax-4.1.1/mathjax-fonts/mathjax-newcm-font/dynamic',
+        mtextInheritFont: true, // 设置\text命令内的字体 或使用 mtextFontInherit: true (取决于MathJax版本)
+        matchFontHeight: false
       };
       
       // 调用默认的 ready 函数
