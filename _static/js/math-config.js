@@ -19,13 +19,20 @@ window.MathJax = {
   loader: {
     //load: ['[tex]/boldsymbol'],                       // 预加载的扩展包
   },
-  /*startup: {
+  startup: {
     ready: () => {
       // 动态获取当前页面的基础路径
-      const baseUrl = window.location.pathname.split('/').slice(0, 1).join('/'); 
+      //const baseUrl = window.location.pathname.split('/').slice(0, 1).join('/'); 
       // 或者更简单：如果你的 site_url 是 https://r-a-s-p.github.io/adv-math-wiki/
       // 那么基础路径就是 '/adv-math-wiki'
       //const baseUrl = '{{ extra.site_base }}'; 
+
+      const path = window.location.pathname;
+      // 提取基础路径：匹配第一个 /xxx 段，如果没有则返回空字符串（表示根目录）
+      // 例如：/adv-math-wiki/... → '/adv-math-wiki'
+      //       / (本地预览) → ''
+      const match = path.match(/^\/[^\/]+/);
+      const baseUrl = match ? match[0] : '';
       
       // 设置 fontURL 和 dynamicPrefix
       MathJax.config.chtml = {
@@ -39,12 +46,13 @@ window.MathJax = {
       // 调用默认的 ready 函数
       MathJax.startup.defaultReady();
     }
-  },*/
+  },
   chtml: {
-    font: 'mathjax-newcm',
+  /*  font: 'mathjax-newcm',
     fontURL: '{{ base_url }}/mathjax-fonts/mathjax-newcm-font/woff-v2',  // 字体文件地址（可换国内源）
     dynamicPrefix: '{{ base_url }}/mathjax-fonts/mathjax-newcm-font/dynamic',
     mtextInheritFont: true, // 设置\text命令内的字体 或使用 mtextFontInherit: true (取决于MathJax版本)
     matchFontHeight: false
+    */
   }
 };
