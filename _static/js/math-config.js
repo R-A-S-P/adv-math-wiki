@@ -22,7 +22,7 @@ window.MathJax = {
   chtml: {
     font: 'mathjax-newcm',
     fontURL: '{{ base_url }}/assets/mathjax-fonts/mathjax-newcm-font/woff-v2',  // 字体文件地址（可换国内源）
-    dynamicPrefix: '{{base_url}}/assets/mathjax-fonts/mathjax-newcm-font/dynamic',
+    dynamicPrefix: '{{ base_url }}/assets/mathjax-fonts/mathjax-newcm-font/dynamic',
     mtextInheritFont: true, // 设置\text命令内的字体 或使用 mtextFontInherit: true (取决于MathJax版本)
     matchFontHeight: false
   }
