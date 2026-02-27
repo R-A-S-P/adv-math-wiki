@@ -89,8 +89,8 @@ markdown_extensions:
 
 # 额外的 JavaScript 和 CSS（用于公式渲染、自定义行为等）
 extra_javascript:
-  - _static/js/math-config.js                # 1. 先加载 MathJax 配置
-  - assets/vendor/MathJax-4.1.1/tex-mml-chtml.js  # 2. 再加载 MathJax 核心
+  - /_static/js/math-config.js                # 1. 先加载 MathJax 配置
+  - /assets/vendor/MathJax-4.1.1/tex-mml-chtml.js  # 2. 再加载 MathJax 核心
   # 如果你需要使用 GeoGebra 经典版本，可以加载其 API（可选）
   # - https://www.geogebra.org/apps/deployggb.js
 extra_css:
