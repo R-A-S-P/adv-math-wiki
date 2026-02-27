@@ -1,0 +1,134 @@
+# 站点基本信息
+site_name: 工科数学分析知识梳理
+site_description: 使用 MkDocs 构建的工科数学分析知识库
+site_author: 马士川
+site_url:   # 部署后的实际地址，可先留空
+
+#repo_name: 'R-A-S-P/TRQdocs'  # 可选，自定义显示名称，默认会自动推断
+#repo_url: 'https://github.com/R-A-S-P/TRQdocs'  # 必填，你的仓库完整地址
+
+# 可选：自定义显示的图标（默认是 GitHub 图标，也可以改成 GitLab 等）
+#theme:
+#  icon:
+#    repo: fontawesome/brands/github  # 使用 GitHub 图标
+
+# 主题配置（Material 主题）
+theme:
+  name: material
+  language: zh  # 中文界面
+  features:
+    - navigation.tabs      # 顶部导航标签
+    #- navigation.sections  # 侧边栏章节渲染为组
+    - navigation.expand    # 默认展开所有层级
+    #- navigation.top
+    #- toc.integrate        # 将目录整合进侧边栏
+    - search.suggest       # 搜索建议
+    - search.highlight     # 搜索结果高亮
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: white
+      accent: red
+      toggle:
+        icon: material/weather-sunny
+        name: 切换至深色模式
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: blue
+      accent: blue
+      toggle:
+        icon: material/weather-night
+        name: 切换至浅色模式
+
+# 插件配置（按需启用）
+plugins:
+  - search                     # 内置搜索，必须保留
+  # Obsidian 语法支持插件（二选一方案，见下文说明）
+  - obsidian-support           # 一站式处理 Callout、图片双链等
+  #- autoreflinks              # 如果 obsidian-support 无法处理文本双链，可加上此插件
+  #- mkdocs-video               # 轻松嵌入视频（可选）
+
+# Markdown 扩展配置（必须启用，否则很多高级语法不生效）
+markdown_extensions:
+  # Python Markdown 扩展
+  - admonition                 # 支持标注块（Callout 的基础）
+  - attr_list                  # 允许在 Markdown 元素上添加属性（用于图片尺寸控制等）
+  - md_in_html                 # 允许在 HTML 标签内写 Markdown
+  - tables                     # 表格支持
+  - footnotes                  # 脚注
+  - def_list                   # 定义列表
+  
+  # PyMdown Extensions 扩展包
+  - pymdownx.arithmatex:       # 数学公式（支持 LaTeX）
+      generic: true
+  - pymdownx.highlight:        # 代码高亮
+      anchor_linenums: true
+  - pymdownx.inlinehilite      # 行内代码高亮
+  - pymdownx.snippets          # 嵌入外部文件片段
+  - pymdownx.superfences:      # 代码块增强（支持嵌套、流程图等）
+      custom_fences:
+        - name: mermaid        # 支持 Mermaid 图表
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+        - name: math                    # 支持代码块内的数学公式（如 ```math ... ```）
+          class: arithmatex
+          format: pymdownx.arithmatex.fence_mathjax_format
+  - pymdownx.tabbed:           # 选项卡
+      alternate_style: true
+  - pymdownx.tasklist:         # 任务列表
+      custom_checkbox: true
+  - pymdownx.emoji:            # Emoji 表情
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.details           # 可折叠的详情块
+  - pymdownx.caret
+  - pymdownx.critic
+  - pymdownx.keys              # 键盘按键样式
+  - pymdownx.mark              # 文本高亮
+  - pymdownx.tilde
+
+# 额外的 JavaScript 和 CSS（用于公式渲染、自定义行为等）
+extra_javascript:
+  - _static/js/math-config.js                # 1. 先加载 MathJax 配置
+  - assets/vendor/MathJax-4.1.1/tex-mml-chtml.js  # 2. 再加载 MathJax 核心
+  # 如果你需要使用 GeoGebra 经典版本，可以加载其 API（可选）
+  # - https://www.geogebra.org/apps/deployggb.js
+extra_css:
+  - _static/css/extra.css
+  - https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css  # 图标库（可选）
+
+# 导航结构（根据你的实际文件夹和文件修改）
+nav:
+  - 首页:
+    - 简介: index.md
+  - 上册:
+    - 上册简介: i.md
+  - 下册:
+    - 下册简介: ii.md
+    - 空间几何:
+      - 空间几何简介: ii/spatial_geometry.md
+      - 向量: ii/spatial_geometry/vector.md
+      - 空间中的几何对象: ii/spatial_geometry/geometry.md
+    - 多元函数微分学:
+      - 多元函数微分学简介: ii/multivar_differential.md
+      - 基础知识: ii/multivar_differential/basic.md
+      - 多元函数的数学性质: ii/multivar_differential/math_prop.md
+      - 多元函数的值域特征: ii/multivar_differential/range_char.md
+      - 多元向量值函数: ii/multivar_differential/vector_val_func.md
+      - 多元微分的几何应用: ii/multivar_differential/geometry_apply.md
+    - 多元函数积分学:
+      - 多元函数积分学简介: ii/multivar_integral.md
+      - 多元数量值积分的概念与性质: ii/multivar_integral/basic.md
+      - 曲线积分: ii/multivar_integral/cruve_int.md
+      - 重积分: ii/multivar_integral/multi_int.md
+      - 曲面积分: ii/multivar_integral/surface_int.md
+      - 数量值函数积分的应用: ii/multivar_integral/application.md
+      - 场论: ii/multivar_integral/field_theory.md
+    - 无穷级数:
+      - 无穷级数简介: ii/infinite_series.md
+      - 数项级数: ii/infinite_series/series.md
+      - 函数项级数: ii/infinite_series/func_series.md
+      - 幂级数(Taylor级数): ii/infinite_series/taylor.md
+      - Fourier级数: ii/infinite_series/fourier.md
+  - 后记: postscript.md
+  # 其他章节...
