@@ -47,7 +47,13 @@ plugins:
   # Obsidian 语法支持插件（二选一方案，见下文说明）
   - obsidian-support           # 一站式处理 Callout、图片双链等
   #- autoreflinks              # 如果 obsidian-support 无法处理文本双链，可加上此插件
-  #- mkdocs-video               # 轻松嵌入视频（可选）
+  - mkdocs-video:              # 轻松嵌入视频（可选）
+      is_video: true
+      video_muted: true
+      video_autoplay: true
+      video_loop: true
+      video_controls: false
+      mark: "video"
 
 # Markdown 扩展配置（必须启用，否则很多高级语法不生效）
 markdown_extensions:
