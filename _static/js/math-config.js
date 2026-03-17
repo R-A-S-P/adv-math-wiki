@@ -7,6 +7,7 @@ window.MathJax = {
     //packages: { '[+]': ['boldsymbol'] }             // 加载额外宏包（如粗体符号）
     macros:{
       bs: ["\\boldsymbol{ #1 }",1],
+      abs: ["\\left|{ #1 }\\right|",1],
     }
   },
   options: {
