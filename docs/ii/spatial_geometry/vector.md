@@ -114,7 +114,7 @@ $$\bs a\cdot\bs b=x_1x_2+y_1y_2+z_1z_2$$
 
 外积是从两个向量得到一个向量的运算，其几何定义是 $\Vert\bs a\times\bs b\Vert=\Vert\bs a\Vert\Vert\bs b\Vert\sin(\bs a,\bs b)$ ，方向满足从 $\bs a$ 到 $\bs b$ 的 **右手定则** ，可见，外积 $\bs a\times\bs b$ 的模长就是 $\bs a$ 和 $\bs b$ 张成的平行四边形的面积，方向就代表该面积的方向.
 
-==此处应有视频*1==
+![video](CrossProduct.mp4)
 
 根据几何定义可以知道，外积也满足一定的运算律
 

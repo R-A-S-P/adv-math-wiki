@@ -4,11 +4,11 @@
     "type": "split",
     "children": [
       {
-        "id": "c920840811a28ec9",
+        "id": "90446d42520aa786",
         "type": "tabs",
         "children": [
           {
-            "id": "e658055a21adedcb",
+            "id": "602de7d379021cbd",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -24,11 +24,11 @@
         ]
       },
       {
-        "id": "ca6a396a1c730777",
+        "id": "dcd8131f32af89bc",
         "type": "tabs",
         "children": [
           {
-            "id": "0b0297ffee28d6cf",
+            "id": "4439de1dcc02bfa6",
             "type": "leaf",
             "state": {
               "type": "markdown",
@@ -203,11 +203,22 @@
       "bases:新建数据库": false
     }
   },
-  "active": "0b0297ffee28d6cf",
+  "active": "4439de1dcc02bfa6",
   "lastOpenFiles": [
-    "docs/ii/spatial_geometry/ScalarMultiplication.mp4",
+    "docs/ii/spatial_geometry/geometry.md",
     "docs/ii/spatial_geometry/vector.md",
-    "docs/ii/spatial_geometry/VectorAddition.mp4",
+    "docs/ii/spatial_geometry/CrossProduct.mp4",
+    "lty1.jpg",
+    "site/assets/vendor/MathJax-4.1.1/mathjax-fonts/mathjax-tex-font/woff-v2/mjx-tex-zero.woff2",
+    "site/assets/vendor/MathJax-4.1.1/mathjax-fonts/mathjax-tex-font/woff-v2/mjx-tex-ssi.woff2",
+    "site/assets/vendor/MathJax-4.1.1/mathjax-fonts/mathjax-tex-font/woff-v2/mjx-tex-v.woff2",
+    "site/assets/vendor/MathJax-4.1.1/mathjax-fonts/mathjax-tex-font/woff-v2/mjx-tex-ssb.woff2",
+    "site/assets/vendor/MathJax-4.1.1/mathjax-fonts/mathjax-tex-font/woff-v2/mjx-tex-ss.woff2",
+    "site/assets/vendor/MathJax-4.1.1/mathjax-fonts/mathjax-tex-font/woff-v2/mjx-tex-so.woff2",
+    "site/assets/vendor/MathJax-4.1.1/mathjax-fonts/mathjax-tex-font/woff-v2/mjx-tex-s4.woff2",
+    "site/assets/vendor/MathJax-4.1.1/mathjax-fonts/mathjax-tex-font/woff-v2/mjx-tex-s3.woff2",
+    "site/assets/vendor/MathJax-4.1.1/mathjax-fonts/mathjax-tex-font/woff-v2/mjx-tex-os.woff2",
+    "site/assets/images/favicon.png",
     "docs/ii/infinite_series.md",
     "docs/index.md",
     "docs/postscript.md",
@@ -229,17 +240,7 @@
     "docs/ii/multivar_integral/cruve_int.md",
     "docs/ii/multivar_integral/basic.md",
     "docs/ii/multivar_integral/application.md",
-    "docs/ii/spatial_geometry/geometry.md",
     "docs/ii/multivar_integral.md",
-    "docs/ii/multivar_differential.md",
-    "docs/ii/spatial_geometry/VectorSubtraction.mp4",
-    "docs/assets/videos",
-    "docs/assets/新建文件夹",
-    "site/assets/images/favicon.png",
-    "site/assets/images",
-    "site/assets/vendor/MathJax-4.1.1/CONTRIBUTING/index.html",
-    "site/assets/vendor/MathJax-4.1.1/CONTRIBUTING",
-    "site/assets/vendor/MathJax-4.1.1/index.html",
-    "site/404.html"
+    "docs/ii/multivar_differential.md"
   ]
 }
