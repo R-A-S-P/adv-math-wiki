@@ -83,6 +83,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -725,6 +730,24 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    空间中的几何对象
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -741,6 +764,62 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        线与面的解析几何表示
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="线与面的解析几何表示">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一般曲面的表示
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一般曲线的表示
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1491,6 +1570,53 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        线与面的解析几何表示
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="线与面的解析几何表示">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一般曲面的表示
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一般曲线的表示
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1511,7 +1637,25 @@
 
   <h1>空间中的几何对象</h1>
 
-<p>111</p>
+<div><p>空间中的几何对象主要是线和面，本章会讲解如何从解析几何的角度来看待三维Euclid空间中这些对象之间的几何关系. </p>
+<h2 id="_1">线与面的解析几何表示</h2>
+<p>线和面都有参数方程和隐函数方程两种表示方法，可以相互推导，相互转化.</p>
+<h3 id="_2">一般曲面的表示</h3>
+<p>曲面没有体积，是一个二维对象，这也就意味着在 <span class="arithmatex">\(x,y,z\)</span> 三个坐标中，只有两个是自由的，另一个要靠其它两个坐标来决定，由此，我们可以知道，一个曲面 <span class="arithmatex">\(S\)</span> 可以用隐函数方程 <span class="arithmatex">\(F(x,y,z)=0\)</span> ( <span class="arithmatex">\(x,y,z\)</span> 在一定范围内) 的形式来表示，满足方程的所有点的集合就是曲面 <span class="arithmatex">\(S\)</span> ，故称曲面 <span class="arithmatex">\(S\)</span> 为方程 <span class="arithmatex">\(F(x,y,z)=0\)</span> 的 <strong>图形</strong> .</p>
+<p>从另一个角度看，这意味着在一定的规则下，只需要两个数就能确定一个点在曲面 <span class="arithmatex">\(S\)</span> 上的位置，从这个角度出发，可以知道曲面 <span class="arithmatex">\(S\)</span> 能用两个参数来描述，这样就会得到 <strong>曲面 <span class="arithmatex">\(S\)</span> 的参数方程</strong></p>
+<div class="arithmatex">\[S:\;\begin{cases}x=x(u,v)\\[1ex]y=y(u,v)\\[1ex]z=z(u,v)\end{cases},\quad(u,v)\in D\subseteq\mathbb{R}^2\]</div>
+<p>区域 <span class="arithmatex">\(D\)</span> 内的每一个点 <span class="arithmatex">\((u,v)\)</span> 都对应曲面 <span class="arithmatex">\(S\)</span> 上的一个点 <span class="arithmatex">\((x,y,z)\)</span> ，如果用一个向量 <span class="arithmatex">\(\bs{r}=\{x,y,z\}\)</span> 来表示，就可以记为</p>
+<div class="arithmatex">\[S:\;\bs{r}=\bs{r}(u,v)=\{x(u,v),y(u,v),z(u,v)\},\quad(u,v)\in D\subseteq\mathbb{R}^2\]</div>
+<p>这就是曲面 <span class="arithmatex">\(S\)</span> 的 <strong>向量式参数方程</strong> ，两种记法中的 <span class="arithmatex">\(u\)</span> 和 <span class="arithmatex">\(v\)</span> 称作曲面 <span class="arithmatex">\(S\)</span> 的 <strong>参数</strong> .</p>
+<h3 id="_3">一般曲线的表示</h3>
+<p>与曲面的参数方程类似，曲线也可以用参数方程来表示，不同在于曲线是一维对象，只需要一个参数，故曲线的 <strong>参数方程</strong> 为</p>
+<div class="arithmatex">\[\Gamma:\;\begin{cases}x=x(t)\\[1ex]y=y(t)\\[1ex]z=z(t)\end{cases}\]</div>
+<p>或者</p>
+<div class="arithmatex">\[\Gamma:\;\bs{r}=\bs{r}(t)=\{x(t),y(t),z(t)\}\]</div>
+<p>同样的，每个 <span class="arithmatex">\(t=t_0\)</span> 对应着曲线 <span class="arithmatex">\(\Gamma\)</span> 上的一个点 <span class="arithmatex">\((x_0,y_0,z_0)\)</span> .</p>
+<p>从另一个角度看，曲线 <span class="arithmatex">\(\Gamma\)</span> 可以视为两个曲面的交线，所以曲线也能表示为</p>
+<div class="arithmatex">\[\Gamma:\;\begin{cases}F(x,y,z)=0\\[1ex]G(x,y,z)=0\end{cases}\]</div>
+<p>这叫做曲线 <span class="arithmatex">\(\Gamma\)</span> 的 <strong>一般方程</strong> .</p></div>
 
 
 

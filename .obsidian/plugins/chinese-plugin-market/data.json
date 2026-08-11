@@ -1,0 +1,15 @@
+{
+  "useMyMemory": true,
+  "sourceFilter": "all",
+  "aiSearchEnabled": false,
+  "aiSearchModel": "deepseek-chat",
+  "aiSearchShowReason": false,
+  "embeddingSource": "local",
+  "embeddingModel": "text-embedding-3-small",
+  "embeddingLocalModel": "Xenova/bge-small-zh-v1.5",
+  "embeddingLocalWasmPaths": "",
+  "mirrorSource": "github",
+  "mirrorCustomBase": "",
+  "sortBy": "relevance",
+  "compare": []
+}
