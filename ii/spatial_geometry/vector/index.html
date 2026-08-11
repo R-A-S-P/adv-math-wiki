@@ -1952,10 +1952,10 @@
 <p>根据这些运算律，仿照推导内积坐标表示的方法，可以得到</p>
 <div class="arithmatex">\[\bs a\times\bs b=\begin{vmatrix}\bs i&amp;\bs j&amp;\bs k\\x_1&amp;y_1&amp;z_1\\x_2&amp;y_2&amp;z_2\end{vmatrix}\]</div>
 <p>这就是 <strong>外积的坐标表示</strong> ，结合线性代数的知识，可以很自然的从这个表达式推导出上述运算律. </p>
-<p>与内积不同，外积的坐标表示不能自然的推广到 <span class="arithmatex">\(n\)</span> 维，所以外积是三维空间特有的向量运算，这不难理解：只有三维空间中，一个平面才有唯一的法向，在更高维度，一个平面与无数个方向垂直，不能唯一确定一个向量. </p>
+<p>与内积不同，外积的坐标表示不能自然的推广到 <span class="arithmatex">\(n\)</span> 维，所以外积是三维空间特有的向量运算，这不难理解：只有三维空间中，一个平面才有唯一的法向，在更高维度，一个平面与无数个方向垂直，不能唯一确定一个向量.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>这并不是说高维空间中没有有向面积，实际上，高位空间中也有有向面积，有向面积的方向就是它自己，不是什么别的，只是在三维空间中，除去平面的两个维度恰好剩下一个方向，可以与有向面积的方向一一对应，这才用向量来表示有向面积的方向.</p>
+<p>这并不是说高维空间中没有有向面积，实际上，高维空间中也有有向面积，有向面积的方向就是它自己，不是什么别的，只是在三维空间中，除去平面的两个维度恰好剩下一个方向，可以与有向面积的方向一一对应，这才用向量来表示有向面积的方向.</p>
 </div>
 <p>有时我们会在二维空间中做外积，那实际上是添加了一个维度，由于外积结果一定垂直于原本的二维平面，我们可以把方向用正负号表示，这样得到的标量就是二维外积的结果，用数学语言来表达就是</p>
 <div class="arithmatex">\[\begin{gathered}\{x_1,y_1,0\}\times\{x_2,y_2,0\}=\begin{vmatrix}\bs i&amp;\bs j&amp;\bs k\\x_1&amp;y_1&amp;0\\x_2&amp;y_2&amp;0\end{vmatrix}=\{0,0,x_1y_2-x_2y_1\}\\[2ex]\therefore\text{define}\quad\{x_1,y_1\}\times\{x_2,y_2\}=\begin{vmatrix}x_1&amp;y_1\\x_2&amp;y_2\end{vmatrix}=x_1y_2-x_2y_1\end{gathered}\]</div>
@@ -1963,7 +1963,7 @@
 <p>把内积和外积组合起来，可以得到一种三元运算—— <strong>混合积</strong> ，符号记为 <span class="arithmatex">\([\bs a\bs b\bs c]\)</span> ，满足</p>
 <div class="arithmatex">\[[\bs a\bs b\bs c]=\bs a\cdot(\bs b\times\bs c)=\begin{vmatrix}x_1&amp;y_1&amp;z_1\\x_2&amp;y_2&amp;z_2\\x_3&amp;y_3&amp;z_3\end{vmatrix}\]</div>
 <p>这就是 <strong>混合积的坐标表示</strong> ，其几何意义为 <span class="arithmatex">\([\bs a\bs b\bs c]=\pm V\)</span> ，其中 <span class="arithmatex">\(V\)</span> 是 <span class="arithmatex">\(\bs a,\bs b,\bs c\)</span> 张成的平行六面体的体积， <span class="arithmatex">\(\bs a,\bs b,\bs c\)</span> 满足右手法则时取 <span class="arithmatex">\(+\)</span> ，否则取 <span class="arithmatex">\(-\)</span> .</p>
-<p><mark>此处应有视频*1</mark></p>
+<p><div class="video-container"><video style="position:relative;width:100%;height:22.172vw" loop muted autoplay alt="video"><source src="../MixedProduct.mp4" type="video/mp4"></source></video></div></p>
 <p>根据坐标表示，可以发现混合积具有如下性质</p>
 <div class="arithmatex">\[[\bs a\bs b\bs c]=[\bs c\bs a\bs b]=[\bs b\bs c\bs a]=-[\bs a\bs c\bs b]=-[\bs b\bs a\bs c]=-[\bs c\bs b\bs a]\]</div>
 <p>几何上，混合积有这种性质是因为以上各个混合积对应着相同的平行六面体.</p>
