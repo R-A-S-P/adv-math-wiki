@@ -944,7 +944,18 @@
   <a href="#_14" class="md-nav__link">
     <span class="md-ellipsis">
       
+        旋转曲面
+      
+    </span>
+  </a>
+  
+</li>
         
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二次曲面
       
     </span>
   </a>
@@ -1881,7 +1892,18 @@
   <a href="#_14" class="md-nav__link">
     <span class="md-ellipsis">
       
+        旋转曲面
+      
+    </span>
+  </a>
+  
+</li>
         
+          <li class="md-nav__item">
+  <a href="#_15" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        二次曲面
       
     </span>
   </a>
@@ -2021,7 +2043,6 @@
 <p>这三类夹角的求法是类似的，以下用 <span class="arithmatex">\(\theta\)</span> 表示两对象的夹角.</p>
 <p>对于线线夹角，如果两直线的方向向量分别为 <span class="arithmatex">\(\bs{a}_1\)</span> 和 <span class="arithmatex">\(\bs{a}_2\)</span> ，利用之前讲到的夹角公式，可得</p>
 <div class="arithmatex">\[\cos\theta=\frac{|\bs{a}_1\cdot\bs{a}_2|}{\Vert\bs{a}_1\Vert\Vert\bs{a}_2\Vert}\]</div>
-<p><mark>动画*1</mark></p>
 <p>之所以有绝对值，是因为 <span class="arithmatex">\(\theta\)</span> 对应的是两直线构成的角中在 <span class="arithmatex">\([0,\dfrac\pi2]\)</span> 的那一个，后文的 <span class="arithmatex">\(\theta\)</span> 也是这样.</p>
 <p>对于线面夹角，如果直线的方向向量为 <span class="arithmatex">\(\bs{a}\)</span> ，平面的法向量为 <span class="arithmatex">\(\bs{n}\)</span> ，则有</p>
 <div class="arithmatex">\[\sin\theta=\frac{|\bs{a}\cdot\bs{n}|}{\Vert\bs{a}\Vert\Vert\bs{n}\Vert}\]</div>
@@ -2038,6 +2059,22 @@ S:\;(x-x_0)^2+(y-y_0)^2+(z-z_0)^2=R^2
 \]</div>
 <p>其中球心为 <span class="arithmatex">\((x_0,y_0,z_0)\)</span> ，半径为 <span class="arithmatex">\(R\)</span> ，可以看到这其实就是两点距离公式</p>
 <p><mark>动画*1</mark></p>
+<p>球面的参数方程也不复杂，原理和用经纬度定位是相同的，用两个角度作为参数，得到参数方程为</p>
+<div class="arithmatex">\[
+\bs{r}(\theta,\phi)=\{x_0+R\sin\theta\cos\phi,y_0+R\sin\theta\sin\phi,z_0+R\cos\theta\}
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>由球面的参数方程引申出了球坐标系，球坐标系的三个坐标是 <span class="arithmatex">\((r,\theta,\phi)\)</span> ，其中 <span class="arithmatex">\(r\)</span> 是到原点的距离， <span class="arithmatex">\(\theta\)</span> 为极角，是位置向量与 <span class="arithmatex">\(+z\)</span> 半轴的夹角，范围为 <span class="arithmatex">\([0,\pi]\)</span> ， <span class="arithmatex">\(\phi\)</span> 为方位角，是位置向量在 <span class="arithmatex">\(xOy\)</span> 平面的投影与 <span class="arithmatex">\(+x\)</span> 半轴的夹角，范围为 <span class="arithmatex">\([0,2\pi)\)</span> ，通过</p>
+<div class="arithmatex">\[
+\begin{cases}
+x=r\sin\theta\cos\phi\\
+y=r\sin\theta\sin\phi\\
+z=r\cos\theta
+\end{cases}
+\]</div>
+<p>将球坐标系与直角坐标系相互转化</p>
+</div>
 <h3 id="_12">柱面</h3>
 <p>一条直线沿一定曲线平移得到一族直线，这族直线构成的曲面就是柱面，我们把此曲线称为柱面的 <strong>准线</strong> ，这族直线的每一条都称为柱面的 <strong>母线</strong> </p>
 <p><mark>动画*1</mark></p>
@@ -2186,7 +2223,123 @@ F(\dfrac xz,\dfrac yz,1)&amp;=0
 <p>在球坐标系下，顶点为 <span class="arithmatex">\(O\)</span> 的锥面方程更加简单，是 <span class="arithmatex">\(F(\theta,\varphi)=0\)</span> ，更直观的表现了锥面的本质是函数值是否为0只与方向有关</p>
 </div>
 <p>值得注意的是，一个图像可能对应多个不同的方程，例如 <span class="arithmatex">\(\mathrm{e}^{x^2+y^2-z^2}-1=0\)</span> ，这个方程的图像同样是锥面，但是 <span class="arithmatex">\(F(x,y,z)=\mathrm{e}^{x^2+y^2-z^2}-1\)</span> 并不是齐次函数，不过这个方程与 <span class="arithmatex">\(x^2+y^2-z^2=0\)</span> 等价，可见此锥面依旧可以用齐次方程来描述，这个锥面可以用二次方程描述，称为 <strong>二次锥面</strong></p>
-<h3 id="_14"></h3></div>
+<h3 id="_14">旋转曲面</h3>
+<p>让曲线 <span class="arithmatex">\(C\)</span> 绕着某固定直线 <span class="arithmatex">\(l\)</span> 旋转一周，这样形成的曲面叫做 <strong>旋转曲面</strong> ，其中曲线 <span class="arithmatex">\(C\)</span> 称为母线，直线 <span class="arithmatex">\(l\)</span> 称为 <strong>旋转轴</strong></p>
+<p><mark>anim</mark></p>
+<p>对于旋转轴是坐标轴且母线是平面曲线的情况，旋转曲面的方程是十分简单的，例如以 <span class="arithmatex">\(z\)</span> 轴为旋转轴，母线是 <span class="arithmatex">\(xOz\)</span> 平面的曲线</p>
+<div class="arithmatex">\[
+\begin{cases}
+F(x,z)=0\\
+y=0
+\end{cases}
+\]</div>
+<p>时，旋转曲面的方程就是 <span class="arithmatex">\(F(\pm\sqrt{x^2+y^2},z)=0\)</span> ，因为原先的 <span class="arithmatex">\(F(x,z)=0\)</span> 中， <span class="arithmatex">\(z\)</span> 代表了曲线上点的轴向位置， <span class="arithmatex">\(x\)</span> 代表了曲线上点的距轴半径，此时方位角受到 <span class="arithmatex">\(y=0\)</span> 的限制，改写成  <span class="arithmatex">\(F(\pm\sqrt{x^2+y^2},z)=0\)</span> 后，实际上是解除方位角的限制，这反映了曲面的旋转对称性</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>对于一般的旋转曲面，情况则复杂的多，因为旋转轴是任意直线，可以不过原点，再者，母线不一定在坐标面内，甚至可以不是平面曲线，但是依然可以求出旋转曲面方程的通式</p>
+<p>假设旋转曲面的转轴是过 <span class="arithmatex">\(V\)</span> 的直线，单位方向向量为 <span class="arithmatex">\(\bs{k}\)</span> ，那么旋转曲面满足法向量与纬圆切线垂直，也就是方程</p>
+<div class="arithmatex">\[
+\bs{k}\times(\bs{r}-\bs{V})\cdot\nabla F=0
+\]</div>
+<p>其通解为</p>
+<div class="arithmatex">\[
+F(x,y,z)=\Phi((\bs{r}-\bs{V})\cdot\bs{k},|(\bs{r}-\bs{V})\times\bs{k}|^2)
+\]</div>
+<p>所以旋转曲面方程的通式就是 <span class="arithmatex">\(\Phi((\bs{r}-\bs{V})\cdot\bs{k},|(\bs{r}-\bs{V})\times\bs{k}|^2)=0\)</span> ，其中 <span class="arithmatex">\((\bs{r}-\bs{V})\cdot\bs{k}\)</span> 是曲面上点的轴向坐标，也就是该点在轴上的投影到基准点 <span class="arithmatex">\(V\)</span> 的距离， <span class="arithmatex">\(|(\bs{r}-\bs{V})\times\bs{k}|\)</span> 则是点到轴的距离，带有平方是为了消除具体表达式中很可能出现的根号</p>
+<p>下面求解旋转曲面的参数方程，参数选取是十分显然的，就是母线参数 <span class="arithmatex">\(t\)</span> 与方向角 <span class="arithmatex">\(\theta\)</span> </p>
+<p>对于一点 <span class="arithmatex">\(A\)</span> ，绕过 <span class="arithmatex">\(V\)</span> 点，单位方向向量为 <span class="arithmatex">\(\bs{k}\)</span> 的轴旋转形成圆的参数方程是</p>
+<div class="arithmatex">\[
+\bs{r}(\theta)=\bs{V}+(\bs{A}-\bs{V})\cos\theta+\bs{k}\times(\bs{A}-\bs{V})\sin\theta+(1-\cos\theta)[(\bs{A}-\bs{V})\cdot\bs{k}]\bs{k}
+\]</div>
+<p>直接把 <span class="arithmatex">\(\bs{A}\)</span> 换成 <span class="arithmatex">\(\bs{c}(t)\)</span> 就是母线 <span class="arithmatex">\(\bs{c}(t)\)</span> 形成的旋转曲面参数方程</p>
+</div>
+<h3 id="_15">二次曲面</h3>
+<p>在高中阶段，我们学习到三种二次曲线，椭圆(圆)，双曲线，抛物线，二次曲面也是类似的，常见的二次曲面有 <strong>椭球面(球面)</strong>、<strong>单叶/双叶双曲面</strong>、<strong>椭圆/双曲抛物面</strong> 这五种，为便利起见，在此同样只研究图形正放的情况，即方程中没有交叉项的情况</p>
+<p>首先是 <strong>椭球面</strong> ，其方程就是椭圆的三维版本</p>
+<div class="arithmatex">\[
+\frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2}=1
+\]</div>
+<p>这也称作 <strong>椭球面的标准方程</strong> ，为了从方程出发研究椭球面的形态特征，我们可以先研究其截线，尤其是平行于坐标面的截线，因为这种截线的方程相对简单，这种方法称为 <strong>平面截痕法</strong> ，例如令 <span class="arithmatex">\(z=h\)</span> ，得到</p>
+<div class="arithmatex">\[
+\begin{cases}
+\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1-\dfrac{h^2}{c^2}\\[1ex]
+z=h
+\end{cases}
+\]</div>
+<p>这是平行于 <span class="arithmatex">\(xOy\)</span> 平面的截线方程，可见是一个椭圆，并且只在 <span class="arithmatex">\(-c\leq h\leq c\)</span> 能截到图形，说明椭球面在 <span class="arithmatex">\(z\)</span> 轴方向有界，区间就是 <span class="arithmatex">\([-c,c]\)</span> ，用坐标面截得的截线称为 <strong>主截线</strong> ，因为这些截线是椭圆，所以也叫 <strong>主椭圆</strong> ，位于坐标面上，是平行于坐标面的最大的椭圆，例如</p>
+<div class="arithmatex">\[
+\begin{cases}
+\dfrac{x^2}{a^2}+\dfrac{y^2}{b^2}=1\\[1ex]
+z=0
+\end{cases}
+\]</div>
+<p>就是 <span class="arithmatex">\(xOy\)</span> 平面上的主椭圆</p>
+<p><mark>anim</mark></p>
+<p>整体的看，椭球有良好的对称性，关于三条坐标轴、三张坐标面以及原点 <span class="arithmatex">\(O\)</span> 都对称，几个参数 <span class="arithmatex">\(a,b,c\)</span> 称为 <strong>半轴</strong> ，可以完全确定一个椭球，椭球的体积公式为 <span class="arithmatex">\(\dfrac43\pi abc\)</span> ，这也体现了观察椭球的另一个视角，就是把椭球看做球的拉伸</p>
+<p><mark>anim</mark></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>就和椭圆周长一样，椭球的表面积并没有初等表达式，其公式为</p>
+<div class="arithmatex">\[
+S=\int^{2\pi}_{0}\left(\int^{\pi}_{0}\sin\varphi\sqrt{a^2b^2\cos^2\varphi+c^2\sin^2\varphi(b^2\cos^2\theta+a^2\sin^2\theta)}\dd\varphi\right)\dd\theta
+\]</div>
+<p>椭圆的周长公式为</p>
+<div class="arithmatex">\[
+C=4\int^{\pi/2}_{0}\sqrt{a^2\sin^2t+b^2\cos^2t}\,\dd t=4a\int^{\pi/2}_0\sqrt{1-e^2\sin^2\theta}\,\dd\theta
+\]</div>
+<p>其中 <span class="arithmatex">\(e\)</span> 是椭圆的离心率，函数</p>
+<div class="arithmatex">\[
+E(e)=\int^{\pi/2}_0\sqrt{1-e^2\sin^2\theta}\,\dd\theta
+\]</div>
+<p>即为第二类完全椭圆积分</p>
+<p>会注意到，研究椭球面时并不像研究椭圆那样考察关于焦点的几何性质，因为椭球面的焦点通常不再是两个点，而是变为了两条曲线，也就是焦点椭圆和焦点双曲线，这使得焦点相关的几何性质变的十分复杂</p>
+</div>
+<p>然后是 <strong>单叶双曲面</strong> 和 <strong>双叶双曲面</strong> ，单叶双曲面的方程为</p>
+<div class="arithmatex">\[
+\frac{x^2}{a^2}+\frac{y^2}{b^2}-\frac{z^2}{c^2}=1
+\]</div>
+<p>其中三个二次项符号两正一负即可，所以</p>
+<div class="arithmatex">\[
+\frac{x^2}{a^2}-\frac{y^2}{b^2}+\frac{z^2}{c^2}=1
+\]</div>
+<p>和</p>
+<div class="arithmatex">\[
+-\frac{x^2}{a^2}+\frac{y^2}{b^2}+\frac{z^2}{c^2}=1
+\]</div>
+<p>也是单叶双曲面，只是朝向不同</p>
+<p><mark>anim</mark></p>
+<p>双叶双曲线的方程为</p>
+<div class="arithmatex">\[
+\frac{x^2}{a^2}-\frac{y^2}{b^2}-\frac{z^2}{c^2}=1
+\]</div>
+<p>其中二次项只要一正两负即可，所以也还有另外两种不同的方程，对应另外两种不同的朝向</p>
+<p><mark>anim</mark></p>
+<p>单叶双曲面和双叶双曲面的对称性都是与椭球面相同的，也可以使用平面截痕法对其图像进行分析</p>
+<p>接下来是 <strong>椭圆抛物面</strong> ，其方程为</p>
+<div class="arithmatex">\[
+\begin{align}
+z=\frac{x^2}{a^2}+\frac{y^2}{b^2}\\[1ex]
+y=\frac{x^2}{a^2}+\frac{z^2}{c^2}\\[1ex]
+x=\frac{y^2}{b^2}+\frac{z^2}{c^2}
+\end{align}
+\]</div>
+<p>三者均可，是朝向三个不同方向的椭圆抛物面</p>
+<p><mark>anim</mark></p>
+<p>最后是 <strong>双曲抛物面</strong> ，也叫做 <strong>马鞍面</strong> ，双曲抛物面的方程是</p>
+<div class="arithmatex">\[
+\begin{align}
+z=\frac{x^2}{a^2}-\frac{y^2}{b^2}\\[1ex]
+y=\frac{x^2}{a^2}-\frac{z^2}{c^2}\\[1ex]
+x=\frac{y^2}{b^2}-\frac{z^2}{c^2}
+\end{align}
+\]</div>
+<p>三者均可，会发现双曲抛物面的方程两端正负都不确定，因此其图像相对复杂，以</p>
+<div class="arithmatex">\[
+z=\frac{x^2}{a^2}-\frac{y^2}{b^2}
+\]</div>
+<p>为例，使用平面截痕法取截面 <span class="arithmatex">\(z=h\)</span> ，在 <span class="arithmatex">\(z&gt;0\)</span> 和 <span class="arithmatex">\(z&lt;0\)</span> 区域截得的双曲线开口方向是不同的，而在 <span class="arithmatex">\(z=0\)</span> 平面上，双曲线退化为两条相交的直线</p>
+<p><mark>anim</mark></p>
+<p>END</p></div>
 
 
 

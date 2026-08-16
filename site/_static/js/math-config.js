@@ -8,6 +8,7 @@ window.MathJax = {
     macros:{
       bs: ["\\boldsymbol{ #1 }",1],
       abs: ["\\left|{ #1 }\\right|",1],
+      dd: ["\\mathrm{d}{ #1 }",1]
     }
   },
   options: {
