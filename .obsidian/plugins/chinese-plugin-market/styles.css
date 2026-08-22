@@ -353,8 +353,12 @@
 	outline: none;
 }
 
-/* 工具栏「仅未安装」 toggle */
-.pt-toggle-uninstalled {
+/* 工具栏「仅已安装」/「仅已启动」/「仅已安装未启动」 toggle */
+.pt-toggle-uninstalled,
+.pt-toggle-enabled,
+.pt-toggle-installed-off,
+.pt-toggle-favorites,
+.pt-toggle-unfavorites {
 	flex-shrink: 0;
 }
 
@@ -458,6 +462,78 @@
 }
 .pt-refresh:active { transform: scale(0.94); }
 .pt-refresh:disabled { cursor: default; opacity: 0.6; }
+/* 检查更新按钮：纯图标，无底框/背景（仅图标+hover 着色）。
+   必须用 button. 前缀：主题的 .theme-xx button 默认背景/边框/box-shadow 特异性 (0,1,1)
+   会压过 .pt-check-update(0,1,0)，必须用 button.pt-check-update(0,1,1) 同级才能覆盖。 */
+button.pt-check-update {
+	appearance: none;
+	flex: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	padding: 0;
+	color: var(--pt-text-muted);
+	background: transparent;
+	border: none;
+	box-shadow: none;
+	border-radius: var(--pt-radius-btn);
+	cursor: pointer;
+	font-family: inherit;
+	transition: color var(--pt-duration-fast) var(--pt-ease),
+		transform var(--pt-duration-fast) var(--pt-ease-spring);
+}
+button.pt-check-update svg.svg-icon {
+	width: 16px;
+	height: 16px;
+	stroke-width: 2px;
+}
+button.pt-check-update:focus-visible {
+	box-shadow: var(--pt-focus-ring);
+	outline: none;
+}
+button.pt-check-update:hover {
+	color: var(--pt-text);
+}
+button.pt-check-update:active { transform: scale(0.94); }
+/* 检测进行中：图标旋转提示 */
+button.pt-check-update.pt-spin svg {
+	animation: pt-spin 0.9s linear infinite;
+}
+/* 组合下拉按钮（场景切换）：与检查更新同款纯图标样式 */
+button.pt-profile-dropdown {
+	appearance: none;
+	flex: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 32px;
+	height: 32px;
+	padding: 0;
+	color: var(--pt-text-muted);
+	background: transparent;
+	border: none;
+	box-shadow: none;
+	border-radius: var(--pt-radius-btn);
+	cursor: pointer;
+	font-family: inherit;
+	transition: color var(--pt-duration-fast) var(--pt-ease),
+		transform var(--pt-duration-fast) var(--pt-ease-spring);
+}
+button.pt-profile-dropdown svg.svg-icon {
+	width: 16px;
+	height: 16px;
+	stroke-width: 2px;
+}
+button.pt-profile-dropdown:focus-visible {
+	box-shadow: var(--pt-focus-ring);
+	outline: none;
+}
+button.pt-profile-dropdown:hover {
+	color: var(--pt-text);
+}
+button.pt-profile-dropdown:active { transform: scale(0.94); }
 /* 刷新进行中：旋转动画提示进行状态 */
 .pt-refresh.pt-refreshing {
 	animation: pt-refresh-spin 0.9s linear infinite;
@@ -496,7 +572,7 @@
 	color: var(--pt-text-faint);
 	text-transform: uppercase;
 	letter-spacing: 0.8px;
-	margin-bottom: var(--pt-space-xxs);
+	margin-bottom: 0;
 }
 .pt-advanced-title-group {
 	display: inline-flex;
@@ -508,7 +584,7 @@
 	display: flex;
 	flex-direction: column;
 	gap: 0;
-	padding: var(--pt-space-xs) var(--pt-space-md) 0;
+	padding: 0 var(--pt-space-md) 0;
 }
 
 /* 统计行（内联到 .pt-advanced-heading 右侧时紧凑显示） */
@@ -660,8 +736,8 @@
 	display: flex;
 	align-items: center;
 	flex: 1 1 100%;
-	flex-wrap: nowrap; /* chips 内部自身 wrap，外层不 wrap；避免标签被挤到独立行 */
-	padding-block: var(--pt-space-xs);
+	flex-wrap: nowrap; 	/* chips 内部自身 wrap，外层不 wrap；避免标签被挤到独立行 */
+	padding-block: 1px;
 	border-top: 1px solid var(--pt-border);
 }
 .pt-facet-row:first-child {
@@ -676,11 +752,15 @@
 	text-align: left;
 	box-sizing: border-box;
 	padding-right: var(--pt-space-md); /* 标签 ↔ chips 列 12px gap 用 padding 留 */
+	white-space: nowrap;
+	/* 防御：某些 Obsidian 主题/自定义 CSS 会设竖排；强制保持横向，避免「翻译」等二字标签被竖排 */
+	writing-mode: horizontal-tb;
+	text-orientation: mixed;
 }
 .pt-facet-chips {
 	display: flex;
 	flex-wrap: wrap; /* chips 数量多时自然换行，不出现横滚 */
-	gap: var(--pt-space-xs);
+	gap: var(--pt-space-2xs);
 	flex: 1 1 auto;
 	min-width: 0;
 }
@@ -701,13 +781,24 @@
 .pt-facet-more:hover {
 	background: color-mix(in srgb, var(--pt-accent) 8%, transparent);
 }
+/* 面板内字号统一降一号（sm→xs）+ chip 垂直 padding 略收，进一步压缩面板高度。
+   限定 .pt-advanced 作用域，避免影响顶部工具条的同款 .pt-filter 胶囊。 */
+.pt-advanced .pt-facet-label,
+.pt-advanced .pt-filter,
+.pt-advanced .pt-facet-chip,
+.pt-advanced .pt-facet-more {
+	font-size: var(--pt-text-xs);
+}
+.pt-advanced .pt-filter,
+.pt-advanced .pt-facet-more {
+	padding: 4px 12px;
+}
 
-/* 分类 facet 选中态视觉反馈（keyword 模式下也可作为筛选条件） */
+/* 分类 facet 选中态视觉反馈：与「来源/翻译」维度统一（accent 色文字 + 加粗，无背景填充，border/background 由下方 .pt-view 覆盖块置透明） */
 .pt-facet-chip.pt-active,
 .pt-facet-chip[aria-pressed="true"] {
-	background: var(--pt-accent, var(--interactive-accent));
-	color: var(--pt-on-accent, var(--text-on-accent));
-	border-color: var(--pt-accent, var(--interactive-accent));
+	color: var(--pt-accent, var(--interactive-accent));
+	font-weight: var(--pt-weight-semibold);
 }
 .pt-facet-hint {
 	font-size: var(--font-smallest);
@@ -756,8 +847,8 @@ button.pt-facet-letter-btn:hover {
 	box-shadow: none;
 }
 button.pt-facet-letter-btn.is-active {
-	color: inherit;
-	font-weight: inherit;
+	color: var(--pt-accent, var(--interactive-accent));
+	font-weight: var(--pt-weight-semibold);
 	background: transparent;
 	border: none;
 	box-shadow: none;
@@ -944,18 +1035,17 @@ button.pt-facet-letter-btn.is-active {
 .pt-view .pt-toolbar-reset:focus-visible,
 .pt-view .pt-toggle-filters[aria-expanded="true"],
 .pt-view .pt-toggle-filters--text[aria-expanded="true"],
+/* 工具条/筛选区按钮（来源/安装/收藏等 .pt-filter）选中时去边框去背景；分类 facet chip 走方案 B（accent 字+加粗+保留细边框），不在此覆盖 */
 .pt-view .pt-filter[aria-pressed="true"],
-.pt-view .pt-filter.pt-filter-recommended[aria-pressed="true"],
-.pt-view .pt-facet-chip.pt-active,
-.pt-view .pt-facet-chip[aria-pressed="true"] {
+.pt-view .pt-filter.pt-filter-recommended[aria-pressed="true"] {
 	border: none;
 	box-shadow: none;
 	background: transparent;
 }
-/* 字母索引 active态 覆盖：保持纯字母，不加任何装饰 */
+/* 字母索引 active态：与分类/翻译维度统一（accent 色文字 + 加粗，无背景填充） */
 .pt-view button.pt-facet-letter-btn.is-active {
-	color: inherit;
-	font-weight: inherit;
+	color: var(--pt-accent, var(--interactive-accent));
+	font-weight: var(--pt-weight-semibold);
 	background: transparent;
 	border: none;
 	box-shadow: none;
@@ -1091,7 +1181,7 @@ button.pt-facet-letter-btn.is-active {
 	height: 14px;
 	stroke-width: 2px;
 }
-/* AI 模式下 badge 占据最右，清除按钮左移让位 */
+/* 语义模式（AI）下 badge 占据最右，清除按钮左移让位；本地语义 badge 已隐藏，无需让位 */
 .pt-search.pt-search-ai .pt-search-clear { right: 44px; }
 
 /* AI 搜索进行时：整个组合框边框高亮 + 输入区流光反馈 */
@@ -1184,7 +1274,7 @@ button.pt-facet-letter-btn.is-active {
 	}
 	.pt-card-desc.pt-card-desc--clamped {
 		-webkit-line-clamp: 3;
-		max-height: calc(var(--pt-text-base, 0.78rem) * 1.5 * 3);
+		max-height: calc(var(--pt-text-sm, 0.72rem) * 1.5 * 3);
 	}
 }
 /* 中等宽度（420-600px）：隐藏信号行，保留统计和 AI 理由，描述截断 4 行 */
@@ -1194,7 +1284,7 @@ button.pt-facet-letter-btn.is-active {
 	}
 	.pt-card-desc.pt-card-desc--clamped {
 		-webkit-line-clamp: 4;
-		max-height: calc(var(--pt-text-base, 0.78rem) * 1.5 * 4);
+		max-height: calc(var(--pt-text-sm, 0.72rem) * 1.5 * 4);
 	}
 }
 
@@ -1326,8 +1416,8 @@ button.pt-facet-letter-btn.is-active {
 	line-height: inherit;
 	min-height: 0; /* UA/某些主题会给 button 一个 min-height */
 	height: auto;
-	background: color-mix(in srgb, var(--pt-accent) 14%, transparent);
-	color: var(--pt-accent);
+	background: color-mix(in srgb, var(--pt-text-muted) 12%, transparent);
+	color: var(--pt-text-muted, var(--text-muted));
 	border: none;
 	border-radius: 999px;
 	box-shadow: none;
@@ -1338,35 +1428,52 @@ button.pt-facet-letter-btn.is-active {
 	transition: background var(--pt-duration-fast) var(--pt-ease);
 }
 .pt-card-install-btn:hover {
-	background: color-mix(in srgb, var(--pt-accent) 24%, transparent);
+	background: color-mix(in srgb, var(--pt-text-muted) 20%, transparent);
 	filter: none;
 }
-/* 已安装但未启用：次要 CTA（同款 tint 视觉语言，但用中性 muted 色） */
+/* 已安装但未启用：accent tint（与「已启用」视觉语言统一） */
 .pt-card-install-btn--installed {
-	background: color-mix(in srgb, var(--pt-text-muted) 12%, transparent);
-	color: var(--pt-text-muted, var(--text-muted));
+	background: color-mix(in srgb, var(--pt-accent) 14%, transparent);
+	color: var(--pt-accent);
 	border: none;
 }
 .pt-card-install-btn--installed:hover {
-	background: color-mix(in srgb, var(--pt-text-muted) 20%, transparent);
-	color: var(--pt-text-strong, var(--text-normal));
+	background: color-mix(in srgb, var(--pt-accent) 24%, transparent);
+	color: var(--pt-accent);
 	filter: none;
 }
-/* 已启用：纯展示 chip 胶囊（成功色 tint），不可交互 */
+/* 已启用：强调色 tint 胶囊（accent 14% 透明底 + accent 色文字）；
+   纯展示状态，不可交互。 */
 .pt-card-install-btn--enabled {
-	background: color-mix(in srgb, var(--pt-color-success) 14%, transparent);
-	color: var(--pt-color-success);
+	background: color-mix(in srgb, var(--pt-accent) 14%, transparent);
+	color: var(--pt-accent);
+	border: none;
+}
+.pt-card-install-btn--enabled:hover {
+	background: color-mix(in srgb, var(--pt-accent) 14%, transparent);
+	color: var(--pt-accent);
+	filter: none;
+}
+/* 安装中：纯展示 chip 胶囊（强调色淡底），不可交互。
+   进行中提示用 JS 驱动的三点省略号（安装中···）循环，不依赖 CSS 动画，
+   规避系统/主题 reduce-motion 禁用动画导致完全不可见。 */
+.pt-card-install-btn--installing {
+	background: color-mix(in srgb, var(--pt-accent) 14%, transparent);
+	color: var(--pt-accent);
 	border: none;
 	cursor: default;
 	pointer-events: none;
+}
+.pt-card-install-btn--installing .pt-install-label {
+	white-space: nowrap;
 }
 /* 关键：button 元素的 UA/主题默认样式需要更高具体性才能被覆盖。
    仅靠 .pt-card-install-btn 不够，必须用 button. 前缀。
    注意：不要在这里写 font: shorthand，否则会用更高具体性把类的字号字重冲掉；
    必须用 font-family / font-size / font-weight 单独覆盖。 */
 button.pt-card-install-btn {
-	background: color-mix(in srgb, var(--pt-accent) 14%, transparent);
-	color: var(--pt-accent);
+	background: color-mix(in srgb, var(--pt-text-muted) 12%, transparent);
+	color: var(--pt-text-muted, var(--text-muted));
 	border: none;
 	box-shadow: none;
 	appearance: none;
@@ -1396,7 +1503,8 @@ button.pt-card-install-btn--installed {
 .pt-card-actions-row {
 	display: flex;
 	align-items: center;
-	gap: var(--pt-space-2xs);
+	justify-content: flex-start;
+	gap: 2px;
 	flex-wrap: wrap;
 	opacity: 1;
 	transform: translateY(0);
@@ -1495,6 +1603,80 @@ button.pt-card-install-btn--installed {
 	border: 1px solid color-mix(in srgb, var(--pt-gold) 40%, transparent);
 }
 
+/* ── 「可更新」徽标：官方版本领先本地（仅已装插件），点击跳社区插件更新入口 ──
+   设计：绿色升级提示，区别于金色推荐；可点击（pointer-events: auto）。 */
+.pt-card-update-badge {
+	position: static;
+	align-self: flex-start;
+	display: inline-flex;
+	align-items: center;
+	gap: var(--pt-space-2xs);
+	padding: var(--pt-space-2xs) var(--pt-space-sm);
+	border-radius: 999px;
+	font-size: var(--pt-text-xs);
+	font-weight: var(--pt-weight-bold);
+	letter-spacing: 0.02em;
+	color: var(--text-on-accent, #fff);
+	background: linear-gradient(135deg,
+		color-mix(in srgb, var(--pt-accent-green, #2ecc71) 85%, #fff),
+		var(--pt-accent-green, #2ecc71));
+	box-shadow: 0 1px 4px color-mix(in srgb, var(--pt-accent-green, #2ecc71) 40%, transparent);
+	cursor: pointer;
+	pointer-events: auto;
+}
+.pt-card-update-badge:hover {
+	filter: brightness(1.08);
+}
+/* 暗色主题下降低可更新徽章亮度，避免刺眼 */
+.theme-dark .pt-card-update-badge {
+	color: var(--text-on-accent, #fff);
+	background: linear-gradient(135deg,
+		color-mix(in srgb, var(--pt-accent-green, #2ecc71) 50%, var(--pt-surface-2, var(--background-secondary))),
+		color-mix(in srgb, var(--pt-accent-green, #2ecc71) 50%, var(--pt-surface-2, var(--background-secondary)))
+	);
+	box-shadow: 0 1px 4px color-mix(in srgb, var(--pt-accent-green, #2ecc71) 25%, transparent);
+	border: 1px solid color-mix(in srgb, var(--pt-accent-green, #2ecc71) 40%, transparent);
+}
+
+/* ── 维护健康度（基于 updated 三档，纯文字表达，融入作者行） ── */
+.pt-card-health-badge {
+	display: inline;
+	padding: 0;
+	border-radius: 0;
+	font-size: var(--pt-text-xs);
+	font-weight: normal;
+	letter-spacing: 0;
+	color: var(--text-muted);
+	background: transparent;
+	box-shadow: none;
+	border: none;
+	cursor: default;
+}
+/* 在作者名与健康度文案之间加间隔点 */
+.pt-card-health-badge::before {
+	content: "·";
+	margin: 0 0.3em;
+}
+
+/* ── 「新」标记（近 30 天首次见，纯文字，融入作者行） ── */
+.pt-card-new-badge {
+	display: inline;
+	padding: 0;
+	border-radius: 0;
+	font-size: var(--pt-text-xs);
+	font-weight: normal;
+	letter-spacing: 0;
+	color: var(--text-muted);
+	background: transparent;
+	box-shadow: none;
+	border: none;
+	cursor: default;
+}
+.pt-card-new-badge::before {
+	content: "·";
+	margin: 0 0.3em;
+}
+
 /* ── 顶部「官方推荐」置顶区（默认无搜索词时强曝光） ──
    设计：融入页面的分区标题，去掉厚边框/背景盒子，从根本上消除「框内居中」对齐难题。
    头部为一行 flex（标题左 + 展开/收起右），标题含金色强调竖条；
@@ -1588,8 +1770,10 @@ button.pt-card-install-btn--installed {
 /* ── 操作图标按钮（用于 .pt-card-actions-row 常驻行） ── */
 
 /* 描述（完整显示，柔和副文层级；封顶 5 行 + 展开按钮） */
+/* 字号用 --pt-text-sm（较正文 --pt-text-base 略小）：描述是辅助信息，缩小后可读性不变、
+   视觉上让位给标题/按钮等主要可操作元素（产品改进：描述区点击已穿透到整卡打开详情）。 */
 .pt-card-desc {
-	font-size: var(--pt-text-base);
+	font-size: var(--pt-text-sm);
 	line-height: 1.5;
 	color: var(--pt-text-muted);
 	word-break: break-word;
@@ -1606,71 +1790,12 @@ button.pt-card-install-btn--installed {
 .pt-card-desc--clamped {
 	overflow: hidden;
 }
-/* #5: 移动端点按描述原地展开（移除行数截断），再点收起 */
-.pt-card-desc--touch {
-	cursor: pointer;
-}
+/* 描述区为纯文本展示（点击穿透到整卡打开详情页，非独立可点元素）：
+   不再使用 --touch（原 cursor:pointer + hover 下划线会误导用户以为点描述可展开）。 */
 .pt-card-desc--expanded {
 	-webkit-line-clamp: unset;
 	max-height: none;
 	overflow: visible;
-}
-/* 描述 hover 浮层（fixed 定位，不破坏卡片布局） */
-.pt-desc-tooltip {
-	position: fixed;
-	z-index: var(--layer-popover, var(--obsidian-z-popover));
-	padding: 12px 16px;
-	background: var(--pt-surface);
-	color: var(--pt-text-strong);
-	border: 1px solid var(--pt-border);
-	border-radius: 8px;
-	box-shadow:
-		0 4px 12px rgba(0, 0, 0, 0.08),
-		0 1px 3px rgba(0, 0, 0, 0.06);
-	font-size: var(--pt-text-md);
-	line-height: 1.75;
-	max-height: 260px;
-	overflow-y: auto;
-	pointer-events: none;
-	word-break: break-word;
-	overflow-wrap: anywhere;
-	white-space: normal;
-	-webkit-box-orient: initial;
-	-webkit-line-clamp: initial;
-	display: block;
-	/* 入场动画 */
-	opacity: 0;
-	transform: translateY(4px);
-	animation: pt-tooltip-in 0.15s ease-out forwards;
-}
-@keyframes pt-tooltip-in {
-	to { opacity: 1; transform: translateY(0); }
-}
-/* 三角箭头（默认朝上，指向描述区底部）。用 border 三角画纯色箭头，避免 clip-path。 */
-.pt-desc-tooltip::before {
-	content: "";
-	position: absolute;
-	top: -8px;
-	left: var(--pt-tooltip-arrow-x, 16px);
-	width: 0;
-	height: 0;
-	border: 8px solid transparent;
-	border-bottom-color: var(--pt-surface);
-}
-/* 翻转态：浮层在描述区上方，箭头朝下 */
-.pt-desc-tooltip--above::before {
-	top: auto;
-	bottom: -8px;
-	border-bottom-color: transparent;
-	border-top-color: var(--pt-surface);
-}
-/* 尊重用户减弱动画偏好 */
-@media (prefers-reduced-motion: reduce) {
-	.pt-desc-tooltip {
-		animation: none;
-		opacity: 1;
-		transform: none;
-	}
 }
 /* 描述展开/收起按钮（底部居右） */
 .pt-card-desc-toggle {
@@ -1709,6 +1834,30 @@ button.pt-card-install-btn--installed {
 .pt-stat-chip .pt-stat-icon {
 	margin-right: 2px;
 	font-size: var(--pt-text-xs);
+}
+
+/* 趋势 sparkline（卡片下载行内，近 30 天增速折线） */
+.pt-card-spark {
+	display: inline-flex;
+	align-items: center;
+	margin-left: var(--pt-space-2xs);
+}
+.pt-card-spark svg {
+	width: 60px;
+	height: 16px;
+	display: block;
+}
+.pt-card-spark path {
+	fill: none;
+	stroke: var(--pt-accent);
+	stroke-width: 1.5;
+	stroke-linejoin: round;
+	stroke-linecap: round;
+	vector-effect: non-scaling-stroke;
+}
+/* 平/负增速：中性灰，弱化强调 */
+.pt-card-spark--flat path {
+	stroke: var(--pt-text-muted);
 }
 
 /* AI 理由行（紧凑，1 行） */
@@ -1841,25 +1990,6 @@ button.pt-card-install-btn--installed {
 	line-height: 1.4;
 }
 
-/* 已安装 / 已启用状态标识（产品改进 #7） */
-.pt-card-installed {
-	font-size: var(--pt-text-xs);
-	padding: var(--pt-space-2xs) var(--pt-space-sm);
-	border-radius: 999px;
-	font-weight: var(--pt-weight-semibold);
-	white-space: nowrap;
-	flex: none;
-}
-.pt-installed-on {
-	color: var(--text-on-accent, #fff);
-	background: var(--interactive-accent, #7b61ff);
-}
-.pt-installed-off {
-	color: var(--pt-text-muted);
-	background: var(--pt-surface-3);
-	border: 1px solid var(--pt-border);
-}
-
 /* 操作图标按钮（用于 .pt-card-actions-row 常驻行）—— 幽灵风格，降低视觉噪音 */
 .pt-card-market {
 	color: color-mix(in srgb, var(--pt-accent) 72%, var(--pt-text-faint));
@@ -1913,13 +2043,178 @@ button.pt-card-install-btn--installed {
 	color: var(--pt-accent);
 	background: color-mix(in srgb, var(--pt-accent) 14%, transparent);
 }
-/* 系统翻译按需按钮：加载中（旋转指示，复用 accent 色） */
-.pt-icon-btn--loading svg,
-.pt-detail-btn--loading {
-	animation: pt-spin 0.9s linear infinite;
+/* ── 系统翻译（macOS 通道）加载态 ──────────────────────────────────────────
+   设计目标：摆脱"裸旋转"和"整个按钮歪歪扭扭转"的廉价感；改用「苹果标自身
+   的呼吸 + 弧扫光指示 + 底部细进度线」这套克制的视觉语义，让等待显得踏实。
+
+   - 卡片按钮（.pt-icon-btn--loading）：按钮本体轻微收紧，SVG 颜色渐变到 accent，
+     苹果叶/果身做长呼吸，叶柄柔抖；按钮下方冒出一道 hair-thin 进度线，从 0%→
+     100% 跟随 JS 写入的 --pt-progress（0~1）。整按钮本身不旋转。
+   - 详情页按钮（.pt-detail-btn--loading）：整按钮本体不再旋转（避免矩形乱甩）；
+     前置一个弧扫光 SVG 圆环指示器（光点顺环跑），底部同样接进度线，文案走
+     "翻译中 N%"。
+   共用：long-easing cubic-bezier(0.4,0,0.2,1) 让节奏不像定时器；尊重
+   prefers-reduced-motion（降到极淡的纯渐变）。                                         */
+
+:root {
+    --pt-progress: 0;        /* 0~1，由 JS 写入；CSS 进度线/弧扫光都从这里读 */
+    --pt-sys-ease: cubic-bezier(0.4, 0, 0.2, 1);
 }
-@keyframes pt-spin {
-	to { transform: rotate(360deg); }
+
+/* ── 卡片：🍎 系统翻译按钮加载态 ──────────────────────────────────────── */
+.pt-icon-btn--loading {
+    /* 整按钮微缩 + accent 光环呼吸；按钮本身不再旋转，把"动"让给图标内部 */
+    position: relative;          /* 让 ::after 进度线能相对按钮定位 */
+    transform: scale(0.94);
+    color: var(--pt-accent);
+    box-shadow:
+        0 0 0 4px color-mix(in srgb, var(--pt-accent) 18%, transparent),
+        0 0 14px color-mix(in srgb, var(--pt-accent) 40%, transparent);
+    animation: pt-sys-card-pulse 1.6s var(--pt-sys-ease) infinite;
+}
+/* 进度线容器：用 ::after 在按钮下方做一道 hair-thin 增长线，opacity 0→1 入场 */
+.pt-icon-btn--loading::after {
+    content: "";
+    position: absolute;
+    left: 3px;
+    right: 3px;
+    bottom: 2px;
+    height: 1.5px;
+    border-radius: 2px;
+    background: linear-gradient(
+        90deg,
+        var(--pt-accent) 0%,
+        color-mix(in srgb, var(--pt-accent) 70%, white 30%) 100%
+    );
+    transform-origin: left center;
+    transform: scaleX(var(--pt-progress, 0));
+    transition: transform 320ms var(--pt-sys-ease);
+    box-shadow: 0 0 6px color-mix(in srgb, var(--pt-accent) 60%, transparent);
+    pointer-events: none;
+}
+/* 苹果标 SVG：颜色已由父级 color 接管，这里让 SVG 描边略细化+跟随父色 */
+.pt-icon-btn--loading svg {
+    overflow: visible;
+    animation: pt-sys-logo-breath 2.2s var(--pt-sys-ease) infinite;
+    transform-origin: 12px 12px;
+    filter: drop-shadow(0 0 3px color-mix(in srgb, var(--pt-accent) 35%, transparent));
+}
+/* 苹果标内部「叶柄」斜线（ICON_SYS_TRANSLATE 第 3、4 笔）做柔抖——挑出对应 <path> */
+.pt-icon-btn--loading svg path:nth-of-type(3),
+.pt-icon-btn--loading svg path:nth-of-type(4) {
+    transform-origin: 12px 12px;
+    animation: pt-sys-logo-tilt 2.6s var(--pt-sys-ease) infinite;
+}
+.pt-icon-btn--loading svg path:nth-of-type(4) {
+    animation-delay: -1.3s; /* 让两条叶柄线交替 */
+}
+
+/* ── 详情页：🍎 系统翻译 README 按钮加载态 ────────────────────────────── */
+.pt-detail-btn--loading {
+    color: var(--pt-accent);
+    border-color: color-mix(in srgb, var(--pt-accent) 35%, var(--background-modifier-border));
+    background: color-mix(in srgb, var(--pt-accent) 8%, var(--background-primary));
+    /* 关键：整按钮不旋转；只在前面贴一颗弧扫指示器 */
+    animation: pt-sys-detail-glow 1.8s var(--pt-sys-ease) infinite;
+    overflow: hidden;        /* 让 progress 线和光晕裁在按钮里 */
+    position: relative;
+}
+/* 弧扫指示器：SVG 圈在按钮文字前面，做"光点顺环跑"的精致感。
+   用 background-image data-uri，避免引入新 DOM。                           */
+.pt-detail-btn--loading::before {
+    content: "";
+    display: inline-block;
+    width: 14px;
+    height: 14px;
+    margin-right: 6px;
+    vertical-align: -2px;
+    border-radius: 50%;
+    background:
+        conic-gradient(
+            from 0deg,
+            var(--pt-accent) 0deg,
+            color-mix(in srgb, var(--pt-accent) 25%, transparent) 110deg,
+            transparent 200deg,
+            transparent 360deg
+        );
+    -webkit-mask:
+        radial-gradient(circle, transparent 4.5px, #000 5px, #000 6.5px, transparent 7px);
+            mask:
+        radial-gradient(circle, transparent 4.5px, #000 5px, #000 6.5px, transparent 7px);
+    animation: pt-sys-arc-spin 1.3s linear infinite;
+}
+/* 底部进度线（占满 button 内 padding，跟卡片版本对齐） */
+.pt-detail-btn--loading::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 2px;
+    width: calc(100% * var(--pt-progress, 0));
+    background: linear-gradient(
+        90deg,
+        var(--pt-accent),
+        color-mix(in srgb, var(--pt-accent) 60%, white 40%)
+    );
+    transition: width 320ms var(--pt-sys-ease);
+    box-shadow: 0 0 6px color-mix(in srgb, var(--pt-accent) 50%, transparent);
+    pointer-events: none;
+}
+
+/* ── keyframes（pt-sys-*） ───────────────────────────────────────────── */
+@keyframes pt-sys-card-pulse {
+    0%, 100% {
+        box-shadow:
+            0 0 0 4px color-mix(in srgb, var(--pt-accent) 18%, transparent),
+            0 0 14px color-mix(in srgb, var(--pt-accent) 30%, transparent);
+    }
+    50% {
+        box-shadow:
+            0 0 0 6px color-mix(in srgb, var(--pt-accent) 10%, transparent),
+            0 0 22px color-mix(in srgb, var(--pt-accent) 55%, transparent);
+    }
+}
+@keyframes pt-sys-logo-breath {
+    0%, 100% { transform: scale(1); }
+    50%      { transform: scale(1.08); }
+}
+@keyframes pt-sys-logo-tilt {
+    0%, 100% { transform: rotate(-1.5deg); }
+    50%      { transform: rotate( 1.5deg); }
+}
+@keyframes pt-sys-detail-glow {
+    0%, 100% {
+        box-shadow: 0 0 0 0 transparent;
+        background: color-mix(in srgb, var(--pt-accent) 8%, var(--background-primary));
+    }
+    50% {
+        box-shadow: 0 0 0 4px color-mix(in srgb, var(--pt-accent) 14%, transparent);
+        background: color-mix(in srgb, var(--pt-accent) 14%, var(--background-primary));
+    }
+}
+@keyframes pt-sys-arc-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ── 减弱动效：保留语义、删去所有连续循环 ───────────────────────────────
+   这里必须用 !important（reduce-motion 的「无条件禁用」语义）：动画定义在
+   .pt-icon-btn--loading svg path:nth-of-type(3) 等更高特异性选择器上，
+   (0,1,0) 的本体选择器压不住；去掉会破坏「系统减弱动效」用户的体验。 */
+@media (prefers-reduced-motion: reduce) {
+    /* 所有带动画/过渡的选择器都列在此处（含 .pt-icon-btn--loading svg path:nth-of-type(3)
+       等高特异性选择器），且本块在文件后部——同特异性后声明覆盖，无需 !important。 */
+    .pt-icon-btn--loading,
+    .pt-icon-btn--loading svg,
+    .pt-icon-btn--loading svg path:nth-of-type(3),
+    .pt-icon-btn--loading svg path:nth-of-type(4),
+    .pt-detail-btn--loading,
+    .pt-detail-btn--loading::before {
+        animation: none;
+    }
+    .pt-icon-btn--loading::after,
+    .pt-detail-btn--loading::after {
+        transition: none;
+    }
 }
 
 /* 列表整体入场淡入（一次性，绑定在 layer 上，
@@ -2347,7 +2642,6 @@ button.pt-card-install-btn--installed {
 	.pt-card--flash,
 	.pt-back-top,
 	.pt-scroll-bottom,
-	.pt-author-banner,
 	.pt-ai-badge,
 	.pt-refreshing,
 	.pt-search.pt-search--ai,
@@ -2774,6 +3068,27 @@ button.pt-card-install-btn--installed {
 	color: var(--pt-accent);
 }
 .pt-detail-btn--sys-translate:hover {
+	background: color-mix(in srgb, var(--pt-accent) 14%, transparent);
+}
+.pt-detail-btn--sys-translate:disabled {
+	opacity: 0.6;
+	cursor: not-allowed;
+}
+/* README 翻译入口：「当前通道名 ▼」（主按钮 + 下拉 caret 合成一个视觉单元） */
+.pt-detail-readme-translate {
+	display: inline-flex;
+	align-items: center;
+	gap: 2px;
+}
+.pt-detail-readme-translate .pt-detail-btn {
+	padding-left: 10px;
+	padding-right: 10px;
+}
+.pt-detail-btn--caret {
+	padding-left: 6px;
+	padding-right: 6px;
+}
+.pt-detail-btn--caret:hover {
 	background: color-mix(in srgb, var(--pt-accent) 14%, transparent);
 }
 /* README 系统翻译后的「返回原文」标识 */
@@ -4047,8 +4362,8 @@ button.pt-card-install-btn--installed {
 	transition: fill var(--pt-duration-slow) var(--pt-ease), stroke var(--pt-duration-normal) var(--pt-ease), transform var(--pt-duration-slow) var(--pt-ease-spring);
 }
 .pt-card-favorite.is-fav-on svg {
-	fill: var(--pt-gold);
-	stroke: var(--pt-gold);
+	fill: #d99a1c;
+	stroke: #d99a1c;
 	transform: scale(1.15) rotate(-12deg);
 }
 /* 收藏按钮点击脉冲：仅通过一次性 class .pt-fav-pulse 触发，避免虚拟滚动复用时重播 */
@@ -4164,97 +4479,158 @@ button.pt-card-install-btn--installed {
 	background: color-mix(in srgb, var(--interactive-accent) 18%, transparent);
 }
 
-/* 卡片收藏按钮选中态（金色星标，呼应官方推荐）。(0,2,0) 高于主题图标默认色，无需 !important。 */
+/* 卡片收藏按钮选中态（金色星标，呼应官方推荐）。用固定金色，绕开第三方主题覆盖 --pt-gold 导致星标变色/不显眼。 */
 .pt-card-favorite.is-fav-on {
-	color: var(--pt-gold);
+	color: #d99a1c;
+}
+
+/* 启用/禁用子弹开关：与左侧图标组（26px）严格上下对齐，
+   容器高度撑到 26px，内部 track 居中（34×18），仅已安装插件显示。
+   margin-left: auto 把开关推到行末，图标组紧凑靠左。 */
+.pt-card-toggle-switch {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	align-self: center;
+	flex-shrink: 0;
+	margin-left: auto;
+	width: 34px;
+	height: 26px;
+	padding: 0;
+	margin-top: 0;
+	margin-right: 0;
+	margin-bottom: 0;
+	border: none;
+	background: transparent;
+	cursor: pointer;
+	-webkit-tap-highlight-color: transparent;
+	vertical-align: middle;
+}
+.pt-card-toggle-switch:focus-visible {
+	outline: none;
+}
+.pt-card-toggle-switch:focus-visible .pt-card-toggle-track {
+	box-shadow: var(--pt-focus-ring);
+}
+.pt-card-toggle-track {
+	position: relative;
+	width: 34px;
+	height: 18px;
+	border-radius: 999px;
+	background: var(--pt-border-strong);
+	border: 1px solid color-mix(in srgb, var(--pt-border-strong) 60%, transparent);
+	transition: background var(--pt-duration-fast) var(--pt-ease), box-shadow var(--pt-duration-fast) var(--pt-ease), border-color var(--pt-duration-fast) var(--pt-ease);
+}
+.pt-card-toggle-knob {
+	position: absolute;
+	top: 2px;
+	left: 2px;
+	width: 13px;
+	height: 13px;
+	border-radius: 50%;
+	background: #fff;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.25);
+	transition: transform var(--pt-duration-fast) var(--pt-ease);
+}
+/* 已启用：主题色淡雅绿轨道 + 微光 */
+.pt-card-toggle-switch.is-on .pt-card-toggle-track {
+	background: var(--pt-accent, var(--pt-accent-green, #2ecc71));
+	border-color: transparent;
+	box-shadow: 0 0 6px 1px color-mix(in srgb, var(--pt-accent, var(--pt-accent-green, #2ecc71)) 30%, transparent);
+}
+.pt-card-toggle-switch.is-on .pt-card-toggle-knob {
+	transform: translateX(16px);
 }
 
 /* 收藏卡片：金色描边轮廓（替代左侧竖条，与 hover 描边方案统一） */
-/* 作者钻取状态条：常驻工具栏下方，告知用户当前处于作者筛选态 */
-.pt-author-banner {
-	display: flex;
-	align-items: center;
-	gap: var(--pt-space-sm);
-	padding: var(--pt-space-xs) var(--pt-space-md);
-	margin-top: var(--pt-space-xs);
-	background: color-mix(in srgb, var(--pt-accent) 8%, transparent);
-	border: 1px solid color-mix(in srgb, var(--pt-accent) 25%, transparent);
-	border-radius: var(--pt-radius);
-	font-size: var(--pt-text-sm);
-	color: var(--pt-text);
-	animation: pt-author-banner-in 200ms var(--pt-ease);
-}
-@keyframes pt-author-banner-in {
+/* 活跃筛选条件 chips：折叠面板收起后仍常驻搜索行下方，避免「隐藏状态」反模式 */
+@keyframes pt-chip-in {
 	from { opacity: 0; transform: translateY(-4px); }
 	to { opacity: 1; transform: translateY(0); }
 }
-.pt-author-banner-text {
-	flex: 1 1 auto;
-	min-width: 0;
-	font-weight: var(--pt-weight-medium);
-}
-.pt-author-banner-clear {
-	appearance: none;
-	flex: none;
-	font: inherit;
-	font-size: var(--pt-text-xs);
-	font-weight: var(--pt-weight-semibold);
-	padding: var(--pt-space-2xs) var(--pt-space-md);
-	color: var(--pt-accent);
-	background: color-mix(in srgb, var(--pt-accent) 10%, transparent);
-	border: 1px solid color-mix(in srgb, var(--pt-accent) 30%, transparent);
-	border-radius: 999px;
-	cursor: pointer;
-	transition: background var(--pt-duration-fast) var(--pt-ease), color var(--pt-duration-fast) var(--pt-ease);
-}
-.pt-author-banner-clear:hover {
-	background: color-mix(in srgb, var(--pt-accent) 20%, transparent);
-	border-color: color-mix(in srgb, var(--pt-accent) 50%, transparent);
-}
-
-/* 活跃筛选条件 chips：折叠面板收起后仍常驻搜索行下方，避免「隐藏状态」反模式 */
 .pt-active-filters {
 	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
-	gap: var(--pt-space-xs);
+	gap: var(--pt-space-xs) var(--pt-space-sm);
 	padding: var(--pt-space-xs) var(--pt-space-md) 0;
 }
 .pt-active-filters-label {
+	display: inline-flex;
+	align-items: center;
+	gap: var(--pt-space-2xs);
 	font-size: var(--pt-text-xs);
 	font-weight: var(--pt-weight-semibold);
 	color: var(--pt-text-faint, var(--text-faint));
 	margin-right: var(--pt-space-2xs);
 }
+.pt-active-filters-label .svg-icon {
+	width: 11px;
+	height: 11px;
+	stroke-width: 2.25;
+	opacity: 0.75;
+}
 .pt-active-chip {
 	display: inline-flex;
 	align-items: center;
-	gap: 4px;
-	padding: 2px 4px 2px var(--pt-space-sm);
+	gap: var(--pt-space-2xs);
+	padding: 1px 2px 1px var(--pt-space-sm);
 	font-size: var(--pt-text-xs);
-	line-height: 1.4;
+	line-height: 1.35;
 	color: var(--pt-text-strong, var(--text-normal));
-	background: color-mix(in srgb, var(--pt-accent) 10%, transparent);
-	border: 1px solid color-mix(in srgb, var(--pt-accent) 28%, transparent);
-	border-radius: 999px;
-	animation: pt-author-banner-in 160ms var(--pt-ease);
+	background: color-mix(in srgb, var(--pt-accent) 9%, var(--background-primary));
+	border: 1px solid color-mix(in srgb, var(--pt-accent) 22%, transparent);
+	border-radius: var(--pt-radius-pill);
+	box-shadow: 0 1px 2px color-mix(in srgb, var(--pt-accent) 6%, transparent);
+	animation: pt-chip-in 160ms var(--pt-ease);
+	transition: background var(--pt-duration-fast) var(--pt-ease),
+		border-color var(--pt-duration-fast) var(--pt-ease),
+		box-shadow var(--pt-duration-fast) var(--pt-ease);
+}
+.pt-active-chip:hover {
+	background: color-mix(in srgb, var(--pt-accent) 14%, var(--background-primary));
+	border-color: color-mix(in srgb, var(--pt-accent) 32%, transparent);
+	box-shadow: 0 1px 3px color-mix(in srgb, var(--pt-accent) 10%, transparent);
+}
+.pt-active-chip-key {
+	color: var(--pt-text-muted, var(--text-muted));
+	font-weight: var(--pt-weight-medium);
+}
+.pt-active-chip-sep {
+	color: var(--pt-text-faint, var(--text-faint));
+	font-weight: var(--pt-weight-bold);
+	transform: translateY(-0.5px);
+}
+.pt-active-chip-value {
+	color: var(--pt-text-strong, var(--text-normal));
+	font-weight: var(--pt-weight-semibold);
 }
 .pt-active-chip-clear {
 	appearance: none;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 18px;
+	height: 18px;
 	border: none;
+	border-radius: var(--pt-radius-pill);
 	background: transparent;
 	color: var(--pt-text-muted, var(--text-muted));
-	font: inherit;
-	font-size: var(--pt-text-xs);
-	line-height: 1;
-	padding: 2px 4px;
-	border-radius: 999px;
 	cursor: pointer;
+	font-size: 14px;
+	line-height: 1;
+	font-family: inherit;
 	transition: background var(--pt-duration-fast) var(--pt-ease), color var(--pt-duration-fast) var(--pt-ease);
 }
+/* 文字 × 偏移修正：CSS line-height 在 inline-flex 容器里仍可能略偏，-2px 上移让它视觉居中。
+   同时去掉 SVG 子选择器（按钮改用文字后 svg-icon 规则失效）。 */
 .pt-active-chip-clear:hover {
-	background: color-mix(in srgb, var(--pt-accent) 22%, transparent);
+	background: color-mix(in srgb, var(--pt-accent) 20%, transparent);
 	color: var(--pt-accent, var(--interactive-accent));
+}
+.pt-active-chip-clear:focus-visible {
+	outline: none;
+	box-shadow: var(--pt-focus-ring);
 }
 
 /* 相似推荐卡片键盘聚焦样式（统一光环） */
@@ -4813,6 +5189,87 @@ button.pt-card-install-btn--installed {
 	color: var(--pt-gold, #d99a1c);
 }
 
+/* ── 直链安装（DirectInstallModal）── */
+.pt-direct-install-modal {
+	padding: var(--pt-space-md);
+	max-width: 560px;
+}
+.pt-direct-install-modal h3 {
+	margin: 0 0 4px;
+	font-size: var(--pt-text-lg);
+	font-weight: 600;
+	color: var(--pt-text-strong, var(--text-normal));
+}
+.pt-direct-install-modal .pt-direct-install-desc {
+	margin: 0 0 var(--pt-space-sm);
+	font-size: var(--pt-text-xs, 12px);
+	line-height: 1.55;
+	color: var(--text-muted);
+}
+.pt-direct-install-modal .setting-item {
+	border: none;
+	padding: 0;
+	/* 标签描述独占一行，输入框与按钮另起一行，避免横向空间被 label 挤占 */
+	flex-direction: column;
+	align-items: stretch;
+	gap: 10px;
+}
+.pt-direct-install-modal .setting-item .setting-item-info {
+	width: 100%;
+	margin-right: 0;
+}
+.pt-direct-install-modal .setting-item .setting-item-description {
+	white-space: normal;
+}
+.pt-direct-install-modal .setting-item-control {
+	width: 100%;
+	justify-content: flex-end;
+	gap: 10px;
+}
+.pt-direct-install-modal .setting-item-control input[type="text"] {
+	flex: 1 1 auto;
+	min-width: 0;
+	width: 100%;
+}
+.pt-direct-install-modal .setting-item-control button {
+	flex: none;
+}
+
+/* ── 另存为启用组合（SaveAsModal）── */
+.pt-save-as-modal {
+	padding: var(--pt-space-md);
+	max-width: 480px;
+}
+.pt-save-as-modal h3 {
+	margin: 0 0 4px;
+	font-size: var(--pt-text-lg);
+	font-weight: 600;
+	color: var(--pt-text-strong, var(--text-normal));
+}
+.pt-save-as-modal .pt-save-as-desc {
+	margin: 0 0 var(--pt-space-md);
+	font-size: var(--pt-text-sm);
+	line-height: 1.6;
+	color: var(--text-muted);
+}
+.pt-save-as-modal .setting-item {
+	border: none;
+	padding: 0;
+	flex-direction: column;
+	align-items: stretch;
+	gap: 10px;
+}
+.pt-save-as-modal .setting-item-control {
+	width: 100%;
+	justify-content: flex-end;
+	gap: 10px;
+}
+.pt-save-as-modal .setting-item-control input[type="text"] {
+	flex: 1 1 auto;
+	min-width: 0;
+	width: 100%;
+}
+
 /* ═══════════════════════════════════════════════════ */
 /*  #5 移动端触摸适配：放大触控热区（iOS 人机界面指南推荐 ≥44px） */
 /*  仅作用于 .pt-mobile（view-chrome 在移动端给视图根加的类），不影响桌面。 */
@@ -4851,10 +5308,7 @@ button.pt-card-install-btn--installed {
 .pt-mobile .pt-facet-chips {
 	gap: 8px;
 }
-/* 卡片描述可点态：触摸端给轻微视觉提示（点一下展开） */
-.pt-mobile .pt-card-desc--touch {
-	-webkit-tap-highlight-color: rgba(0, 0, 0, 0.08);
-}
+/* 卡片描述不再作为独立可点元素（点击穿透到整卡打开详情页），移除移动端 --touch 高亮 */
 
 /* ═══════════════════════════════════════════════════ */
 /*  #7 移动端响应式布局：单列卡片 + 工具栏溢出菜单       */
@@ -4896,4 +5350,112 @@ button.pt-card-install-btn--installed {
 	.pt-view .pt-header-row {
 		flex-wrap: nowrap;
 	}
+}
+
+/* 左侧栏 ribbon：已装插件有可用更新时的红点徽标（对齐竞品 better-store 后台更新提醒） */
+.side-dock-ribbon-action.pt-ribbon-has-update {
+	position: relative;
+}
+.side-dock-ribbon-action.pt-ribbon-has-update::after {
+	content: "";
+	position: absolute;
+	top: 6px;
+	right: 6px;
+	width: 8px;
+	height: 8px;
+	border-radius: 50%;
+	background: var(--text-error, #e5693f);
+	box-shadow: 0 0 0 2px var(--background-primary);
+	pointer-events: none;
+}
+
+/* 设置页：插件启用组合 Profile 行 */
+.pt-profile-row {
+	display: flex;
+	align-items: center;
+	gap: 6px;
+	margin: 6px 0;
+	flex-wrap: nowrap;
+	/* 名称占满剩余空间但允许收缩（避免被长名撑爆） */
+	min-width: 0;
+}
+.pt-profile-name {
+	flex: 1 1 auto;
+	min-width: 0;
+	font-weight: 500;
+	/* 名称过长省略：避免「日常（5）·绑定布局 ✓」长名撑破布局 */
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+.pt-profile-row button {
+	margin: 0;
+	flex: none;
+}
+.pt-profile-del {
+	color: var(--text-error, #e5693f);
+}
+.pt-profile-save-row {
+	display: flex;
+	gap: 8px;
+	margin-top: 8px;
+}
+.pt-profile-save-row .pt-profile-input {
+	flex: 1 1 auto;
+	min-width: 0;
+	margin: 0;
+}
+.pt-profile-save-row button {
+	flex: none;
+	margin: 0;
+}
+
+/* 设置页：鸣谢清单（硬编码贡献者，每行名字可点击跳 GitHub）
+   主布局在 renderThanks 里用内联样式强制（特异性最高），这里仅作兜底/细节样式。 */
+.pt-thanks-list {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+	margin-top: 4px;
+	align-items: flex-start;
+	width: 100%;
+}
+.pt-thanks-row {
+	line-height: 1.6;
+	width: 100%;
+	text-align: left;
+}
+.pt-thanks-name {
+	font-weight: 600;
+	color: var(--pt-text);
+}
+.pt-thanks-link {
+	font-weight: 500;
+	text-decoration: none;
+	word-break: break-all;
+}
+.pt-thanks-link:hover {
+	text-decoration: underline;
+}
+.pt-thanks-prologue {
+	margin-bottom: 10px;
+	line-height: 1.6;
+	text-align: left;
+	font-size: var(--pt-text-sm, 13px);
+	color: var(--pt-text-muted, var(--text-muted));
+}
+
+/* 设置页通用：整行 block 左对齐（renderThanks / profiles 渲染区共用）。
+   规避 Obsidian no-static-styles-assignment 规范：不得内联 style.setProperty。 */
+.pt-setting-full-width {
+	display: block;
+	text-align: left;
+}
+.pt-setting-info-hidden {
+	display: none;
+}
+.pt-setting-control-full {
+	display: block;
+	width: 100%;
+	text-align: left;
 }

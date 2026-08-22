@@ -139,7 +139,7 @@ $$L:\;\bs{r}=\bs{r}_0+t\bs{a}$$
 
 $$d=\frac{\Vert\bs{a}\times\overrightarrow{M_0M_1}\Vert}{\Vert\bs{a}\Vert}$$
 
-==此处应有动画*1==
+![video](DotLine.mp4)
 
 求点面距离也是类似的，只不过表示平面方向的向量换成了平面的法向量，所以原先的正弦换成了余弦，外积换成了内积，距离公式变成了
 
