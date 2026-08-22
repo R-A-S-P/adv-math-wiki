@@ -1,4 +1,18 @@
 // MathJax 配置（必须在加载核心前执行）
+
+/**
+ * 站点基础路径 SITE_BASE
+ * 在脚本【同步执行时】捕获本文件的完整路径，据此推断站点根路径，
+ * 从而正确定位本地 MathJax 字体（支持 GitHub Pages 子路径部署）。
+ *
+ * 注意：不能在 startup.ready（异步回调）里用 document.currentScript，
+ * 那里它可能为 null 或指向 MathJax 核心脚本，不可靠。
+ */
+const _mathConfigScript = document.currentScript;
+const SITE_BASE = (_mathConfigScript && _mathConfigScript.src)
+  ? new URL(_mathConfigScript.src).pathname.replace(/\/_static\/js\/math-config\.js$/, '')
+  : '';
+
 window.MathJax = {
   tex: {
     inlineMath: [['$', '$'], ['\\(', '\\)']],      // 行内公式定界符
@@ -24,26 +38,11 @@ window.MathJax = {
   },
   startup: {
     ready: () => {
-      // 动态获取当前页面的基础路径
-      //const baseUrl = window.location.pathname.split('/').slice(0, 1).join('/'); 
-      // 或者更简单：如果你的 site_url 是 https://r-a-s-p.github.io/adv-math-wiki/
-      // 那么基础路径就是 '/adv-math-wiki'
-      //const baseUrl = '{{ extra.site_base }}'; 
-
-      let baseUrl = '';
-      // 方法1：通过 document.currentScript 获取当前脚本的 src（最准确）
-      const currentScript = document.currentScript;
-      if (currentScript && currentScript.src) {
-        const scriptUrl = new URL(currentScript.src);
-        // 去掉末尾的 /_static/js/math-config.js，得到基础路径（如 '' 或 '/adv-math-wiki'）
-        baseUrl = scriptUrl.pathname.replace(/\/tex-mml-chtml\.js$/, '');
-      }
-      
-      // 设置 fontURL 和 dynamicPrefix
+      // 使用同步阶段算好的 SITE_BASE，设置本地字体路径（无需在回调里动态推断）
       MathJax.config.chtml = {
         font: 'mathjax-newcm', // 或你的字体
-        fontURL: baseUrl + '/mathjax-fonts/mathjax-newcm-font/woff-v2',
-        dynamicPrefix: baseUrl + '/mathjax-fonts/mathjax-newcm-font/dynamic',
+        fontURL: SITE_BASE + '/assets/vendor/MathJax-4.1.1/mathjax-fonts/mathjax-newcm-font/woff-v2',
+        dynamicPrefix: SITE_BASE + '/assets/vendor/MathJax-4.1.1/mathjax-fonts/mathjax-newcm-font/dynamic',
         mtextInheritFont: true, // 设置\text命令内的字体 或使用 mtextFontInherit: true (取决于MathJax版本)
         matchFontHeight: false
       };
