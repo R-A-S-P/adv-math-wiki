@@ -103,6 +103,12 @@ mjx-container > img {
   height: 0;
 }
 
+/* 浅色模式：强调色改为 Obsidian 默认紫色 #7c3aed */
+[data-md-color-scheme="default"] {
+  --md-accent-fg-color: #7c3aed;
+  --md-accent-fg-color--transparent: rgba(124, 58, 237, 0.15);
+}
+
 [data-md-color-scheme="slate"] {
   --md-primary-fg-color: #2e303e;
   --md-accent-fg-color: #00bda4;
