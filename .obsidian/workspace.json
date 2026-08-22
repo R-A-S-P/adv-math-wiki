@@ -14,12 +14,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/ii/spatial_geometry/geometry.md",
+                "file": "docs/ii/infinite_series/series.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "geometry"
+              "title": "series"
             }
           }
         ]
@@ -35,12 +35,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/ii/spatial_geometry/geometry.md",
+                "file": "docs/ii/infinite_series/series.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "geometry"
+              "title": "series"
             }
           }
         ]
@@ -216,14 +216,17 @@
     "site/ii/spatial_geometry/geometry/index.html",
     "site/ii/spatial_geometry/geometry",
     "site/ii/spatial_geometry/index.html",
-    "site/assets/vendor/MathJax-4.1.1/output/svg.js",
-    "site/assets/vendor/MathJax-4.1.1/output/chtml.js",
-    "site/assets/vendor/MathJax-4.1.1/output",
+    "site/ii/multivar_integral/surface_int/index.html",
+    "site/ii/multivar_integral/multi_int/index.html",
     "site/ii/multivar_integral/field_theory/index.html",
+    "site/ii/multivar_integral/cruve_int/index.html",
     "site/assets/images/favicon.png",
+    "debug_display_sum.png",
     "docs/ii/spatial_geometry/vector.md",
     "docs/ii/spatial_geometry/geometry.md",
     "docs/ii/infinite_series/series.md",
+    "debug_online_first_sum.png",
+    "debug_first_sum.png",
     "docs/ii/infinite_series/func_series.md",
     "docs/ii/multivar_integral.md",
     "docs/ii/multivar_differential.md",

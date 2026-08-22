@@ -1,4 +1,17 @@
 // MathJax 配置（必须在加载核心前执行）
+
+/**
+ * 站点基础路径 SITE_BASE —— 硬编码，零运行时推断
+ *
+ * 站点始终位于 /adv-math-wiki 子路径下：
+ *   - 线上 GitHub Pages: https://r-a-s-p.github.io/adv-math-wiki/...
+ *   - 本地 mkdocs serve: http://127.0.0.1:8000/adv-math-wiki/...
+ *     （MkDocs 会沿用 mkdocs.yml 中 site_url 的子路径）
+ *
+ * 若修改了 site_url 或部署路径，只需同步改动下面这一行。
+ */
+const SITE_BASE = '/adv-math-wiki';
+
 window.MathJax = {
   tex: {
     inlineMath: [['$', '$'], ['\\(', '\\)']],      // 行内公式定界符
@@ -16,7 +29,7 @@ window.MathJax = {
     ignoreHtmlClass: 'tex2jax_ignore',              // 忽略的 HTML 类
     processHtmlClass: 'tex2jax_process',            // 处理的 HTML 类
     enableMenu: false,                       // 禁用右键菜单和点击弹出的辅助框
-    enableEnrichment: true,       // 显式关闭语义增强 (v4 可能用这个)
+    enableEnrichment: false,       // 关闭语义增强（SRE 会显著拖慢大量公式的渲染，如无无障碍需求应关闭）
     enableExplorer: false,                // 显式关闭公式探索器
   },
   loader: {
@@ -24,32 +37,35 @@ window.MathJax = {
   },
   startup: {
     ready: () => {
-      // 动态获取当前页面的基础路径
-      //const baseUrl = window.location.pathname.split('/').slice(0, 1).join('/'); 
-      // 或者更简单：如果你的 site_url 是 https://r-a-s-p.github.io/adv-math-wiki/
-      // 那么基础路径就是 '/adv-math-wiki'
-      //const baseUrl = '{{ extra.site_base }}'; 
-
-      let baseUrl = '';
-      // 方法1：通过 document.currentScript 获取当前脚本的 src（最准确）
-      const currentScript = document.currentScript;
-      if (currentScript && currentScript.src) {
-        const scriptUrl = new URL(currentScript.src);
-        // 去掉末尾的 /_static/js/math-config.js，得到基础路径（如 '' 或 '/adv-math-wiki'）
-        baseUrl = scriptUrl.pathname.replace(/\/tex-mml-chtml\.js$/, '');
-      }
-      
-      // 设置 fontURL 和 dynamicPrefix
+      // 使用同步阶段算好的 SITE_BASE，设置本地字体路径（无需在回调里动态推断）
       MathJax.config.chtml = {
         font: 'mathjax-newcm', // 或你的字体
-        fontURL: baseUrl + '/mathjax-fonts/mathjax-newcm-font/woff-v2',
-        dynamicPrefix: baseUrl + '/mathjax-fonts/mathjax-newcm-font/dynamic',
+        fontURL: SITE_BASE + '/assets/vendor/MathJax-4.1.1/mathjax-fonts/mathjax-newcm-font/woff-v2',
+        dynamicPrefix: SITE_BASE + '/assets/vendor/MathJax-4.1.1/mathjax-fonts/mathjax-newcm-font/dynamic',
         mtextInheritFont: true, // 设置\text命令内的字体 或使用 mtextFontInherit: true (取决于MathJax版本)
         matchFontHeight: false
       };
-      
+
+      // 强制关闭语义增强（SRE 会显著拖慢大量公式页面的渲染）。
+      // 注意：config.options.enableEnrichment=false 可能被 a11y handler 的默认值覆盖，
+      // 而 document 在 ready 时尚未创建，必须在 pageReady（渲染前）强制设置才生效。
+      // 见下方 pageReady 钩子。
       // 调用默认的 ready 函数
       MathJax.startup.defaultReady();
+    },
+    pageReady: () => {
+      // document 已创建、渲染开始前，强制关闭语义增强与探索器。
+      // 注意：两者的 false 配置都可能被 a11y handler 的默认值覆盖，
+      // 必须在渲染前直接设置 document 的 options 才生效。
+      // 探索器激活时会在公式右上角显示 "i" 帮助图标（mjx-help），关闭后不再出现。
+      try {
+        const doc = MathJax.startup.document;
+        if (doc) {
+          doc.options.enableEnrichment = false;
+          doc.options.enableExplorer = false;
+        }
+      } catch (e) {}
+      return MathJax.startup.defaultPageReady();
     }
   },
   chtml: {
