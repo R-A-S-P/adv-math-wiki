@@ -121,11 +121,18 @@ div.md-typeset__scrollwrap:has(table[data-review-enabled]) {
   overflow: visible;
 }
 
-/* MathJax 公式：完整显示高度，右侧不出现滚动条 */
-/* 覆盖 MathJax 4 默认的 overflow:auto clip（水平滚动 + 垂直裁剪） */
+/* MathJax 公式：竖向完整显示高度、无竖向滚动条；横向超宽时允许滚动 */
+/* mjx-container：公式本体保持可见，不被裁剪 */
 mjx-container[display] {
   overflow: visible !important;
 }
 mjx-container[overflow] {
   overflow: visible !important;
+}
+/* 公式外层容器 .arithmatex：
+   横向 auto → 公式超宽时可横向滚动；
+   竖向 clip → 不出现竖向滚动条，且容器高度自适应内容，公式完整显示 */
+.arithmatex {
+  overflow-x: auto !important;
+  overflow-y: clip !important;
 }
