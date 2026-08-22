@@ -2016,7 +2016,7 @@
 <p>两点距离的公式就是 <span class="arithmatex">\(d=\sqrt{(x_2-x_1)^2+(y_2-y_1)^2+(z_2-z_1)^2}\)</span> ，没有什么值得讲的地方.</p>
 <p>求点线距离实际上就是求点到直线的垂线段长，如果按照传统的方法，往往要列方程求出垂足的坐标，但是这样很复杂，假设我们求点 <span class="arithmatex">\(M_1\)</span> 到方向向量为 <span class="arithmatex">\(\bs{a}\)</span> 的直线 <span class="arithmatex">\(L\)</span> 的距离，那么，一种巧妙的办法是在 <span class="arithmatex">\(L\)</span> 上任取一点 <span class="arithmatex">\(M_0\)</span> ，这时有 <span class="arithmatex">\(d=\Vert\overrightarrow{M_0M_1}\Vert\sin(\bs{a},\overrightarrow{M_0M_1})\)</span> ，而 <span class="arithmatex">\(\sin(\bs{a},\overrightarrow{M_0M_1})\)</span> 可以从 <span class="arithmatex">\(\bs{a}\times\overrightarrow{M_0M_1}\)</span> 构造出来，不难发现如下关系</p>
 <div class="arithmatex">\[d=\frac{\Vert\bs{a}\times\overrightarrow{M_0M_1}\Vert}{\Vert\bs{a}\Vert}\]</div>
-<p><mark>此处应有动画*1</mark></p>
+<p><div class="video-container"><video style="position:relative;width:100%;height:22.172vw" loop muted autoplay alt="video"><source src="../DotLine.mp4" type="video/mp4"></source></video></div></p>
 <p>求点面距离也是类似的，只不过表示平面方向的向量换成了平面的法向量，所以原先的正弦换成了余弦，外积换成了内积，距离公式变成了</p>
 <div class="arithmatex">\[d=\frac{|\bs{n}\cdot\overrightarrow{M_0M_1}|}{\Vert\bs{n}\Vert}\]</div>
 <p>其中 <span class="arithmatex">\(M_0\)</span> 是平面上的任意一点， <span class="arithmatex">\(\bs{n}\)</span> 是平面的法向量.</p>
