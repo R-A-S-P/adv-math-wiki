@@ -1,17 +1,16 @@
 // MathJax 配置（必须在加载核心前执行）
 
 /**
- * 站点基础路径 SITE_BASE
- * 在脚本【同步执行时】捕获本文件的完整路径，据此推断站点根路径，
- * 从而正确定位本地 MathJax 字体（支持 GitHub Pages 子路径部署）。
+ * 站点基础路径 SITE_BASE —— 硬编码，零运行时推断
  *
- * 注意：不能在 startup.ready（异步回调）里用 document.currentScript，
- * 那里它可能为 null 或指向 MathJax 核心脚本，不可靠。
+ * 站点始终位于 /adv-math-wiki 子路径下：
+ *   - 线上 GitHub Pages: https://r-a-s-p.github.io/adv-math-wiki/...
+ *   - 本地 mkdocs serve: http://127.0.0.1:8000/adv-math-wiki/...
+ *     （MkDocs 会沿用 mkdocs.yml 中 site_url 的子路径）
+ *
+ * 若修改了 site_url 或部署路径，只需同步改动下面这一行。
  */
-const _mathConfigScript = document.currentScript;
-const SITE_BASE = (_mathConfigScript && _mathConfigScript.src)
-  ? new URL(_mathConfigScript.src).pathname.replace(/\/_static\/js\/math-config\.js$/, '')
-  : '';
+const SITE_BASE = '/adv-math-wiki';
 
 window.MathJax = {
   tex: {
