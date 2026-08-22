@@ -22,6 +22,12 @@ details > summary + .highlight > .highlighttable { margin: 0 !important; }
 
 .headerlink { transform: translateY(-2.5px); }
 
+/* 引用块（blockquote）改色：默认是灰色，这里改成主题强调色 */
+/* 想用固定颜色的话，把 var(--md-accent-fg-color) 换成具体色值，如 #64b5f6 */
+.md-typeset blockquote {
+  border-left: .2rem solid var(--md-accent-fg-color) !important;
+}
+
 .md-nav__link[for=__toc] .md-icon { margin-left: auto !important; }
 
 blockquote.page-time {
