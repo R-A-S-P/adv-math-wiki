@@ -16,7 +16,7 @@ window.MathJax = {
     ignoreHtmlClass: 'tex2jax_ignore',              // 忽略的 HTML 类
     processHtmlClass: 'tex2jax_process',            // 处理的 HTML 类
     enableMenu: false,                       // 禁用右键菜单和点击弹出的辅助框
-    enableEnrichment: true,       // 显式关闭语义增强 (v4 可能用这个)
+    enableEnrichment: false,       // 关闭语义增强（SRE 会显著拖慢大量公式的渲染，如无无障碍需求应关闭）
     enableExplorer: false,                // 显式关闭公式探索器
   },
   loader: {
@@ -47,9 +47,22 @@ window.MathJax = {
         mtextInheritFont: true, // 设置\text命令内的字体 或使用 mtextFontInherit: true (取决于MathJax版本)
         matchFontHeight: false
       };
-      
+
+      // 强制关闭语义增强（SRE 会显著拖慢大量公式页面的渲染）。
+      // 注意：config.options.enableEnrichment=false 可能被 a11y handler 的默认值覆盖，
+      // 而 document 在 ready 时尚未创建，必须在 pageReady（渲染前）强制设置才生效。
+      // 见下方 pageReady 钩子。
       // 调用默认的 ready 函数
       MathJax.startup.defaultReady();
+    },
+    pageReady: () => {
+      // document 已创建、渲染开始前，强制关闭语义增强
+      try {
+        if (MathJax.startup.document) {
+          MathJax.startup.document.options.enableEnrichment = false;
+        }
+      } catch (e) {}
+      return MathJax.startup.defaultPageReady();
     }
   },
   chtml: {
