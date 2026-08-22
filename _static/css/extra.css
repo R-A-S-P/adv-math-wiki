@@ -26,6 +26,12 @@ details > summary + .highlight > .highlighttable { margin: 0 !important; }
 /* 想用固定颜色的话，把 var(--md-accent-fg-color) 换成具体色值，如 #64b5f6 */
 .md-typeset blockquote {
   border-left: .2rem solid var(--md-accent-fg-color) !important;
+  color: var(--md-default-fg-color) !important; /* 文字颜色与正文一致 */
+}
+
+/* Note 块：颜色背景覆盖整个块（不只是标题） */
+.md-typeset .admonition.note {
+  background-color: rgba(68, 138, 255, 0.2) !important;
 }
 
 .md-nav__link[for=__toc] .md-icon { margin-left: auto !important; }
