@@ -25,7 +25,7 @@ details > summary + .highlight > .highlighttable { margin: 0 !important; }
 /* 引用块（blockquote）改色：默认是灰色，这里改成主题强调色 */
 /* 想用固定颜色的话，把 var(--md-accent-fg-color) 换成具体色值，如 #64b5f6 */
 .md-typeset blockquote {
-  border-left: .2rem solid var(--md-accent-fg-color) !important;
+  border-left: .1rem solid var(--md-accent-fg-color) !important;
   color: var(--md-default-fg-color) !important; /* 文字颜色与正文一致 */
 }
 
@@ -37,6 +37,10 @@ details > summary + .highlight > .highlighttable { margin: 0 !important; }
 /* 让标题背景透明，避免与块背景叠加后颜色不一致 */
 .md-typeset .admonition.note > .admonition-title {
   background-color: transparent !important;
+}
+/* 将 note 图标由默认铅笔改为灯泡（MDI lightbulb-outline） */
+.md-typeset .admonition.note > .admonition-title {
+  --md-admonition-icon--note: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12,2A7,7 0 0,0 5,9C5,11.38 6.19,13.47 8,14.74V17A1,1 0 0,0 9,18H15A1,1 0 0,0 16,17V14.74C17.81,13.47 19,11.38 19,9A7,7 0 0,0 12,2M9,21A1,1 0 0,0 10,22H14A1,1 0 0,0 15,21V20H9V21M12,4A5,5 0 0,1 17,9C17,11.38 15.81,13.47 14,14.74V16H10V14.74C8.19,13.47 7,11.38 7,9A5,5 0 0,1 12,4Z"/></svg>');
 }
 
 .md-nav__link[for=__toc] .md-icon { margin-left: auto !important; }
@@ -103,10 +107,10 @@ mjx-container > img {
   height: 0;
 }
 
-/* 浅色模式：强调色改为 Obsidian 默认紫色 #7c3aed */
+/* 浅色模式：强调色改为 Obsidian 默认紫色 #8561ec */
 [data-md-color-scheme="default"] {
-  --md-accent-fg-color: #7c3aed;
-  --md-accent-fg-color--transparent: rgba(124, 58, 237, 0.15);
+  --md-accent-fg-color: #8561ec;
+  --md-accent-fg-color--transparent: rgba(133, 97, 236, 0.15);
 }
 
 [data-md-color-scheme="slate"] {
