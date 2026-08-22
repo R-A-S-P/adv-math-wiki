@@ -120,3 +120,12 @@ mjx-container > img {
 div.md-typeset__scrollwrap:has(table[data-review-enabled]) {
   overflow: visible;
 }
+
+/* MathJax 公式：完整显示高度，右侧不出现滚动条 */
+/* 覆盖 MathJax 4 默认的 overflow:auto clip（水平滚动 + 垂直裁剪） */
+mjx-container[display] {
+  overflow: visible !important;
+}
+mjx-container[overflow] {
+  overflow: visible !important;
+}
