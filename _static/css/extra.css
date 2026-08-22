@@ -31,7 +31,11 @@ details > summary + .highlight > .highlighttable { margin: 0 !important; }
 
 /* Note 块：颜色背景覆盖整个块（不只是标题） */
 .md-typeset .admonition.note {
-  background-color: rgba(68, 138, 255, 0.2) !important;
+  background-color: rgba(68, 138, 255, 0.1) !important;
+}
+/* 让标题背景透明，避免与块背景叠加后颜色不一致 */
+.md-typeset .admonition.note > .admonition-title {
+  background-color: transparent !important;
 }
 
 .md-nav__link[for=__toc] .md-icon { margin-left: auto !important; }
