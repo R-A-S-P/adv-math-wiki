@@ -137,3 +137,8 @@ mjx-container[overflow] {
   overflow-x: auto !important;
   overflow-y: clip !important;
 }
+
+/* 隐藏 MathJax 探索器的 "i" 帮助图标（mjx-help，点击公式时右上角出现） */
+mjx-help {
+  display: none !important;
+}

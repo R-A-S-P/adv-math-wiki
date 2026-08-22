@@ -54,10 +54,15 @@ window.MathJax = {
       MathJax.startup.defaultReady();
     },
     pageReady: () => {
-      // document 已创建、渲染开始前，强制关闭语义增强
+      // document 已创建、渲染开始前，强制关闭语义增强与探索器。
+      // 注意：两者的 false 配置都可能被 a11y handler 的默认值覆盖，
+      // 必须在渲染前直接设置 document 的 options 才生效。
+      // 探索器激活时会在公式右上角显示 "i" 帮助图标（mjx-help），关闭后不再出现。
       try {
-        if (MathJax.startup.document) {
-          MathJax.startup.document.options.enableEnrichment = false;
+        const doc = MathJax.startup.document;
+        if (doc) {
+          doc.options.enableEnrichment = false;
+          doc.options.enableExplorer = false;
         }
       } catch (e) {}
       return MathJax.startup.defaultPageReady();
