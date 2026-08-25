@@ -1759,19 +1759,21 @@
 
   <h1>数项级数</h1>
 
-<div><p>无穷级数可以分为 <strong>数项级数</strong> 和 <strong>函数项级数</strong> ，二者在实际应用中并无太大差距，但是数项级数从数学上较为根本，所以本章先介绍数项级数</p>
+<div><p>无穷级数可以分为<strong>数项级数</strong>和<strong>函数项级数</strong>，二者在实际应用中并无太大差距，但是数项级数从数学上较为根本，所以本章先介绍数项级数</p>
 <h2 id="_1">数项级数的基本性质</h2>
-<p>数项级数的定义相当符合直觉，把数列 <span class="arithmatex">\(\{a_n\}\)</span> 各项依次相加的表达式就是数项级数，或者叫做 <strong>常数项无穷级数</strong> ，通常以</p>
+<p>数项级数的定义相当符合直觉，把数列 <span class="arithmatex">\(\{a_n\}\)</span> 各项依次相加的表达式就是数项级数，或者叫做<strong>常数项无穷级数</strong>，通常以</p>
 <div class="arithmatex">\[
 a_1+a_2+a_3+\cdots+a_n+\cdots
 \]</div>
-<p>的形式出现，用求和符号记成 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> ，其中 <span class="arithmatex">\(a_n\)</span> 叫做 <strong>通项</strong></p>
+<p>的形式出现，用求和符号记成 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> ，其中 <span class="arithmatex">\(a_n\)</span> 叫做<strong>通项</strong></p>
 <h3 id="_2">敛散性</h3>
 <p>定义只提供了数项级数的形式，而最基础的问题是敛散性，也就是 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 是否是有限值，首先我们把求和符号的计算扩展到无穷，很自然的办法是使用极限，那么就有</p>
 <div class="arithmatex">\[
 \sum_{i=1}^{\infty}a_i=\lim_{n\to+\infty}\sum_{i=1}^na_i
 \]</div>
-<p>可以看到这是一个数列极限，我们把每一项记作 <span class="arithmatex">\(S_n=\dst\sum_{i=1}^{n}a_i\)</span> ，这个 <span class="arithmatex">\(S_n\)</span> 就是级数的前 <span class="arithmatex">\(n\)</span> 项和，也叫 <strong>部分和</strong> ，<span class="arithmatex">\(\{S_n\}\)</span> 就是部分和数列，自然的，极限 <span class="arithmatex">\(\dst\lim_{n\to+\infty}S_n\)</span> 存在就代表级数收敛，不存在就代表级数发散，对于收敛级数，其 <strong>和</strong> 就是该极限值 <span class="arithmatex">\(S\)</span> ，把 <span class="arithmatex">\(R_n=S-S_n\)</span> 叫做级数的 <strong>余项</strong> ，显然，在级数中删去或添加有限项并不改变级数的敛散性</p>
+<p>可以看到这是一个数列极限，我们把每一项记作 <span class="arithmatex">\(S_n=\dst\sum_{i=1}^{n}a_i\)</span> ，这个 <span class="arithmatex">\(S_n\)</span> 就是级数的前 <span class="arithmatex">\(n\)</span> 项和，也叫<strong>部分和</strong>，<span class="arithmatex">\(\{S_n\}\)</span> 就是部分和数列，自然的，极限 <span class="arithmatex">\(\dst\lim_{n\to+\infty}S_n\)</span> 存在就代表级数收敛，不存在就代表级数发散，对于收敛级数，其<strong>和</strong>就是该极限值 <span class="arithmatex">\(S\)</span> ，把 <span class="arithmatex">\(R_n=S-S_n\)</span> 叫做级数的<strong>余项</strong></p>
+<p>显然，在级数中删去或添加有限项并不改变级数的敛散性，而且收敛级数必有</p>
+<div class="arithmatex">\[\lim_{n\to\infty}a_n=0\]</div>
 <h3 id="_3">线性与单调性</h3>
 <p>对于收敛级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 和 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}b_n\)</span> ，和有限求和一样，满足这几个性质</p>
 <ol>
@@ -1781,29 +1783,135 @@ a_1+a_2+a_3+\cdots+a_n+\cdots
 </ol>
 <h3 id="_4">运算律</h3>
 <p>有限求和满足加法交换律和加法结合律，但对于无限求和则要谨慎，有限情况下得到的结论不能随意推广到无限情况</p>
-<p>收敛的无穷级数满足 <strong>结合律</strong> ，可以在级数的各项间任意添加括号，其和不变，也就是若 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n=S\)</span> ，则有</p>
+<p>收敛的无穷级数满足<strong>结合律</strong>，可以在级数的各项间任意添加括号，其和不变，也就是若 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n=S\)</span> ，则有</p>
 <div class="arithmatex">\[
 (a_1+a_2+a_3)+(a_4+a_5)+\cdots=S
 \]</div>
 <p>但是反过来是不能任意拆括号的，拆括号得到的级数未必收敛，只有收敛的情况才可以拆括号</p>
-<p>把级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 的各项重新排列会得到一个新级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}\tilde{a}_n\)</span> ，叫做 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 的 <strong>重排</strong> ，满足 <strong>交换律</strong> 意味着原级数的所有重排都与原级数相等，可见适用交换律的条件会更严格，要求级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 必须 <strong>绝对收敛</strong> ，也就是说 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}|a_n|\)</span> 收敛时 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 才满足交换律</p>
-<p>与绝对收敛相对的是 <strong>条件收敛</strong> ，也就是 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 收敛而 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}|a_n|\)</span> 发散，这时 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 不仅不满足交换律，而且根据 <strong>Riemann 定理</strong> ，其重排可以收敛到任何数</p>
+<p>把级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 的各项重新排列会得到一个新级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}\tilde{a}_n\)</span> ，叫做 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 的<strong>重排</strong>，满足<strong>交换律</strong>意味着原级数的所有重排都与原级数相等，可见适用交换律的条件会更严格，要求级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 必须<strong>绝对收敛</strong>，也就是说 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}|a_n|\)</span> 收敛时 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 才满足交换律</p>
+<p>与绝对收敛相对的是<strong>条件收敛</strong>，也就是 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 收敛而 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}|a_n|\)</span> 发散，这时 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 不仅不满足交换律，而且根据<strong>Riemann 定理</strong>，其重排可以收敛到任何数</p>
 <h2 id="_5">数项级数的判敛法</h2>
-<p>数项级数的敛散性也就是极限 <span class="arithmatex">\(\dst\lim_{n\to+\infty}S_n\)</span> 的敛散性，对于一般的数项级数，<span class="arithmatex">\(\{S_n\}\)</span> 没有任何特别的性质，不易处理，为此先研究 <span class="arithmatex">\(a_n\geq0\)</span> 的级数，因为其部分和数列是单调增的。这样的级数叫做 <strong>正项级数</strong> </p>
+<p>数项级数的敛散性也就是极限 <span class="arithmatex">\(\dst\lim_{n\to+\infty}S_n\)</span> 的敛散性，对于一般的数项级数，<span class="arithmatex">\(\{S_n\}\)</span> 没有任何特别的性质，不易处理，为此先研究 <span class="arithmatex">\(a_n\geq0\)</span> 的级数，因为其部分和数列是单调增的。这样的级数叫做<strong>正项级数</strong></p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>满足所有 <span class="arithmatex">\(a_n\leq0\)</span> 的级数叫做负项级数，不需要单独讨论，把系数 <span class="arithmatex">\(-1\)</span> 提到级数之外就变为了正项级数</p>
 </div>
 <h3 id="_6">正项级数判敛法</h3>
-<p>正项级数的判敛法相当多样，其中最接近定义的是有界判别法</p>
+<p>正项级数的判敛法相当多样，其中最接近定义的是<strong>有界判别法</strong></p>
 <blockquote>
 <p>正项级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 收敛的充要条件是其部分和数列 <span class="arithmatex">\(\{S_n\}\)</span> 有上界</p>
 </blockquote>
 <p>因为单调增有上界数列是收敛的，极限 <span class="arithmatex">\(\dst\lim_{n\to+\infty}S_n\)</span> 存在，级数自然收敛</p>
 <p><mark>pho</mark></p>
+<p>数项级数可以逐项比较大小，自然的，就有<strong>比较判别法</strong></p>
+<blockquote>
+<p>级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 和级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}b_n\)</span> 均为正项级数，如果 <span class="arithmatex">\(a_n\leq b_n\)</span> 恒成立，那么 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}b_n\)</span> 收敛时 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 也收敛， <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 发散时 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}b_n\)</span> 也发散</p>
+</blockquote>
+<p>比较判别法更常见的是极限形式，令 <span class="arithmatex">\(\dst\lim_{n\to\infty}\frac{a_n}{b_n}=\lambda\)</span> ，<span class="arithmatex">\(\lambda\)</span> 为有限数或者 <span class="arithmatex">\(+\infty\)</span> ，那么</p>
+<blockquote>
+<p>若 <span class="arithmatex">\(0&lt;\lambda&lt;+\infty\)</span> ，则两级数敛散性相同</p>
+<p>若 <span class="arithmatex">\(\lambda=0\)</span> ，则 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}b_n\)</span> 收敛时 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 也收敛</p>
+<p>若 <span class="arithmatex">\(\lambda=+\infty\)</span> ，则 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}b_n\)</span> 发散时 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 也发散</p>
+</blockquote>
+<p>在高中阶段，我们学过等比数列求和公式，考虑 <span class="arithmatex">\(q&gt;0\)</span> 的情况</p>
+<div class="arithmatex">\[
+c+cq+cq^2+\cdots+cq^n=\sum_{i=1}^ncq^{i-1}=c\frac{1-q^n}{1-q}
+\]</div>
+<p>取极限就得到</p>
+<div class="arithmatex">\[
+\sum_{n=1}^{\infty}cq^{n-1}=\lim_{n\to\infty}c\frac{1-q^n}{1-q}
+\]</div>
+<p>这是个正项等比无穷级数，可见 <span class="arithmatex">\(q&lt;1\)</span> 时级数收敛， <span class="arithmatex">\(q\geq1\)</span> 时级数发散，如果对一般的正项级数也能定义出合适的 <span class="arithmatex">\(q\)</span> ，那么就可以用它判别敛散性</p>
+<p>最直接的， <span class="arithmatex">\(q\)</span> 是等比数列的公比，也就是 <span class="arithmatex">\(\dfrac{a_{n+1}}{a_n}\)</span> ，由于改变有限项不影响级数的敛散性，我们只考虑 <span class="arithmatex">\(n\to\infty\)</span> 时的情况，取极限得到 <span class="arithmatex">\(\dst q=\lim_{n\to\infty}\frac{a_{n+1}}{a_n}\)</span> ，此时就得到了<strong>比值判别法</strong></p>
+<blockquote>
+<p><span class="arithmatex">\(q&lt;1\)</span> 时，级数收敛</p>
+<p><span class="arithmatex">\(1&lt;q\leq+\infty\)</span> 时，级数发散</p>
+<p><span class="arithmatex">\(q=1\)</span> 时是临界情况，无法判定(这和等比级数不同)</p>
+</blockquote>
+<p>从另一个角度说，对于等比级数有 <span class="arithmatex">\(\dst\lim_{n\to\infty}\sqrt[n]{a_n}=q\)</span> ，那么推而广之就有了<strong>根值判别法</strong>，对 <span class="arithmatex">\(q\)</span> 使用的判定方法和上面的比值判别法相同</p>
+<p>然而有一类形式非常简单的级数不论用比值判别法还是根值判别法都无法判断其敛散性，就是 <strong><span class="arithmatex">\(p-\)</span>级数</strong>，形式为</p>
+<div class="arithmatex">\[
+\sum_{n=1}^{\infty}\frac{1}{n^p}
+\]</div>
+<p>解决这个问题可以用<strong>积分判别法</strong>，具体的说</p>
+<blockquote>
+<p>如果一个函数 <span class="arithmatex">\(f(n)\)</span> 在 <span class="arithmatex">\([1,+\infty)\)</span> 上连续、非负且单调递减，记 <span class="arithmatex">\(a_n=f(n),n\in\mathbb{N_+}\)</span> ，那么级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 与积分 <span class="arithmatex">\(\dst\int_1^{+\infty}f(x)\dd x\)</span> 敛散性相同</p>
+</blockquote>
+<p>这里给出一个图形的证明</p>
+<p><div class="video-container"><video style="position:relative;width:100%;height:22.172vw" loop muted autoplay alt="video"><source src="../Inttest.mp4" type="video/mp4"></source></video></div></p>
+<p>总而言之，应用积分判别法会发现级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}\frac{1}{n^p}\)</span> 在 <span class="arithmatex">\(p&gt;1\)</span> 时收敛，而在 <span class="arithmatex">\(p\leq1\)</span> 时发散</p>
+<p>不难发现，这里的 <span class="arithmatex">\(p\)</span> 与等比级数的 <span class="arithmatex">\(q\)</span> 具有相似的地位，是决定级数敛散性的唯一参数，那么就仿照之前的方法，试着对一般的正项级数定义合适的 <span class="arithmatex">\(p\)</span> ，可以发现，在 <span class="arithmatex">\(p-\)</span>级数中有</p>
+<div class="arithmatex">\[
+\frac{a_n}{a_{n+1}}=\frac{(n+1)^p}{n^p}=1+\frac{pn^{p-1}+\cdots+1}{n^p}
+\]</div>
+<p>那么就知道</p>
+<div class="arithmatex">\[
+p=\lim_{n\to\infty}n(\frac{a_n}{a_{n+1}}-1)
+\]</div>
+<p>将此式推广到一般正项级数就得到 <strong>Raabe 判别法</strong></p>
+<blockquote>
+<p><span class="arithmatex">\(1&lt;p\leq+\infty\)</span> 时，级数收敛</p>
+<p><span class="arithmatex">\(p&lt;1\)</span> 时，级数发散</p>
+<p><span class="arithmatex">\(p=1\)</span> 时是临界情况，无法判定</p>
+</blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>在 <span class="arithmatex">\(p-\)</span>级数中求 <span class="arithmatex">\(p\)</span> 的另一办法是对数，因为</p>
+<div class="arithmatex">\[
+p=\lim_{n\to\infty}-\log_na_n=\lim_{n\to\infty}-\frac{\ln a_n}{\ln n}
+\]</div>
+<p>推广到一般正项级数就是<strong>对数判别法</strong>，对 <span class="arithmatex">\(p\)</span> 使用的判定方法与 Raabe 判别法相同</p>
+</div>
 <h3 id="_7">交错级数判敛法</h3>
-<p>正项和负项交替出现的级数叫做 <strong>交错级数</strong> ，</p>
-<h3 id="_8">数项级数通用判敛法</h3></div>
+<p>正项和负项交替出现的级数叫做<strong>交错级数</strong>，可以表示为 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}(-1)^{n-1}a_n\)</span> ，其中 <span class="arithmatex">\(a_n&gt;0\)</span> ，如果数列 <span class="arithmatex">\(\{a_n\}\)</span> 还满足 <span class="arithmatex">\(\dst\lim_{n\to\infty}a_n=0\)</span> 并且单调递减，那么这个交错级数就称为 <strong>Leibniz 级数</strong>，与之对应的是 <strong>Leibniz 判别法</strong></p>
+<blockquote>
+<p>Leibniz 级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}(-1)^{n-1}a_n\)</span> 必定收敛，且</p>
+<div class="arithmatex">\[
+\sum_{n=1}^{\infty}(-1)^{n-1}a_n\leq a_1
+\]</div>
+<p>余项 <span class="arithmatex">\(R_n\)</span> 满足 <span class="arithmatex">\(|R_n|\leq a_{n+1}\)</span></p>
+</blockquote>
+<p><mark>pho</mark></p>
+<h3 id="_8">数项级数通用判敛法</h3>
+<p>对于一般的数项级数，也有一些判别方法，其中最根本的就是<strong>部分和判别法</strong>，或者说就是使用定义</p>
+<blockquote>
+<p><span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n=\lim_{n\to\infty}S_n\)</span></p>
+</blockquote>
+<p>极限存在时就收敛，是一个充要条件</p>
+<p>但是一般情况下级数的部分和并不容易写出，所以还需要寻找一些其他的充分条件，最简单的是<strong>绝对收敛准则</strong></p>
+<blockquote>
+<p>若 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}|a_n|\)</span> 收敛，则 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 必收敛</p>
+</blockquote>
+<p><mark>anim</mark></p>
+<p>另一个想法是把级数的正项和负项分开，拆解为正部 <span class="arithmatex">\(a_n^+\)</span> 和负部 <span class="arithmatex">\(a_n^-\)</span> </p>
+<div class="arithmatex">\[
+\begin{align}
+&amp;a_n^+=\begin{cases}
+|a_n|,&amp;a_n\geq0\\
+0,&amp;a_n&lt;0
+\end{cases}\\[2ex]
+&amp;a_n^-=\begin{cases}
+0,&amp;a_n\geq0\\
+|a_n|,&amp;a_n&lt;0
+\end{cases}
+\end{align}
+\]</div>
+<p>这样原级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 就化为了两个正项级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n^+\)</span> 和 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n^-\)</span> ，那么就有</p>
+<blockquote>
+<p><span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 绝对收敛的充要条件是正项级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n^+\)</span> 和 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n^-\)</span> 均收敛</p>
+<p><span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 条件收敛则 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n^+\)</span> 和 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n^-\)</span> 均发散</p>
+</blockquote>
+<p>最后是 <strong>Cauchy 收敛准则</strong>，<del>名字里带有 Cauchy 的东西似乎总是又繁琐又难用</del>，具体的说</p>
+<blockquote>
+<p><span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 收敛的充要条件是 <span class="arithmatex">\(\forall\varepsilon&gt;0\)</span> ，均 <span class="arithmatex">\(\exists N\in\mathbb{N}_+\)</span> ，使得当 <span class="arithmatex">\(n&gt;N\)</span> 时， <span class="arithmatex">\(\forall p\in\mathbb{N}_+\)</span> ，恒有 <span class="arithmatex">\(\dst\left|\sum_{k=n+1}^{n+p}a_k\right|&lt;\varepsilon\)</span></p>
+</blockquote>
+<p>这个写法看起来相当令人望而生畏，好在可以用极限重写这个准则</p>
+<blockquote>
+<p><span class="arithmatex">\(\dst\sum_{n=1}^{\infty}a_n\)</span> 收敛的充要条件是 <span class="arithmatex">\(\dst\lim_{m,n\to\infty}|S_m-S_n|=0\)</span></p>
+<p>(注意二重极限 <span class="arithmatex">\(\dst\lim_{m,n\to\infty}\)</span> 和累次极限 <span class="arithmatex">\(\dst\lim_{n\to\infty}\lim_{m\to\infty}\)</span> 不一样)</p>
+</blockquote>
+<p>常见的处理方法是夹逼定理，从 <span class="arithmatex">\(|S_m-S_n|\)</span> 去掉一个变量</p>
+<p>END</p></div>
 
 
 
