@@ -4,6 +4,11 @@ site_description: 使用 MkDocs 构建的工科数学分析知识库
 site_author: 马士川
 site_url: https://r-a-s-p.github.io/adv-math-wiki  # 部署后的实际地址，可先留空
 
+# 不参与构建/索引的文档（仅排除 vendor 第三方库自带的 .md 说明文档，
+# 避免污染搜索；注意不能排除整个目录，否则其 JS/字体等静态资源也会丢失）
+exclude_docs: |
+  assets/vendor/**/*.md
+
 repo_name: 'R-A-S-P/adv-math-wiki'  # 可选，自定义显示名称，默认会自动推断
 repo_url: 'https://github.com/R-A-S-P/adv-math-wiki'  # 必填，你的仓库完整地址
 
@@ -28,7 +33,7 @@ theme:
     - media: "(prefers-color-scheme: light)"
       scheme: default
       primary: white
-      accent: red
+      accent: purple
       toggle:
         icon: material/weather-sunny
         name: 切换至深色模式
@@ -42,7 +47,9 @@ theme:
 
 # 插件配置（按需启用）
 plugins:
-  - search                     # 内置搜索，必须保留
+  - search:                    # 内置搜索，必须保留
+      lang:
+        - zh                   # 中文搜索支持（依赖 jieba 分词，需 pip install jieba）
   #- macros                     # 支持宏定义，方便复用内容
   # Obsidian 语法支持插件（二选一方案，见下文说明）
   - obsidian-support           # 一站式处理 Callout、图片双链等

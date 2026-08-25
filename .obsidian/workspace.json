@@ -207,8 +207,11 @@
       "bases:新建数据库": false
     }
   },
-  "active": "c20cb31a3875e975",
+  "active": "928c5a92e0c95224",
   "lastOpenFiles": [
+    "docs/ii/spatial_geometry/geometry.md",
+    "docs/ii/infinite_series/series.md",
+    "docs/ii/infinite_series/Inttest.mp4",
     "site/search/search_index.json",
     "site/search",
     "site/ii/spatial_geometry/vector/index.html",
@@ -218,13 +221,9 @@
     "site/ii/spatial_geometry/index.html",
     "site/ii/multivar_integral/surface_int/index.html",
     "site/ii/multivar_integral/multi_int/index.html",
-    "site/ii/multivar_integral/field_theory/index.html",
-    "site/ii/multivar_integral/cruve_int/index.html",
     "site/assets/images/favicon.png",
     "debug_display_sum.png",
     "docs/ii/spatial_geometry/vector.md",
-    "docs/ii/spatial_geometry/geometry.md",
-    "docs/ii/infinite_series/series.md",
     "debug_online_first_sum.png",
     "debug_first_sum.png",
     "docs/ii/infinite_series/func_series.md",
