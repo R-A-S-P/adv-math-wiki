@@ -14,12 +14,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/ii/infinite_series/series.md",
+                "file": "docs/ii/infinite_series/func_series.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "series"
+              "title": "func_series"
             }
           }
         ]
@@ -35,12 +35,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/ii/infinite_series/series.md",
+                "file": "docs/ii/infinite_series/func_series.md",
                 "mode": "preview",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "series"
+              "title": "func_series"
             }
           }
         ]
@@ -209,8 +209,10 @@
   },
   "active": "928c5a92e0c95224",
   "lastOpenFiles": [
-    "docs/ii/spatial_geometry/geometry.md",
     "docs/ii/infinite_series/series.md",
+    "docs/ii/spatial_geometry/vector.md",
+    "docs/ii/spatial_geometry/geometry.md",
+    "docs/ii/infinite_series/func_series.md",
     "docs/ii/infinite_series/Inttest.mp4",
     "site/search/search_index.json",
     "site/search",
@@ -223,10 +225,8 @@
     "site/ii/multivar_integral/multi_int/index.html",
     "site/assets/images/favicon.png",
     "debug_display_sum.png",
-    "docs/ii/spatial_geometry/vector.md",
     "debug_online_first_sum.png",
     "debug_first_sum.png",
-    "docs/ii/infinite_series/func_series.md",
     "docs/ii/multivar_integral.md",
     "docs/ii/multivar_differential.md",
     "docs/ii/infinite_series.md",

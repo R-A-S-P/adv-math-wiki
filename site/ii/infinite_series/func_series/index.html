@@ -83,6 +83,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -1353,6 +1358,24 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    函数项级数
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1369,6 +1392,73 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        函数项级数的基本概念
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一致收敛级数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一致收敛级数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        判别法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1491,6 +1581,64 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        函数项级数的基本概念
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一致收敛级数
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="一致收敛级数">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        判别法
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1511,7 +1659,44 @@
 
   <h1>函数项级数</h1>
 
-<p>111</p>
+<div><h2 id="_1">函数项级数的基本概念</h2>
+<p>函数项级数和数项级数十分相似，只要把数列 <span class="arithmatex">\(\{a_n\}\)</span> 换成具有公共定义域 <span class="arithmatex">\(E\)</span> 的函数列 <span class="arithmatex">\(\{u_n(x)\}\)</span> ，那么 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}u_n(x)\)</span> 就成为了函数项级数，一样的，这代表</p>
+<div class="arithmatex">\[
+u_1(x)+u_2(x)+u_3(x)+\cdots+u_n(x)+\cdots
+\]</div>
+<p>通项与部分和的定义也是一样的，只不过都变为了函数，自然的，对于每一个 <span class="arithmatex">\(x_0\in E\)</span> ，<span class="arithmatex">\(\dst\sum_{n=1}^{\infty}u_n(x_0)\)</span> 就是一个数项级数，有收敛与发散之分，使其收敛的 <span class="arithmatex">\(x_0\)</span> 就叫做<strong>收敛点</strong>，也可以说 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}u_n(x)\)</span> 在 <span class="arithmatex">\(x_0\)</span> 收敛</p>
+<p>收敛点的全体就叫做<strong>收敛域</strong>，在收敛域上，级数的和存在，这自然也是 <span class="arithmatex">\(x\)</span> 的函数，叫做<strong>和函数</strong> <span class="arithmatex">\(\dst S(x)=\sum_{n=1}^{\infty}u_n(x)\)</span> ，<strong>余项</strong>也是一样，是 <span class="arithmatex">\(R_n(x)=S(x)-S_n(x)\)</span> </p>
+<p>以上的收敛方式是单独考察每一个点的收敛情况的，称为<strong>逐点收敛</strong>或者<strong>点态收敛</strong></p>
+<h2 id="_2">一致收敛级数</h2>
+<p>如果只研究逐点收敛级数的话，完全可以在每个点用数项级数的方法研究，这就失去了发明函数项级数的意义，所以一定有一类函数项级数存在某些特殊的性质，值得专门建立理论，这类级数就是一致收敛级数，其定义为</p>
+<blockquote>
+<p><span class="arithmatex">\(\forall\varepsilon&gt;0\)</span> ，均 <span class="arithmatex">\(\exists N(\varepsilon)\in\mathbb{N}_+\)</span> ，使得当 <span class="arithmatex">\(n&gt;N(\varepsilon)\)</span> 时， <span class="arithmatex">\(\forall x\in D\)</span> 都有 <span class="arithmatex">\(|S_n(x)-S(x)|&lt;\varepsilon\)</span> ，则称函数项级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}u_n(x)\)</span> 在 <span class="arithmatex">\(D\)</span> 上一致收敛于 <span class="arithmatex">\(S(x)\)</span> </p>
+</blockquote>
+<p>自然的，这种形式让我们希望能用极限进行改写，就有了等价的</p>
+<blockquote>
+<p><span class="arithmatex">\(\dst\lim_{n\to\infty}\left(\sup_{x\in D}|S_n(x)-S(x)|\right)=0\)</span> ，则级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}u_n(x)\)</span> 在 <span class="arithmatex">\(D\)</span> 上一致收敛于 <span class="arithmatex">\(S(x)\)</span> </p>
+</blockquote>
+<p>显然，一致收敛级数一定逐点收敛</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>函数空间</p>
+</div>
+<h3 id="_3">判别法</h3>
+<p>通过定义判定级数是否一致收敛大多数时候是困难的，因为要求出和函数，然而很多时候求和函数反而要利用一致收敛性，甚至于难以求出和函数，因此需要一些简单的判别法</p>
+<p>最根本的是 <strong>Cauchy 一致收敛准则</strong></p>
+<blockquote>
+<p><span class="arithmatex">\(\dst\sum_{n=1}^{\infty}u_n(x)\)</span> 在 <span class="arithmatex">\(D\)</span> 上一致收敛的充要条件是 <span class="arithmatex">\(\forall\varepsilon&gt;0\)</span> ，都 <span class="arithmatex">\(\exists N(\varepsilon)\in\mathbb{N}_+\)</span> ，使得当 <span class="arithmatex">\(n&gt;N(\varepsilon)\)</span> 时， <span class="arithmatex">\(\forall p\in\mathbb{N}_+\)</span> ，以及 <span class="arithmatex">\(\forall x\in D\)</span> 都有 <span class="arithmatex">\(\dst\left|\sum_{k=n+1}^{n+p}u_k(x)\right|&lt;\varepsilon\)</span></p>
+</blockquote>
+<p>依旧是用相当复杂的 <span class="arithmatex">\(\varepsilon\)</span> 语言写成的，好在和数项级数的 Cauchy 收敛准则一样可以用极限重写，一致收敛的定义比逐点收敛多一个上确界， Cauchy 收敛准则也比 Cauchy 收敛准则多一个上确界</p>
+<blockquote>
+<p><span class="arithmatex">\(\dst\sum_{n=1}^{\infty}u_n(x)\)</span> 在 <span class="arithmatex">\(D\)</span> 上一致收敛的充要条件是 <span class="arithmatex">\(\dst\lim_{m,n\to\infty}\left(\sup_{x\in D}|S_n(x)-S_m(x)|\right)=0\)</span></p>
+</blockquote>
+<p>极限还是较为复杂，在数项级数部分，我们运用放缩与夹逼定理实现了变量的消去，参考这个做法，我们自然会想，如果能通过级数逐项比较大小的性质消去函数中的 <span class="arithmatex">\(x\)</span> ，把函数项级数化为数项级数，问题就会简化，这就是 <strong>Weierstrass 判别法</strong>，或者叫 <strong><span class="arithmatex">\(M-\)</span>判别法</strong>，<strong>优级数判别法</strong>皆可</p>
+<blockquote>
+<p>若能找到收敛的正项级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}M_n\)</span> 使得 <span class="arithmatex">\(|u_n(x)|\leq M_n\)</span> 在 <span class="arithmatex">\(x\in D\)</span> 恒成立，那么 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}u_n(x)\)</span> 在 <span class="arithmatex">\(D\)</span> 上一致收敛</p>
+</blockquote>
+<p>级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}M_n\)</span> 称为<strong>优级数</strong>或<strong>控制级数</strong>，不难发现，对于 Weierstrass 判别法判敛的级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}u_n(x)\)</span> ，其绝对值级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}|u_n(x)|\)</span> 也在 <span class="arithmatex">\(D\)</span> 上一致收敛，这种性质叫做级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}u_n(x)\)</span> 在 <span class="arithmatex">\(D\)</span> 上<strong>绝对一致收敛</strong></p>
+<h3 id="_4">性质</h3></div>
 
 
 

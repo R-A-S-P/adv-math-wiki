@@ -159,6 +159,8 @@
 	flex-direction: column;
 	gap: var(--pt-space-sm);
 	margin-bottom: var(--pt-space-sm);
+	container-type: inline-size;
+	container-name: pt-header;
 }
 
 /* 单行头部：搜索框 + 模式下拉 + 工具按钮 */
@@ -196,6 +198,11 @@
 /* 排序按钮容器（定位上下文，下拉菜单挂在此容器下） */
 .pt-sort-wrap {
 	position: relative;
+	/* 建立显式高 z-index 的 stacking context，盖住下方 .pt-scroll-viewport / .pt-list-layer
+	   各自的 contain / will-change context（均 z=auto≈0），否则下拉菜单下半部分会被
+	   卡片遮挡（同 stacking context 内 DOM 序后者压前者，菜单在 header，卡片在列表里）。 */
+	z-index: var(--pt-z-dropdown);
+	isolation: isolate;
 	flex-shrink: 0;
 }
 
@@ -2059,6 +2066,15 @@ button.pt-card-install-btn--installed {
 :root {
     --pt-progress: 0;        /* 0~1，由 JS 写入；CSS 进度线/弧扫光都从这里读 */
     --pt-sys-ease: cubic-bezier(0.4, 0, 0.2, 1);
+    /* 统一浮层 z-index 层级（集中管理，避免散落魔法数字导致未来新增浮层被卡片层遮挡）。
+       背景：.pt-list-layer 有 will-change:transform + contain，.pt-scroll-viewport 有 contain:paint，
+       二者各建独立 stacking context（z=auto≈0）；任何「挂在 header、展开后下盖卡片」的自定义浮层，
+       容器必须显式 z-index 高于 auto 才能压过它们。 */
+    --pt-z-dropdown: 10;     /* 工具条下拉（排序等）：容器层级，配合 isolation:isolate 浮于卡片之上 */
+    --pt-z-fab: 20;          /* 悬浮操作按钮（回到顶部 / 置底） */
+    --pt-z-tray: 30;         /* 对比托盘 / 滚动位置徽标 */
+    --pt-z-drawer: 50;       /* Drawer 遮罩 */
+    --pt-z-drawer-panel: 51; /* Drawer 面板 */
 }
 
 /* ── 卡片：🍎 系统翻译按钮加载态 ──────────────────────────────────────── */
@@ -2694,6 +2710,12 @@ button.pt-card-install-btn--installed {
 	transition: transform var(--pt-duration-normal) var(--pt-ease), opacity var(--pt-duration-normal) var(--pt-ease);
 	padding: var(--pt-space-lg);
 	padding-top: var(--pt-space-xl);
+	/* 容器查询根：以「抽屉/pane 宽度」而非窗口宽度决定双栏断点，
+	 * 这样在 Obsidian 把插件视图放在窄侧栏时不会误触双栏。
+	 * 必须挂在 drawer（本身不滚动）上，不能挂到 .pt-detail-page-scroll：
+	 * container-type 隐含 contain: layout，会让该元素成为其内部 absolute 子元素的
+	 * containing block —— 一旦放在滚动容器上，右栏就相对滚动内容定位，跟着 README 滚走。 */
+	container-type: inline-size;
 }
 .pt-drawer--open {
 	transform: translateX(0);
@@ -2732,16 +2754,17 @@ button.pt-card-install-btn--installed {
 	height: 100%;
 	overflow-y: auto;
 	overflow-x: hidden;
-	scroll-behavior: smooth;
+	/* 顶部 padding = 头部固定块高度（JS 写入 --pt-detail-head-h），让 README
+	   正文从头部下方开始滚动；头部是 absolute 脱离文档流，需此占位避免遮挡。 */
+	padding-top: var(--pt-detail-head-h, 0px);
 	padding-bottom: var(--pt-space-2xl);
 	animation: pt-detail-fadein 0.25s var(--pt-ease);
-	/* 作为容器查询根：以「抽屉/pane 宽度」而非窗口宽度决定双栏断点，
-	 * 这样在 Obsidian 把插件视图放在窄侧栏时不会误触双栏。 */
-	container-type: inline-size;
 }
+/* 仅淡入、不含 transform：transform 会让滚动容器成为内部 sticky 头部的
+   containing block，导致吸顶基准偏移、滚动时头部轻微移动，故只用 opacity。 */
 @keyframes pt-detail-fadein {
-	from { opacity: 0; transform: translateY(8px); }
-	to   { opacity: 1; transform: translateY(0); }
+	from { opacity: 0; }
+	to   { opacity: 1; }
 }
 
 /* ── 内容内层（居中 max-width 提升长文本阅读舒适度） ── */
@@ -2762,31 +2785,43 @@ button.pt-card-install-btn--installed {
  * 双栏让「相似推荐」在阅读 README 时始终可见，不必滚到页面底部。
  * 从 720px 降到 640px：Obsidian 默认主编辑区约 600-800px，640px 让更多实际场景命中双栏。 */
 @container (min-width: 640px) {
+	/* 双栏采用「只有正文列滚动」：scroll 停止滚动，滚动下放到 .pt-detail-main。
+	   这样右栏作为 grid 列天然静止，既不必用 sticky（会抖动），也不必用 absolute
+	   （需手工计算 inner 居中偏移，脆弱且易与正文重叠）。 */
+	.pt-detail-page-scroll {
+		overflow: hidden;              /* 滚动交给 main 列 */
+		display: flex;                 /* 让 inner 撑满可用高度 */
+	}
 	.pt-detail-page-inner {
+		flex: 1;
+		min-height: 0;
 		display: grid;
 		grid-template-columns: minmax(0, 1fr) 280px;
-		grid-template-areas:
-			"head  head"
-			"main  rail";
+		grid-template-rows: 100%;      /* 单行且行高受控，main 才能内部滚动 */
+		/* 头部固定块改 absolute 脱离 grid 流（drawer 直接子，详见 .pt-detail-head-block 注释），
+		   grid 只需承担 main + rail 双栏；head 占位由 scroll 的 padding-top 提供。 */
+		grid-template-areas: "main rail";
 		max-width: 1140px;
 		padding-left: var(--pt-space-xl);
 		padding-right: var(--pt-space-xl);
 	}
-	.pt-drawer-head { grid-area: head; }
-	.pt-detail-main { grid-area: main; min-width: 0; }
-	/* 右栏：粘在视口顶部，README 长滚时推荐常驻。
-	   用 margin-left 模拟原 column-gap（--pt-space-xl），避免 multicolumn 误报；轨道仍 280px。 */
+	.pt-detail-main {
+		grid-area: main;
+		min-width: 0;
+		min-height: 0;
+		overflow-y: auto;              /* 正文列独立滚动 */
+	}
+	/* 右栏：grid 列，随 grid 静止（scroll 已停止滚动）→ 天然常驻、零抖动。
+	   max-height: 100% + 自身滚动，推荐项较多时仍可完整浏览。 */
 	.pt-detail-similar-rail {
 		grid-area: rail;
 		align-self: start;
-		position: sticky;
-		top: var(--pt-space-lg);
+		max-height: 100%;
 		margin-left: var(--pt-space-xl);
-		border-top: none;
 		margin-top: 0;
+		border-top: none;
 		border-left: 1px solid var(--background-modifier-border);
 		padding: 24px 20px;
-		max-height: calc(100vh - 80px);
 		overflow-y: auto;
 	}
 	/* 右栏宽度有限：默认隐藏英文原名行（明细挂在译名 hover tooltip 上） */
@@ -2795,12 +2830,35 @@ button.pt-card-install-btn--installed {
 	}
 }
 
-/* Drawer 头部（整页模式：sticky + 毛玻璃，确保标题始终可见） */
+/* Drawer 头部（仅承载标题/关闭按钮本身；外层由 .pt-detail-head-block 统一 sticky） */
 .pt-drawer-head {
 	display: flex;
 	align-items: flex-start;
 	gap: var(--pt-space-sm);
-	margin-bottom: var(--pt-space-lg);
+}
+
+/*
+ * 详情页头部固定块：position:absolute 相对 .pt-drawer 顶部（drawer 是
+ * position:absolute/包含块），完全脱离滚动容器。
+ * 历史方案用 sticky，但 Chromium/Electron 下 sticky 即便无 backdrop-filter /
+ * transform，吸顶时仍有合成层亚像素抖动（每帧重算位置），表现为头部轻微
+ * 移动；改为 absolute 后头部彻底静止。滚动容器 scroll 通过
+ * padding-top = head-block 高度（CSS 变量 --pt-detail-head-h）占位，
+ * 让 README 正文从头部下方开始滚动。头部宽度铺满 drawer：left/right:0。
+ */
+.pt-detail-head-block {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	z-index: 5;
+	padding: var(--pt-space-lg);
+	background: var(--background-primary);
+	border-bottom: 1px solid var(--background-modifier-border);
+	box-shadow: 0 1px 0 color-mix(in srgb, var(--background-modifier-border) 50%, transparent);
+}
+.pt-detail-head-block > .pt-drawer-head {
+	margin-bottom: var(--pt-space-md);
 	padding-bottom: var(--pt-space-md);
 	border-bottom: 1px solid var(--background-modifier-border);
 }
@@ -3132,7 +3190,8 @@ button.pt-card-install-btn--installed {
 	font-size: var(--pt-text-md);
 	line-height: 1.7;
 	max-width: 680px;           /* 阅读友好宽度 */
-	margin-top: var(--pt-space-sm);
+	margin-top: var(--pt-space-lg);
+	padding-top: var(--pt-space-md);
 	color: var(--pt-text-muted, var(--text-muted));
 }
 .pt-detail-readme-body img {
@@ -5314,6 +5373,12 @@ button.pt-card-install-btn--installed {
 /*  #7 移动端响应式布局：单列卡片 + 工具栏溢出菜单       */
 /* ═══════════════════════════════════════════════════ */
 
+/* ⋮ 溢出按钮：默认隐藏，仅在 .pt-mobile（移动设备）或窄容器（≤520px）下显示，
+   避免桌面端与散开的 refresh / checkUpdate / AI 翻译按钮同时出现造成重复。 */
+.pt-overflow-btn {
+	display: none;
+}
+
 /* 移动端溢出菜单按钮（收起 刷新/AI翻译 等次要操作） */
 .pt-mobile .pt-overflow-btn {
 	display: inline-flex;
@@ -5331,9 +5396,153 @@ button.pt-card-install-btn--installed {
 	color: var(--pt-text-strong, var(--text-normal));
 }
 
-/* 移动端次要按钮已收进菜单，确保工具栏单行不换行 */
-.pt-mobile .pt-header-row {
-	flex-wrap: nowrap;
+/*
+ * 窄屏工具栏兜底（不依赖 JS 的 pt-mobile 类）：用容器查询针对 .pt-header 的内联宽度。
+ * 桌面 Obsidian 客户端用 DevTools 模拟窄 viewport、或侧栏收纳后右侧空间被压缩时，
+ * 搜索行里「关键词▾ + 输入 + 排序 + 筛选▾ + 齿轮 + ⋯」挤在一起没有空间。
+ * 此处按 .pt-header 容器宽度 ≤520px 折叠：
+ *   1. 把 refresh / checkUpdate / AI 翻译 收进 ⋮ 溢出菜单（默认隐藏溢出按钮）；
+ *   2. 「筛选」按钮只保留图标 + caret，省 60+px；
+ *   3. 模式段「关键词▾」用紧凑变体（缩 padding + 缩字号 + min-width:0），省 30px+，并保留 tooltip 解释含义；
+ *   4. 结果计数隐藏，腾给搜索框；
+ *   5. 搜索栏单独成行：header-row 改 flex-wrap，搜索框 flex: 0 0 100% 占满第一行，
+ *      排序/组合/筛选/设置/溢出自然落到第二行，移动端输入更舒适。
+ * 与既有 .pt-mobile 选段不冲突，二者并集生效（设备是移动端 + 容器窄，都折叠）。
+ */
+@container pt-header (max-width: 520px) {
+	/* 次要按钮进 ⋮：桌面与窄屏容器都隐藏 */
+	.pt-header-row .pt-refresh,
+	.pt-header-row .pt-check-update,
+	.pt-header-row .pt-ai-icon-btn {
+		display: none;
+	}
+	/* ⋮ 溢出：默认隐藏，窄屏下显示 */
+	.pt-overflow-btn {
+		display: inline-flex;
+		min-height: 32px;
+		min-width: 32px;
+		padding: 0 6px;
+		margin: 0;
+		border: none;
+		background: none;
+		color: var(--pt-text-muted, var(--text-muted));
+		cursor: pointer;
+		border-radius: var(--pt-radius);
+	}
+	.pt-overflow-btn:hover {
+		color: var(--pt-text-strong, var(--text-normal));
+		background: var(--pt-surface-3, var(--background-modifier-hover));
+	}
+	/* 「筛选」按钮只显示图标：隐藏 "筛选" 文字，保留 lucide icon + caret，
+	   并缩 padding 到图标按钮尺寸，与同排排序/组合/设置/溢出视觉一致 */
+	.pt-toggle-filters--text .pt-toggle-filters-label {
+		display: none;
+	}
+	.pt-toggle-filters--text {
+		padding: 0 10px;
+		min-height: 32px;
+	}
+	/* 模式段窄屏紧凑化：只缩 padding 保留宽度，不缩字号（字号继承基础 --pt-text-sm），
+	   防止 select 内文字与 input placeholder 因字号不同出现 baseline 视觉错位。
+	   同步去掉右 border 让 select 与输入段视觉连贯，避免窄屏下两段紧贴产生的挤压感。 */
+	.pt-search-mode {
+		padding: 0 14px 0 10px;
+		min-width: 0;
+		vertical-align: middle;
+		line-height: 36px;
+		height: 36px;
+		border-right: 0;
+		background: transparent;
+	}
+	.pt-mode-wrap {
+		flex-shrink: 1;
+		min-width: 0;
+		display: inline-flex;
+		align-items: center;
+	}
+	/* 模式段 caret 在窄 padding 下贴更近，避免与右分隔线撞车 */
+	.pt-mode-caret {
+		right: 6px;
+	}
+	/* 移动端直接隐藏搜索放大镜图标：窄屏空间珍贵且图标与文字的间距问题价值不高，
+	   去掉后 placeholder 紧贴模式段右缘、无重叠风险，输入区纯文本更清爽。 */
+	.pt-search-field::before {
+		display: none;
+	}
+	/* 提升特异性（.pt-header 祖先前缀）压过 UA/主题对 <input> 的内置控件层，
+	   替代原 !important，避免 iOS WebView 圆角胶囊回归（container query 内特异性不变，靠祖先类提权）。 */
+	.pt-header .pt-search-input {
+		/* 放大镜已隐藏，左侧 padding 让出空间不必保留，缩到常规即可 */
+		padding: 0 44px 0 12px;
+		/* 内嵌子元素不重复画圆角，由外框 .pt-search 独自负责视觉圆角 + overflow 裁剪，
+		   避免窄屏下「内部 input 圆角与外框圆角错位 1px」造成的尖角瑕疵。
+		   appearance:none 清空 iOS WebView 给 <input> 独立渲染的"控件胶囊"
+		   （即使 transparent / border:0 仍可能保留内嵌 visual layer）。 */
+		appearance: none;
+		-webkit-appearance: none;
+		background: transparent;
+		border: 0;
+		border-radius: 0;
+		box-shadow: none;
+	}
+	.pt-search-mode {
+		border-radius: 0;
+	}
+	/* 外框加 overflow:hidden 让 input/select 在视觉上彻底裁到外框圆角之内；
+	   rounded-end 改为方形（border-radius:0 是为了和 input/select 严格圆角统一）。 */
+	.pt-search {
+		overflow: hidden;
+		border-radius: var(--pt-radius-input);
+	}
+	/* 关键：「视觉语言不统一」原是因为 select / input 都各自被 UA 画了一个圆角胶囊（即使切了
+	   border-radius 也清不掉 iOS / Chromium 上的部分 user-agent stylesheet 控件视觉层），
+	   让 select / input 区段视觉上"碎在"外框里像拼贴块。
+	   解法：在窄屏下将 segmented 内部分两段，分别由 .pt-mode-wrap 和 .pt-search-field 显式担纲：
+	   • 模式段：本身和 select 一起保留独立浅色 chip（已有"关键词▾"视觉块，已存在合理），
+	   • 输入段：让 .pt-search-field 干脆取消自己的几何形，让 input 彻底融合进外框——
+	     直接让 .pt-search-field 自己不画任何独立视觉，几何跟随外框。
+	   实现：.pt-search-field 的 overflow clip 把内部 input 渲染限制在它自身边界内，
+	   并强制 input 与 field 几何与父级 .pt-search 完全一致（同色透明，无 own border-radius 绘制）。 */
+	.pt-search-field,
+	.pt-mode-wrap {
+		/* 让这两个 wrapper 不再创建独立视觉块；几何边界完全依靠外框 border + overflow 切圆角。 */
+		background: transparent;
+		box-shadow: none;
+	}
+	/* 模式段：select 即使被 appearance:none 仍可能在 UA 层画一个圆角胶囊（iOS WebView 上 select
+	   永远带 box-shadow / 边框）。让 select 进一步全透明并彻底融进 .pt-mode-wrap： */
+	/* 提升特异性（.pt-header 祖先前缀）压过 UA/主题对 select 的内置控件层，替代原 !important */
+	.pt-header .pt-search-mode,
+	.pt-mode-wrap select {
+		appearance: none;
+		-webkit-appearance: none;
+		background: transparent;
+		border: 0;
+		box-shadow: none;
+	}
+	/* 结果计数给搜索让位 */
+	.pt-result-count {
+		display: none;
+	}
+
+	/* 搜索栏单独成行：header-row 改换行，搜索框占满第一行，
+	   排序/组合/筛选/设置/溢出自动落到第二行（flex 容器自然换行）。
+	   搜索框 100% 宽度保证不被右侧图标挤窄，移动端输入更舒适。 */
+	.pt-header-row {
+		flex-wrap: wrap;
+	}
+	.pt-header-row .pt-search {
+		flex: 0 0 100%;
+		min-width: 0;
+	}
+	/* 第二行（工具簇）左对齐排布，与搜索框左缘对齐 */
+	.pt-header-row .pt-sort-wrap,
+	.pt-header-row .pt-profile-dropdown,
+	.pt-header-row .pt-toggle-filters,
+	.pt-header-row .pt-open-settings,
+	.pt-header-row .pt-overflow-btn {
+		flex: 0 0 auto;
+	}
 }
 
 /*
@@ -5346,9 +5555,6 @@ button.pt-card-install-btn--installed {
 		   避免纯数学列数推导挤出 1.5 列导致横向撕裂。
 		   .pt-card 基础定义未设 min-width，此处为其唯一声明，无需 !important。 */
 		min-width: 100%;
-	}
-	.pt-view .pt-header-row {
-		flex-wrap: nowrap;
 	}
 }
 
