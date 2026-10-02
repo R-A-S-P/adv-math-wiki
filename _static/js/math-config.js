@@ -18,11 +18,28 @@ window.MathJax = {
     displayMath: [['$$', '$$'], ['\\[', '\\]']],   // 行间公式定界符
     processEscapes: true,                           // 允许转义 \$ 等
     //packages: { '[+]': ['boldsymbol'] }             // 加载额外宏包（如粗体符号）
-    macros:{
-      bs: ["\\boldsymbol{ #1 }",1],
-      abs: ["\\left|{ #1 }\\right|",1],
-      dd: ["\\mathrm{d}{ #1 }",1],
-      dst: "\\displaystyle"
+
+    // ——— 与项目根目录 preamble.sty 保持同步 ———
+    // 无参数宏用字符串；带参数宏用 [展开式, 参数个数]
+    macros: {
+      abs: ["\\left| #1 \\right|", 1],                    // \abs{#1}
+      bs: ["\\boldsymbol{#1}", 1],                        // \bs{#1}
+      dd: "\\mathrm{d}",                                  // \dd
+      dint: "{\\displaystyle\\int}",                      // \dint
+      dprod: "{\\displaystyle\\prod}",                    // \dprod
+      dst: "\\displaystyle",                              // \dst
+      dsum: "{\\displaystyle\\sum}",                      // \dsum
+      dv: ["\\dfrac{\\mathrm{d} #1 }{\\mathrm{d} #2 }", 2],              // \dv{#1}{#2}
+      ee: "\\mathrm{e}",                                  // \ee
+      eval: ["\\left. #1 \\right|", 1],                   // \eval{#1}
+      grad: "\\mathrm{grad}\\;",                          // \grad
+      ii: "\\mathrm{i}",                                  // \ii
+      jj: "\\mathrm{j}",                                  // \jj
+      ndv: ["\\dfrac{\\mathrm{d}^{#3} #1 }{\\mathrm{d} {#2}^{#3} }", 3], // \ndv{#1}{#2}{#3}
+      twodphessian: ["\\begin{pmatrix}\\dfrac{\\partial^2 #1}{\\partial^2 x}&\\dfrac{\\partial^2 #1}{\\partial x\\partial y}\\\\ \\dfrac{\\partial^2 #1}{\\partial x\\partial y}&\\dfrac{\\partial^2 #1}{\\partial^2 y}\\end{pmatrix}", 1],
+      threedphessian: ["\\begin{pmatrix}\\dfrac{\\partial^2 #1}{\\partial^2 x}&\\dfrac{\\partial^2 #1}{\\partial x\\partial y}&\\dfrac{\\partial^2 #1}{\\partial x\\partial z}\\\\ \\dfrac{\\partial^2 #1}{\\partial x\\partial y}&\\dfrac{\\partial^2 #1}{\\partial^2 y}&\\dfrac{\\partial^2 #1}{\\partial y\\partial z}\\\\ \\dfrac{\\partial^2 #1}{\\partial x\\partial z}&\\dfrac{\\partial^2 #1}{\\partial y\\partial z}&\\dfrac{\\partial^2 #1}{\\partial z^2}\\end{pmatrix}", 1],
+      twolim: ["\\lim\\limits_{(x,y)\\to #1}", 1],        // \twolim{#1}
+      vector: ["\\left\\{ #1 \\right\\}", 1]              // \vector{#1}
     }
   },
   options: {

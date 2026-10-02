@@ -1444,7 +1444,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        性质
+        分析性质与运算性质
       
     </span>
   </a>
@@ -1625,7 +1625,7 @@
   <a href="#_4" class="md-nav__link">
     <span class="md-ellipsis">
       
-        性质
+        分析性质与运算性质
       
     </span>
   </a>
@@ -1679,7 +1679,23 @@ u_1(x)+u_2(x)+u_3(x)+\cdots+u_n(x)+\cdots
 <p>显然，一致收敛级数一定逐点收敛</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>函数空间</p>
+<p>在<a href="vector">向量</a>章节中我们讲过范数的概念，当时我们将其等价为 Euclid 空间中向量的长度，严格的说，这是 <span class="arithmatex">\(L^2\)</span> 范数，是 <span class="arithmatex">\(L^p\)</span> 范数的一种，对于向量 <span class="arithmatex">\(\bs{x}=(x_1,\cdots,x_n)\)</span> ，其 <span class="arithmatex">\(L^p\)</span> 范数记为 <span class="arithmatex">\(\Vert\bs{x}\Vert_p\)</span> ，有</p>
+<div class="arithmatex">\[
+\Vert\bs{x}\Vert_p=\left(\sum_{i=1}^n|x_i|^p\right)^{1/p}
+\]</div>
+<p>当然，其中 <span class="arithmatex">\(p\geq1\)</span> </p>
+<p>如果把 <span class="arithmatex">\(p\)</span> 推向无穷，就得到了 <span class="arithmatex">\(L^{\infty}\)</span> 范数，自然想到</p>
+<div class="arithmatex">\[
+\Vert\bs{x}\Vert_{\infty}=\lim_{p\to\infty}\left(\sum_{i=1}^n|x_i|^p\right)^{1/p}=\max_i|x_i|
+\]</div>
+<p>这是个常见的极限</p>
+<p>如果把眼光再放宽广一些，向量最基本的特征是加法可以按位相加，数乘可以按位相乘，这么说来，函数也可以是向量，因为如果函数 <span class="arithmatex">\(h=f+g\)</span> ，那么 <span class="arithmatex">\(h(x)=f(x)+g(x)\)</span> ；如果 <span class="arithmatex">\(h=cf\)</span> ，那么 <span class="arithmatex">\(h(x)=cf(x)\)</span> ，把 <span class="arithmatex">\(x\)</span> 看做函数值 <span class="arithmatex">\(f(x)\)</span> 所在的位，那函数也能按位相加和数乘，只不过 <span class="arithmatex">\(x\)</span> 的取值不局限于整数，而且通常是无限多的，因此这是一个无穷维的向量，只要把求和换成积分，就能得到其 <span class="arithmatex">\(L^p\)</span> 范数，对于 <span class="arithmatex">\(x\in[a,b]\)</span> 的情况</p>
+<div class="arithmatex">\[
+\Vert f\Vert_p=\left(\int_a^b|f(x)|^p\dd x\right)^{1/p}
+\]</div>
+<p>其中 <span class="arithmatex">\(a,b\)</span> 可以取到 <span class="arithmatex">\(\infty\)</span> ，当 <span class="arithmatex">\(p\to\infty\)</span> 时，类似于有限维情况，对于连续函数， <span class="arithmatex">\(\dst\Vert f\Vert_{\infty}=\sup_{x\in[a,b]}|f(x)|\)</span></p>
+<p>按照这个思路也能获得函数的内积为 <span class="arithmatex">\(\dst\langle f,g\rangle=\int_a^bf(x)g(x)\dd x\)</span> ，这里用 <span class="arithmatex">\(\langle f,g\rangle\)</span> 表记 <span class="arithmatex">\(f\)</span> 和 <span class="arithmatex">\(g\)</span> 的内积</p>
+<p>实际上，范数不仅局限于这几种，所有满足正定性( <span class="arithmatex">\(\Vert x\Vert\geq0\)</span> )，齐次性( <span class="arithmatex">\(\Vert ax\Vert=|a|\Vert x\Vert\)</span> )，与三角不等式( <span class="arithmatex">\(\Vert x+y\Vert\leq\Vert x\Vert+\Vert y\Vert\)</span> )的运算 <span class="arithmatex">\(\Vert\cdot\Vert\)</span> 都可以被定义为范数，所以实际上上确界也是一种范数，记为 <span class="arithmatex">\(\Vert f\Vert_{\sup}\)</span> </p>
 </div>
 <h3 id="_3">判别法</h3>
 <p>通过定义判定级数是否一致收敛大多数时候是困难的，因为要求出和函数，然而很多时候求和函数反而要利用一致收敛性，甚至于难以求出和函数，因此需要一些简单的判别法</p>
@@ -1695,8 +1711,53 @@ u_1(x)+u_2(x)+u_3(x)+\cdots+u_n(x)+\cdots
 <blockquote>
 <p>若能找到收敛的正项级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}M_n\)</span> 使得 <span class="arithmatex">\(|u_n(x)|\leq M_n\)</span> 在 <span class="arithmatex">\(x\in D\)</span> 恒成立，那么 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}u_n(x)\)</span> 在 <span class="arithmatex">\(D\)</span> 上一致收敛</p>
 </blockquote>
-<p>级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}M_n\)</span> 称为<strong>优级数</strong>或<strong>控制级数</strong>，不难发现，对于 Weierstrass 判别法判敛的级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}u_n(x)\)</span> ，其绝对值级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}|u_n(x)|\)</span> 也在 <span class="arithmatex">\(D\)</span> 上一致收敛，这种性质叫做级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}u_n(x)\)</span> 在 <span class="arithmatex">\(D\)</span> 上<strong>绝对一致收敛</strong></p>
-<h3 id="_4">性质</h3></div>
+<p>级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}M_n\)</span> 称为<strong>优级数</strong>或<strong>控制级数</strong>，不难发现，对于 Weierstrass 判别法判敛的级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}u_n(x)\)</span> ，其绝对值级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}|u_n(x)|\)</span> 也在 <span class="arithmatex">\(D\)</span> 上一致收敛，这种性质叫做级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}u_n(x)\)</span> 在 <span class="arithmatex">\(D\)</span> 上<strong>绝对一致收敛</strong>(注意绝对一致收敛不是绝对收敛且一致收敛，而是比这更强的条件)</p>
+<h3 id="_4">分析性质与运算性质</h3>
+<p>一致收敛为级数带来了许多优良的性质，首先是保持了和函数的连续性，如果级数 <span class="arithmatex">\(\dst\sum_{n=1}^{\infty}u_n(x)\)</span> 一致收敛，而且每个 <span class="arithmatex">\(u_n(x)\)</span> 都连续，那么和函数 <span class="arithmatex">\(S(x)\)</span> 也连续，用极限的写法来描述会更加清晰</p>
+<div class="arithmatex">\[
+\lim_{x\to x_0}\sum_{n=1}^{\infty}u_n(x)=\lim_{x\to x_0}S(x)=S(x_0)=\sum_{n=1}^{\infty}u_n(x_0)=\sum_{n=1}^{\infty}\lim_{x\to x_0}u_n(x)
+\]</div>
+<p>这个写法下，可以简单的把结论概括为<strong>极限与求和可以交换顺序</strong></p>
+<p>从上确界的视角来看，一致收敛实际上意味着所有位置的误差可以同时被逼近到任意小，那么也就是说收敛域上的变上限积分 <span class="arithmatex">\(\dst\int_a^x(S_n(t)-S(t))\dd t\)</span> 满足</p>
+<div class="arithmatex">\[
+\lim_{n\to\infty}\int_a^x|S_n(t)-S(t)|\dd t\leq\lim_{n\to\infty}\int_a^x\delta_n\dd t=\lim_{n\to\infty}(x-a)\delta_n=0
+\]</div>
+<p>显然只能是 <span class="arithmatex">\(\dst\lim_{n\to\infty}\int_a^x(S_n(t)-S(t))\dd t=0\)</span> ，变形得到</p>
+<div class="arithmatex">\[
+\lim_{n\to\infty}\int_a^x\sum_{i=1}^nu_i(t)\dd t=\lim_{n\to\infty}\int_a^xS_n(t)\dd t
+=\int_a^xS(t)\dd t=\int_a^x\sum_{n=1}^{\infty}u_n(t)\dd t
+\]</div>
+<p>对于任何有限的 <span class="arithmatex">\(n\)</span> ，积分与有限求和都是可以换序的，也就是 <span class="arithmatex">\(\dst\int_a^x\sum_{i=1}^n=\sum_{i=1}^n\int_a^x\)</span> ，两边同取极限就可以得到下式中间的换序</p>
+<div class="arithmatex">\[
+\sum_{n=1}^{\infty}\int_a^xu_n(t)\dd t=\lim_{n\to\infty}\sum_{i=1}^n\int_a^xu_i(t)\dd t=\lim_{n\to\infty}\int_a^x\sum_{i=1}^nu_i(t)\dd t=\int_a^x\sum_{n=1}^{\infty}u_n(t)\dd t
+\]</div>
+<p>这也就是说，<strong>极限与积分可以交换顺序</strong>，这就是<strong>逐项积分定理</strong></p>
+<p>从逐项积分定理衍生出了<strong>逐项求导定理</strong>，实际上就是把逐项积分定理中的 <span class="arithmatex">\(f'(x)=u_n(x)\)</span> 视作一个导函数，那么 <span class="arithmatex">\(\dst f(x)=\int_a^xu_n(t)\dd t\)</span> 就是它的原函数，那么</p>
+<div class="arithmatex">\[
+\sum_{n=1}^{\infty}f(x)=\int_a^x\sum_{n=1}^{\infty}f'(t)\dd t
+\]</div>
+<p>两边同时求导，就有</p>
+<div class="arithmatex">\[
+\left(\sum_{n=1}^{\infty}f(x)\right)'=\sum_{n=1}^{\infty}f'(x)
+\]</div>
+<p>换用莱布尼茨导数符号会把换序体现的更明显</p>
+<div class="arithmatex">\[
+\frac{\dd}{\dd x}\sum_{n=1}^{\infty}f(x)=\sum_{n=1}^{\infty}\frac{\dd}{\dd x}f(x)
+\]</div>
+<p>当然，这个定理要求的是导函数 <span class="arithmatex">\(f'(x)\)</span> 一致收敛，原函数 <span class="arithmatex">\(f(x)\)</span> 只要逐点收敛即可</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>一致收敛级数的加减和数乘同样是保持一致收敛的，具体的说，如果有两个一致收敛级数 <span class="arithmatex">\(\dst\sum_{n=0}^{\infty}u_n(x)=U(x)\)</span> 和 <span class="arithmatex">\(\dst\sum_{n=0}^{\infty}v_n(x)=V(x)\)</span> ，那么其加减、数乘得到的级数</p>
+<div class="arithmatex">\[
+\begin{align}
+\sum_{n=0}^{\infty}(u_n(x)\pm v_n(x))&amp;=\sum_{n=1}^{\infty}u_n(x)+\sum_{n=0}^{\infty}v_n(x)=U(x)+V(x)\\[1ex]
+\sum_{n=0}^{\infty}cu_n(x)&amp;=c\sum_{n=0}^{\infty}u_n(x)=cU(x)
+\end{align}
+\]</div>
+<p>均是一致收敛级数，但柯西乘积 <span class="arithmatex">\(\dst\sum_{k=0}^{\infty}\left(\sum_{n=0}^ku_n(x)v_{k-n}(x)\right)\)</span> 则不一定收敛，即使收敛也不一定等于 <span class="arithmatex">\(U(x)V(x)\)</span> </p>
+<p>如果想要柯西乘积也一致收敛，需要两个级数都绝对一致收敛，这时加减、数乘、柯西乘积得到的级数都是绝对一致收敛的</p>
+</div>
+<p>END</p></div>
 
 
 

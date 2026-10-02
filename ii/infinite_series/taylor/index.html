@@ -83,6 +83,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -1381,6 +1386,24 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    幂级数(Taylor级数)
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1397,6 +1420,84 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        收敛性
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="收敛性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        收敛半径与收敛域
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一致收敛性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        运算性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        幂级数展开
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1491,6 +1592,75 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        收敛性
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="收敛性">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        收敛半径与收敛域
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        一致收敛性
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        运算性质
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        幂级数展开
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1511,7 +1681,121 @@
 
   <h1>幂级数(Taylor级数)</h1>
 
-<p>111</p>
+<div><p>函数项级数的种类繁多，自然会想到优先研究结构简单的函数构成的级数，最简单的函数是常数函数，但是常数函数显然不适合用来构造级数，退而求其次，就找到了幂函数(指数为整数)和指数函数，这两种函数将分别形成<strong>幂级数</strong>( Taylor 级数)和三角级数( Fourier 级数)</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>本章会介绍 Euler 公式 <span class="arithmatex">\(\ee^{\ii\theta}=\cos\theta+\ii\sin\theta\)</span> ，这一公式说明在 <span class="arithmatex">\(\mathbb{C}\)</span> 上三角函数可以用指数函数表示，因此这里没有把三角函数列为基本初等函数考虑，而是用指数函数来构造三角级数</p>
+</div>
+<p>本章先讲幂级数</p>
+<p>形如</p>
+<div class="arithmatex">\[
+\sum_{n=0}^{\infty}a_n(x-x_0)^n=a_0+a_1(x-x_0)+a_2(x-x_n)^2+\cdots+a_n(x-x_0)^n+\cdots
+\]</div>
+<p>的级数就是幂级数，其中 <span class="arithmatex">\(a_0(x-x_0)^0\)</span> 在 <span class="arithmatex">\(x=x_0\)</span> 处约定为 <span class="arithmatex">\(a_0\)</span> ，可以看作是由极限 <span class="arithmatex">\(\dst\lim_{x\to x_0}a_0(x-x_0)^0\)</span> 定义</p>
+<p>当 <span class="arithmatex">\(x_0=0\)</span> 时，该幂级数形式为</p>
+<div class="arithmatex">\[
+\sum_{n=0}^{\infty}a_nx^n=a_0+a_1x+a_2x^2+\cdots+a_nx^n+\cdots
+\]</div>
+<p>由于这两种形式之间只是左右平移的关系，所以只要研究 <span class="arithmatex">\(\dst\sum_{n=0}^{\infty}a_nx^n\)</span> 即可，下文的幂级数在不加说明时指的都是 <span class="arithmatex">\(\dst\sum_{n=0}^{\infty}a_nx^n\)</span> </p>
+<h2 id="_1">收敛性</h2>
+<p>级数的第一大问题就是收敛性，在这个问题上，幂级数是很特殊的</p>
+<h3 id="_2">收敛半径与收敛域</h3>
+<p>幂级数的收敛性只有三种情况</p>
+<blockquote>
+<ol>
+<li>在 <span class="arithmatex">\(\mathbb{R}\)</span> 上处处绝对收敛</li>
+<li>仅在 <span class="arithmatex">\(x=0\)</span> 收敛(显然是绝对收敛的)</li>
+<li><span class="arithmatex">\(\exists R&gt;0\)</span> ，使得 <span class="arithmatex">\(|x|&lt;R\)</span> 时级数绝对收敛， <span class="arithmatex">\(|x|&gt;R\)</span> 时级数发散</li>
+</ol>
+</blockquote>
+<p>以上的情况3中，当 <span class="arithmatex">\(|x|=R\)</span> 时，收敛情况不固定，取决于 <span class="arithmatex">\(a_n\)</span> 的具体形式，这个 <span class="arithmatex">\(R\)</span> 就是该幂级数的<strong>收敛半径</strong>，区间 <span class="arithmatex">\((-R,R)\)</span> 就是其<strong>收敛区间</strong>，再加上收敛的端点就会得到收敛域</p>
+<p>利用比值判别法，我们可以求出 <span class="arithmatex">\(R\)</span> 的具体值，级数收敛需要</p>
+<div class="arithmatex">\[
+\lim_{n\to\infty}\frac{|u_{n+1}(x)|}{|u_n(x)|}=\lim_{n\to\infty}\left|\frac{a_{n+1}x^{n+1}}{a_nx^n}\right|=\lim_{n\to\infty}\left|\frac{a_{n+1}}{a_n}\right||x|&lt;1
+\]</div>
+<p>记 <span class="arithmatex">\(\dst\rho=\lim_{n\to\infty}\left|\frac{a_{n+1}}{a_n}\right|\)</span> ，那么收敛半径 <span class="arithmatex">\(R\)</span> 为</p>
+<div class="arithmatex">\[
+R=
+\begin{cases}
+\dfrac{1}{\rho},&amp;\rho\in(0,+\infty)\\[1ex]
+0,&amp;\rho=+\infty\\[1ex]
++\infty,&amp;\rho=0
+\end{cases}
+\]</div>
+<p>使用根值判别法会得到 <span class="arithmatex">\(\dst\rho=\lim_{n\to\infty}\sqrt[n]{a_n}\)</span> ，这和比值判别法得到的 <span class="arithmatex">\(\rho\)</span> 是相等的，用法也一致</p>
+<h3 id="_3">一致收敛性</h3>
+<p>幂级数逐项求导或逐项积分得到的还是幂级数，这种不变性相当有价值，我们自然希望可以这么做，这就要求幂级数一致收敛，幸运的是，幂级数确实具有一定的一致收敛性，但不是在整个收敛域上一致收敛，而是<strong>在收敛域内的任意闭区间一致收敛</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>这两种收敛是不同的，例如部分和数列 <span class="arithmatex">\(S_n(x)=x^n\)</span> ，它对应的级数在 <span class="arithmatex">\([0,1)\)</span> 上处处收敛至 <span class="arithmatex">\(0\)</span> ，但是 <span class="arithmatex">\(x\to1\)</span> 时收敛速度无限减慢，因此在 <span class="arithmatex">\([0,1)\)</span> 不是一致收敛的，但在任意闭区间 <span class="arithmatex">\([0,1-\delta]\)</span> 都一致收敛 ( <span class="arithmatex">\([0,1)\)</span> 不是这个级数的收敛域，但是原理是一样的)，对于开区间 <span class="arithmatex">\((a,b)\)</span> ，这样的收敛性称为<strong>内闭一致收敛</strong></p>
+</div>
+<p>这样一来，和函数连续性，逐项积分定理，逐项求导定理就都成立了，更好的是，由于逐项积分/求导得到的还是幂级数，因此幂级数在收敛区间上是无限次可积/可导的，并且可以无限次逐项积分/求导</p>
+<p>值得注意的是，逐项求导/积分前后分别使用比值判别法，会发现求出的 <span class="arithmatex">\(\rho\)</span> 是相同的，也就是说，<strong>逐项求导/积分不改变幂级数的收敛区间</strong>，只可能改变端点的敛散性</p>
+<h3 id="_4">运算性质</h3>
+<p>在<a href="func_series">函数项级数</a>章节中，我们讲过，绝对一致收敛函数的运算性质非常良好，加减、数乘、柯西乘积结果都仍是绝对一致收敛的，我们自然希望幂级数是绝对一致收敛的，实际上，幂级数在收敛区间内的任意闭区间确实是绝对一致收敛的</p>
+<p>我们已经知道幂级数 <span class="arithmatex">\(\dst\sum_{n=0}^{\infty}a_nx^n\)</span> 在收敛区间 <span class="arithmatex">\((-R,R)\)</span> 上绝对收敛，也就是说 <span class="arithmatex">\(\dst\sum_{n=0}^{\infty}|a_n||x|^n\)</span> 在 <span class="arithmatex">\((-R,R)\)</span> 收敛，而这恰好又是一个幂级数，因此其在收敛区间上内闭一致收敛，原本的幂级数自然绝对一致收敛，这样就得到了幂级数的运算性质</p>
+<p>如果两个幂级数 <span class="arithmatex">\(\dst\sum_{n=0}^{\infty}a_nx^n\)</span> 与 <span class="arithmatex">\(\dst\sum_{n=0}^{\infty}b_nx^n\)</span> 收敛半径分别为 <span class="arithmatex">\(R_1\)</span> 与 <span class="arithmatex">\(R_2\)</span> ，令 <span class="arithmatex">\(R=\min\{R_1,R_2\}\)</span> ，那么在这两个级数的公共收敛区间 <span class="arithmatex">\((-R,R)\)</span> 内，有</p>
+<div class="arithmatex">\[
+\begin{align}
+\alpha\sum_{n=0}^{\infty}a_nx^n\pm\beta\sum_{n=0}^{\infty}b_nx^n&amp;=\sum_{n=0}^{\infty}(\alpha a_n\pm\beta b_n)x^n\\[2ex]
+\left(\sum_{n=0}^{\infty}a_nx^n\right)\left(\sum_{n=0}^{\infty}b_nx^n\right)&amp;=\sum_{k=0}^{\infty}\left(\sum_{n=0}^ka_nb_{k-n}\right)x^k
+\end{align}
+\]</div>
+<p>其中所有的级数都是收敛的，由于等式右侧的新级数仍是幂级数，故也是内闭绝对一致收敛的</p>
+<p>通过以上分析，可见幂级数在公共收敛域内可以任意加、减、数乘、求柯西乘积、积分、求导</p>
+<h2 id="_5">幂级数展开</h2>
+<p>早在学习 Taylor 公式的时候，我们就知道，一个在 <span class="arithmatex">\(x_0\)</span> 的邻域 <span class="arithmatex">\(N(x_0,r)\)</span> 内 <span class="arithmatex">\(n+1\)</span> 阶可导的函数 <span class="arithmatex">\(f(x)\)</span> 可以在此邻域内用多项式来近似</p>
+<div class="arithmatex">\[
+f(x)=\sum_{k=0}^{n}\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k+R_n(x)
+\]</div>
+<p>那么如果 <span class="arithmatex">\(f(x)\)</span> 无限次可导，就有</p>
+<div class="arithmatex">\[
+f(x)=\sum_{k=0}^{\infty}\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k+\lim_{n\to\infty}R_n(x)
+\]</div>
+<p>可见只要 <span class="arithmatex">\(\dst\lim_{n\to\infty}R_n(x)=0\)</span> ，那么 <span class="arithmatex">\(f(x)\)</span> 就可以展开为幂级数 <span class="arithmatex">\(\dst\sum_{k=0}^{\infty}\frac{f^{(k)}(x_0)}{k!}(x-x_0)^k\)</span> ，这个过程就叫做 <span class="arithmatex">\(f(x)\)</span> 在 <span class="arithmatex">\(N(x_0,r)\)</span> 的<strong>幂级数展开</strong>或 <strong>Taylor 展开</strong>，这个级数就是 <strong>Taylor 级数</strong>，如果 <span class="arithmatex">\(x_0=0\)</span> ，那么这个级数变为 <span class="arithmatex">\(\dst\sum_{k=0}^{\infty}\frac{f^{(k)}(0)}{k!}x^k\)</span> ，叫做 <strong>Maclaurin 级数</strong></p>
+<p>显然，<strong>一个函数在一个点的展开式是唯一的</strong></p>
+<p>Lagrange 型余项把余项和高阶导数关联在了一起，这给我们提供了一个判定余项是否趋于零的充分条件，根据 Lagrange 余项的表示式</p>
+<div class="arithmatex">\[
+R_n(x)=\dfrac{f^{(n+1)}(\xi)}{(n+1)!}(x-x_0)^{n+1}
+\]</div>
+<p>其中 <span class="arithmatex">\(\xi=x_0+\theta(x-x_0),\;\theta\in(0,1)\)</span> ，可见使得 Taylor 展开成立的一个充分条件是</p>
+<blockquote>
+<p>如果函数列 <span class="arithmatex">\(\{f^{(n)}(x)\}\)</span> 在邻域 <span class="arithmatex">\(N(x_0,r)\)</span> 一致有界，也就是说 <span class="arithmatex">\(\exists K\)</span> 使得 <span class="arithmatex">\(\forall n\in\mathbb{N}\)</span> 和 <span class="arithmatex">\(\forall x\in N(x_0,r)\)</span> ，都有 <span class="arithmatex">\(|f^{(n)}(x)|\leq K\)</span> ，那么 <span class="arithmatex">\(f(x)\)</span> 在该邻域内可以展开为 <span class="arithmatex">\(x_0\)</span> 处的 Taylor 级数</p>
+</blockquote>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>在应用中，我们接触到的函数很多都是初等函数，这些函数除了在少数特殊点之外都是解析的，也就是可以展开成幂级数，在复平面上，一个简单的结论是解析函数 Taylor 展开的收敛半径等于展开点到最近不可去奇点的距离</p>
+</div>
+<p>作为各种函数的常见组成部分，研究常见初等函数的展开式是有必要的，以下是几个初等函数的 Maclaurin 展开</p>
+<ol>
+<li><span class="arithmatex">\(\dst\ee^x=\sum_{n=0}^{\infty}\frac{x^n}{n!},\quad x\in(-\infty,+\infty)\)</span> </li>
+<li><span class="arithmatex">\(\dst\sin x=\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n+1)!}x^{2n+1},\quad x\in(-\infty,+\infty)\)</span> </li>
+<li><span class="arithmatex">\(\dst\cos x=\sum_{n=0}^{\infty}\frac{(-1)^n}{(2n)!}x^{2n},\quad x\in(-\infty,+\infty)\)</span> </li>
+<li><span class="arithmatex">\(\dst\frac{1}{1-x}=\sum_{n=0}^{\infty}x^n,\quad x\in(-1,1)\)</span> </li>
+<li><span class="arithmatex">\(\dst\ln(1+x)=\sum_{n=0}^{\infty}\frac{(-1)^{n-1}}{n}x^n,\quad x\in(-1,1]\)</span> </li>
+<li><span class="arithmatex">\(\dst(1+x)^\alpha=\sum_{n=0}^{\infty}\begin{pmatrix}\alpha\\n\end{pmatrix}x^n,\quad x\in(-1,1)\)</span> 这其中的 <span class="arithmatex">\(\begin{pmatrix}\alpha\\n\end{pmatrix}\)</span> 是二项式系数 <span class="arithmatex">\(\mathrm{C}_\alpha^n\)</span> 对于非整数 <span class="arithmatex">\(\alpha\)</span> 的自然推广，有 <span class="arithmatex">\(\dst\begin{pmatrix}\alpha\\n\end{pmatrix}=\frac{\alpha(\alpha-1)\cdots(\alpha-n+1)}{n!}=\frac{1}{n!}\prod_{k=0}^{n-1}(\alpha-k)\)</span> 并约定 <span class="arithmatex">\(\begin{pmatrix}\alpha\\0\end{pmatrix}=1\)</span> ，这个展开式中，如果 <span class="arithmatex">\(\alpha\)</span> 为整数会自然退化为有限项形式</li>
+</ol>
+<p>求展开式的难点在于求高阶导数，以上这些是可以很容易的直接求出高阶导数通式的，以下也有一些需要取巧的</p>
+<ol>
+<li><span class="arithmatex">\(\arctan x\)</span> ，求导得到 <span class="arithmatex">\(\dfrac{1}{1+x^2}\)</span> ，将 <span class="arithmatex">\(-x^2\)</span> 代入 4 式的 <span class="arithmatex">\(x\)</span> ，得到 <span class="arithmatex">\(\dst\sum_{n=0}^{\infty}(-1)^nx^{2n}\)</span> 再逐项积分回去即得到 <span class="arithmatex">\(\dst\arctan x=\sum_{n=0}^{\infty}\frac{(-1)^n}{2n+1}x^{2n+1},\quad x\in[-1,1]\)</span> </li>
+<li><span class="arithmatex">\(\arcsin x\)</span> ，求导得到 <span class="arithmatex">\(\dfrac{1}{\sqrt{1-x^2}}=(1-x^2)^{-\frac12}\)</span> ，将 <span class="arithmatex">\(-x^2\)</span> 代入 6 式的 <span class="arithmatex">\(x\)</span> ，得到 <span class="arithmatex">\(\dst\sum_{n=0}^{\infty}\begin{pmatrix}-\frac12\\n\end{pmatrix}(-1)^nx^{2n}=\sum_{n=0}^{\infty}\frac{(2n-1)!!}{(2n)!!}x^{2n}\)</span> 逐项积分得到 <span class="arithmatex">\(\dst\arcsin x=\sum_{n=0}^{\infty}\frac{(2n-1)!!}{(2n+1)(2n)!!}x^{2n+1}=\sum_{n=0}^{\infty}\frac{(2n)!}{(2n+1)4^n(n!)^2}x^{2n+1},\quad x\in[-1,1]\)</span> </li>
+<li><span class="arithmatex">\(\dst\arccos x=\frac{\pi}{2}-\arcsin x=\frac{\pi}{2}-\sum_{n=0}^{\infty}\frac{(2n)!}{(2n+1)4^n(n!)^2}x^{2n+1},\quad x\in[-1,1]\)</span></li>
+</ol>
+<p>使用的技巧主要是求导/积分拼凑出容易求高阶导数的形式，之后逐项积分/求导还原，以及进行变量代换</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>以上的展开式并没有包含 <span class="arithmatex">\(\tan x\)</span> 这一常见的初等函数，这是因为 <span class="arithmatex">\(\tan x\)</span> 的 Taylor 系数没有十分简单的表达式，只能使用求和号、 Bernoulli 数或者 Riemann <span class="arithmatex">\(\zeta\)</span> 函数表示</p>
+<div class="arithmatex">\[
+\tan x=\sum_{n=1}^{\infty}\frac{(-1)^{n-1}2^{2n}(2^{2n}-1)B_{2n}}{(2n)!}x^{2n-1}=\sum_{n=1}^{\infty}\frac{2(2^{2n}-1)\zeta(2n)}{\pi^{2n}}x^{2n-1}
+\]</div>
+<p>其中 <span class="arithmatex">\(x\in(-\dfrac{\pi}{2},\dfrac{\pi}{2})\)</span> ， <span class="arithmatex">\(B_n\)</span> 是 Bernoulli 数，定义为 <span class="arithmatex">\(\dst\frac{x}{\ee^x-1}=\sum_{n=0}^{\infty}B_n\frac{x^n}{n!}\)</span></p>
+</div>
+<p>这些展开式不局限于实数，即使把实变量 <span class="arithmatex">\(x\)</span> 换为复变量 <span class="arithmatex">\(z\)</span> ，展开结果也是一样的，各种收敛的概念仍然可以使用，只要把实数的绝对值换成复数的模长即可，当我们试着在展开式中代入复数，就会发现</p>
+<div class="arithmatex">\[
+\ee^{\ii x}=\sum_{n=0}^{\infty}\frac{(\ii x)^n}{n!}=\sum_{n=0}^{\infty}\frac{\ii^nx^n}{n!}=\sum_{m=0}^{\infty}\frac{(-1)^mx^{2m}}{(2m)!}+\ii\sum_{m=0}^{\infty}\frac{(-1)^mx^{2m+1}}{(2m+1)!}=\cos x+\ii\sin x
+\]</div>
+<p>这就是 <strong>Euler 公式</strong></p>
+<p>END</p></div>
 
 
 
