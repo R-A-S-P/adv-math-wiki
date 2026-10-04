@@ -83,6 +83,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#_1" class="md-skip">
+          跳转至
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -1409,6 +1414,24 @@
       
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Fourier级数
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -1425,6 +1448,84 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="目录">
+  
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三角函数系
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fourier" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fourier 级数的计算
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fourier 级数的计算">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        周期函数的展开
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        延拓后展开
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fourier_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        复数形式的 Fourier 级数
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1491,6 +1592,75 @@
   
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      目录
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        三角函数系
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fourier" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fourier 级数的计算
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Fourier 级数的计算">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        周期函数的展开
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        延拓后展开
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fourier_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        复数形式的 Fourier 级数
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -1511,7 +1681,173 @@
 
   <h1>Fourier级数</h1>
 
-<p>111</p>
+<div><p>在自然界中，周期现象是非常普遍的，为了研究这些周期现象，我们也可以考虑通过级数展开的方法把复杂的周期函数展开为简单周期函数的和，那么三角函数无疑就是最好的选择，这样展开出的就是<strong>三角级数</strong></p>
+<h2 id="_1">三角函数系</h2>
+<p>为了便于下文描述，在此先定义函数</p>
+<div class="arithmatex">\[
+\delta(x)=\begin{cases}1,&amp;x=0\\0,&amp;x\neq0\end{cases}
+\]</div>
+<p>Fourier 级数是一系列三角函数的线性组合，这些函数构成的函数列叫做<strong>三角函数系</strong></p>
+<div class="arithmatex">\[
+\{1,\cos x,\sin x,\cos2x,\sin2x,\cdots,\cos nx,\sin nx,\cdots\}
+\]</div>
+<p>显然，这些函数的公共周期是 <span class="arithmatex">\(2\pi\)</span> ，参照<a href="func_series">函数项级数</a>章节中把函数作为向量看待的观点，我们可以研究这一函数系中各个函数之间的内积，一个周期就可以完整描述一个周期函数，所以选择 <span class="arithmatex">\([-\pi,\pi]\)</span> 作为积分区间是一个自然的选择</p>
+<div class="arithmatex">\[
+\begin{gathered}
+\int_{-\pi}^{\pi}1\cdot1\dd x=2\pi\\
+\int_{-\pi}^{\pi}1\cdot\cos nx\dd x=\int_{-\pi}^{\pi}1\cdot\sin nx\dd x=\int_{-\pi}^{\pi}\cos mx\sin nx\dd x=0\\
+\int_{-\pi}^{\pi}\cos mx\cos nx\dd x=\int_{-\pi}^{\pi}\sin mx\sin nx\dd x=\pi\delta(m-n)
+\end{gathered}
+\]</div>
+<p>既然有内积的概念，那么 <span class="arithmatex">\(f(x)\)</span> 和 <span class="arithmatex">\(g(x)\)</span> 在 <span class="arithmatex">\([a,b]\)</span> 内积为零自然就意味着 <span class="arithmatex">\(f(x)\)</span> 与 <span class="arithmatex">\(g(x)\)</span> 在 <span class="arithmatex">\([a,b]\)</span> <strong>正交</strong>，这样一来，就会发现三角函数系中的任何两个不同的函数在 <span class="arithmatex">\([-\pi,\pi]\)</span> 都是正交的，也就是说，<strong>三角函数系是 <span class="arithmatex">\([-\pi,\pi]\)</span> 上的正交函数系</strong></p>
+<p>更进一步的，如果某个函数列 <span class="arithmatex">\(\{u_n(x)\}\)</span> 满足</p>
+<div class="arithmatex">\[
+\int_a^bu_m(x)u_n(x)\dd x=\delta(m-n)
+\]</div>
+<p>那么这就叫做区间 <span class="arithmatex">\([a,b]\)</span> 上的<strong>标准正交函数系</strong></p>
+<h2 id="fourier">Fourier 级数的计算</h2>
+<h3 id="_2">周期函数的展开</h3>
+<p>三角级数由常数项和三角函数项组成，三角函数项可以记为 <span class="arithmatex">\(a_n\cos nx+b_n\sin nx\)</span> ，由于 <span class="arithmatex">\(1=\cos0x\)</span> ，故把常数记为 <span class="arithmatex">\(a_0\)</span> ，同时 <span class="arithmatex">\(\dst\int_{-\pi}^{\pi}1^2=2\pi\)</span> 而不是其他相同函数内积的 <span class="arithmatex">\(\pi\)</span> ，所以常数项为 <span class="arithmatex">\(\dfrac{a_0}{2}\)</span> ，那么，三角级数的通式是</p>
+<div class="arithmatex">\[
+f(x)=\frac{a_0}{2}+\sum_{n=1}^{\infty}(a_n\cos nx+b_n\sin nx)
+\]</div>
+<p>这就是 <span class="arithmatex">\(f(x)\)</span> 的<strong>三角级数展开式</strong>，当然，前提是其收敛且和函数确实为 <span class="arithmatex">\(f(x)\)</span> </p>
+<p>现在的问题就是如何求出各个系数，不难想到，可以利用三角函数系的正交性，把其中的某个函数与 <span class="arithmatex">\(f(x)\)</span> 做内积，这样就只有这个函数内积结果非零，系数得到保留，其他系数全部消去，这就是 <strong>Euler-Fourier 系数公式</strong>的原理</p>
+<div class="arithmatex">\[
+\begin{cases}
+\dst a_n=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\cos nx\dd x,&amp;n=0,1,2,\cdots\\[2ex]
+\dst b_n=\frac{1}{\pi}\int_{-\pi}^{\pi}f(x)\sin nx\dd x,&amp;n=1,2,\cdots
+\end{cases}
+\]</div>
+<p>这些系数称为 <strong>Fourier 系数</strong>，采用这种系数的三角级数称为 <strong>Fourier 级数</strong>，其中当 <span class="arithmatex">\(f(x)\)</span> 是奇函数时，所有 <span class="arithmatex">\(a_n\)</span> 为 <span class="arithmatex">\(0\)</span> ，展开式中只有正弦项，叫做<strong>正弦级数</strong>，当 <span class="arithmatex">\(f(x)\)</span> 是偶函数时， <span class="arithmatex">\(b_n\)</span> 全为 <span class="arithmatex">\(0\)</span> ，展开式中只有余弦项和常数项，叫做<strong>余弦级数</strong></p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>三角级数并不就是 Fourier 级数，我们通常是在"几乎处处收敛到原函数"的意义下进行 Fourier 展开的，但是这样的三角级数不止 Fourier 级数一种，只不过其他三角级数系数都非常复杂，而且对解决实际问题没有用处，所以不做讲解</p>
+</div>
+<p>这样一来我们就成功的在 <span class="arithmatex">\([-\pi,\pi]\)</span> 上展开了 <span class="arithmatex">\(f(x)\)</span> ，唯一的问题是这个形式上展开是否收敛到 <span class="arithmatex">\(f(x)\)</span> ，这是个复杂的问题，至今没有被很好的解决，不过有一个好用的充分条件是 <strong>Dirichlet 收敛定理</strong></p>
+<blockquote>
+<p>若周期函数 <span class="arithmatex">\(f(x)\)</span> 满足</p>
+<ol>
+<li>在一个周期内连续或只有有限个第一类间断点</li>
+<li>在一个周期内分段单调</li>
+</ol>
+<p>那么其在一个周期上展开成的 Fourier 级数收敛，在 <span class="arithmatex">\(f(x)\)</span> 的连续点收敛至 <span class="arithmatex">\(f(x)\)</span> ，在 <span class="arithmatex">\(f(x)\)</span> 的间断点收敛至左右极限的平均值，即</p>
+<div class="arithmatex">\[
+S(x)=
+\begin{cases}
+f(x),&amp;x\text{ 是连续点}\\[1ex]
+\dfrac{f(x+0)+f(x-0)}{2},&amp;x\text{ 是间断点}
+\end{cases}
+\]</div>
+<p><span class="arithmatex">\(S(x)\)</span> 是 Fourier 级数的和函数</p>
+</blockquote>
+<p>一般遇到的函数都能满足这个条件</p>
+<p>如果是要在 <span class="arithmatex">\([-l,l]\)</span> 区间上展开，只需要使用公共周期为 <span class="arithmatex">\(2l\)</span> 的函数系 <span class="arithmatex">\(\{1,\cos\dfrac{n\pi}{l},\sin\dfrac{n\pi}{l}\}\)</span> 重复上述求系数流程即可，得到的结果是</p>
+<div class="arithmatex">\[
+f(x)=\frac{a_0}{2}+\sum_{n=1}^{\infty}(a_n\cos\frac{n\pi x}{l}+b_n\sin\frac{n\pi x}{l})
+\]</div>
+<p>其中</p>
+<div class="arithmatex">\[
+\begin{cases}
+\dst a_n=\frac{1}{l}\int_{-l}^{l}f(x)\cos\frac{n\pi x}{l}\dd x,&amp;n=0,1,2,\cdots\\[2ex]
+\dst b_n=\frac{1}{l}\int_{-l}^{l}f(x)\sin\frac{n\pi x}{l}\dd x,&amp;n=1,2,\cdots
+\end{cases}
+\]</div>
+<h3 id="_3">延拓后展开</h3>
+<p>以上的级数展开问题也是明显的，这些展开只针对周期函数，但对于定义域只有一个有限区间 <span class="arithmatex">\([a,b]\)</span> 的函数 <span class="arithmatex">\(f(x)\)</span> 就束手无策了，为此，我们需要一种称为<strong>周期延拓</strong>的技术，通常就是以 <span class="arithmatex">\(b-a\)</span> 为周期，把 <span class="arithmatex">\(f\)</span> 的定义域扩展到 <span class="arithmatex">\(\mathbb{R}\)</span> 成为周期函数 <span class="arithmatex">\(F(x)\)</span> ，并且在 <span class="arithmatex">\([a,b]\)</span> 上保持 <span class="arithmatex">\(f(x)=F(x)\)</span> ，(很明显在区间端点的延拓会有问题，但是一个点通常无关紧要，作为第一类间断点处理即可)</p>
+<p>也有的时候我们并不想直接做周期延拓，这时候就可以先定义辅助函数 <span class="arithmatex">\(g(x)\)</span> 去和 <span class="arithmatex">\(f(x)\)</span> 拼接起来，形成更大定义域上的一个新函数，再去做周期延拓，尤其是 <span class="arithmatex">\(f(x)\)</span> 定义在 <span class="arithmatex">\([0,l]\)</span> 的时候，因为这时很容易把定义域扩充成对称区间， Fourier 级数是解微分方程的重要工具，为实际问题建模的时候，经常会让函数的定义域落在 <span class="arithmatex">\([0,l]\)</span> ，因此这里专注于解决定义域为 <span class="arithmatex">\([0,l]\)</span> 的函数 <span class="arithmatex">\(f(x)\)</span> 的展开问题</p>
+<p>显然我们会希望把定义域延拓到对称区间 <span class="arithmatex">\([-l,l]\)</span> ，因为函数在 <span class="arithmatex">\([-l,0)\)</span> 的值可以任意指定，所以这样的延拓有无数种，不过对称性通常可以简化问题，所以我们一般都把 <span class="arithmatex">\(f(x)\)</span> 延拓为偶函数或者奇函数，这两种延拓分别叫做<strong>偶延拓</strong>和<strong>奇延拓</strong>，偶延拓后展开出的是余弦级数，奇延拓后展开出的是正弦级数</p>
+<p>具体来说，偶延拓的延拓方式是</p>
+<div class="arithmatex">\[
+F(x)=\begin{cases}
+f(x),&amp;x\in[0,l]\\[1ex]
+f(-x),&amp;x\in[-l,0)
+\end{cases}
+\]</div>
+<p>套用前面的公式，运用对称性把积分区间化为 <span class="arithmatex">\([0,l]\)</span> 得到</p>
+<div class="arithmatex">\[
+\begin{cases}
+\dst a_n=\frac{2}{l}\int_{0}^{l}f(x)\cos\frac{n\pi x}{l}\dd x,&amp;n=0,1,2,\cdots\\[2ex]
+\dst b_n=0,&amp;n=1,2,\cdots
+\end{cases}
+\]</div>
+<p>奇函数的延拓方式是</p>
+<div class="arithmatex">\[
+F(x)=\begin{cases}
+f(x),&amp;x\in(0,l]\\[1ex]
+0,&amp;x=0\\[1ex]
+-f(-x),&amp;x\in[-l,0)
+\end{cases}
+\]</div>
+<p>系数为</p>
+<div class="arithmatex">\[
+\begin{cases}
+\dst a_n=0,&amp;n=0,1,2,\cdots\\[2ex]
+\dst b_n=\frac{2}{l}\int_{0}^{l}f(x)\sin\frac{n\pi x}{l}\dd x,&amp;n=1,2,\cdots
+\end{cases}
+\]</div>
+<h2 id="fourier_1">复数形式的 Fourier 级数</h2>
+<p>在<a href="taylor">幂级数</a>章节中，我们介绍了 Euler 公式，利用 Euler 公式，我们可以用指数函数表示三角函数</p>
+<div class="arithmatex">\[
+\cos x=\frac{\ee^{\ii x}+\ee^{-\ii x}}{2}\qquad\sin x=\frac{\ee^{\ii x}-\ee^{-\ii x}}{2\ii}
+\]</div>
+<p>也提到了 Fourier 级数实际上是由指数函数形成的，那么我们不妨把表示三角函数系用到的所有指数函数打包成一个函数系，这个函数系很简单，就是 <span class="arithmatex">\(\{\ee^{\ii n\omega x}\}\)</span> ，其中 <span class="arithmatex">\(\omega=\dfrac{\pi}{l}\)</span> ，(针对周期为 <span class="arithmatex">\(2l\)</span> 的函数)</p>
+<p>进一步看它的内积性质，会发现</p>
+<div class="arithmatex">\[
+\int_{-l}^{l}\ee^{\ii m\omega x}\ee^{-\ii n\omega x}\dd x=2l\delta(m-n)
+\]</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>复值函数 <span class="arithmatex">\(f(x)\)</span> 与 <span class="arithmatex">\(g(x)\)</span> 的内积计算需要取共轭，也就是</p>
+<div class="arithmatex">\[
+\langle f,g\rangle=\int_a^bf(x)\overline{g(x)}\dd x
+\]</div>
+</div>
+<p>可见这同样是正交函数系，因此仿照之前的办法就能得到 <strong>Fourier 级数的复数形式</strong></p>
+<div class="arithmatex">\[
+f(x)=\sum_{n=-\infty}^{\infty}C_n\ee^{\ii n\omega x}
+\]</div>
+<p>其中</p>
+<div class="arithmatex">\[
+C_n=\frac{1}{2l}\int_{-l}^{l}f(x)\ee^{-\ii n\omega x}\dd x,\quad n\in\mathbb{Z}
+\]</div>
+<p>这比实数形式简洁得多， <span class="arithmatex">\(1=\ee^{\ii0\omega x}\)</span> 也不需要特殊处理，其中的 <span class="arithmatex">\(C_n\)</span> 是复数，写成 <span class="arithmatex">\(C_n=|C_n|\ee^{\ii\varphi_n}\)</span> 的形式就有</p>
+<div class="arithmatex">\[
+f(x)=\sum_{n=-\infty}^{\infty}|C_n|\ee^{\ii(n\omega x+\varphi_n)}
+\]</div>
+<p>可见 <span class="arithmatex">\(C_n\)</span> 同时包含了频率分量的幅度和相位， Fourier 级数本质上就是把函数拆成了无数频率分量的和</p>
+<p>最后的一个问题是，以上所有的级数展开最终都是通过某种方式回到周期函数才完成的，那么，如果原本的函数就是定义在 <span class="arithmatex">\(\mathbb{R}\)</span> 上的非周期函数怎么办?</p>
+<p>答案是把它当做周期无限长的函数看待，这种情况下周期 <span class="arithmatex">\(l\to\infty\)</span> ，基频 <span class="arithmatex">\(\Omega=\dfrac{\pi}{l}\to0\)</span> ，原本离散的各个级数项会变成连续变化的函数</p>
+<div class="arithmatex">\[
+\begin{align}
+f(x)
+&amp;=\lim_{l\to\infty}\sum_{n=-\infty}^{\infty}C_n\ee^{\ii n\Omega x}\\
+&amp;=\lim_{l\to\infty}\sum_{n=-\infty}^{\infty}\left(\frac{1}{2l}\int_{-l}^{l}f(t)\ee^{-\ii n\Omega t}\dd t\right)\ee^{\ii n\Omega x}\\
+&amp;=\frac{1}{2\pi}\lim_{\Omega\to0}\sum_{n=-\infty}^{\infty}\Omega\left(\int_{-\pi/\Omega}^{\pi/\Omega}f(t)\ee^{-\ii n\Omega t}\dd t\right)\ee^{\ii n\Omega x}
+\end{align}
+\]</div>
+<p>这里的 <span class="arithmatex">\(\dst\sum\Omega f(n\Omega)\)</span> 是黎曼和， <span class="arithmatex">\(\dst\lim_{\Omega\to0}\sum_{n=-\infty}^{\infty}\Omega f(n\Omega)=\int_{-\infty}^{\infty}f(\omega)\dd\omega\)</span> ，故而</p>
+<div class="arithmatex">\[
+f(x)=\frac{1}{2\pi}\int_{-\infty}^{\infty}\left(\int_{-\infty}^{\infty}f(t)\ee^{-\ii\omega t}\dd t\right)\ee^{\ii\omega x}\dd\omega
+\]</div>
+<p>其中相当于原先系数的部分就是</p>
+<div class="arithmatex">\[
+F(\omega)=\int_{-\infty}^{\infty}f(t)\ee^{-\ii\omega t}\dd t
+\]</div>
+<p>这就是 <span class="arithmatex">\(f(x)\)</span> 的 <strong>Fourier 变换</strong>，记作</p>
+<div class="arithmatex">\[
+\mathcal{F}[f(t)](\omega)
+\]</div>
+<p>外层的积分</p>
+<div class="arithmatex">\[
+\frac{1}{2\pi}\int_{-\infty}^{\infty}F(\omega)\ee^{\ii\omega x}\dd\omega
+\]</div>
+<p>称为 <strong>Fourier 逆变换</strong>，记作</p>
+<div class="arithmatex">\[
+\mathcal{F}^{-1}[F(\omega)](t)
+\]</div>
+<p>Fourier 变换并不是任何函数都有的，不过平方可积函数，也就是满足 <span class="arithmatex">\(\dst\int_{-\infty}^{\infty}|f(x)|^2\dd x&lt;+\infty\)</span> 的函数都有 Fourier 变换，在实际应用中，这通常意味着能量有限</p>
+<p>END</p></div>
 
 
 
